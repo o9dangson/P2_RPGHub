@@ -1,0 +1,24 @@
+
+================================================================================
+
+To do:
+
+
+CODE:
+from flask import session
+
+import secrets
+
+app.secret_key = secrets.token_hex()
+Creation: session['user_id'] = user_login.user_id
+session.pop('user_id', None)
+access: session['user_id']
+
+
+{{ for x in list_req }}
+<div>Entry {{request_id}}</div>
+<but
+{{ endblock }}
+
+COVERAGE LIBRARY
+https://coverage.readthedocs.io/en/6.4.1/

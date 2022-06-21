@@ -2,7 +2,9 @@
 
 ## Product Analysis
 
-**Banana Guild Woes** is a product that will be used by members and guild masters of the Banana Guild. Adventurers can request reimbursements for expenses they had during their job. Guild masters then can accept or reject the request for compensation. 
+**RPGHub** is a product that will be used by gaming users already registered for the service. Users will be able to create and remove raid requests with their ID. In addition, they will be able to approve or reject other users' application to enlist in a raid request. Users can also remove users from a listing that have already been accepted.
+
+Moderator users accounts will also be able to remove or edit any listings. They can add/remove users from any particular listing, and they can freeze other user accounts so that they cannot sign in.
 
 This app will be hosted on the web and will store all data inside a database. The product will require the users to have a web browser.
 
@@ -14,13 +16,14 @@ This app will be hosted on the web and will store all data inside a database. Th
 Here are the following objectives to test:
 
 Functionality:
-- Login
-- Making a request
-- Canceling a pending request
-- Updating a pending request (optional implementation)
-- Viewing all requests
-- Accepting requests as a Guild Master
-- Rejecting requests as a Guild Master
+- Login/logout service
+- Create/remove group listings
+- Browse group listings by category (List filter/pages/?)
+- Apply to join a group (as certain role)
+- Accept/Reject requests as a Group Leader
+- Group Leader can kick members from active
+- Moderator ability force remove group listing
+- Moderator ability force add/remove from group listing
 - Traversing web service
 
 GUI:
@@ -31,7 +34,8 @@ GUI:
 - Navbar
 
 Security:
-- Only access manage page as Guild Master
+- Only group leader or moderator can delist groups
+- Database entries are secure and rollback if any corruption is detected.
 - Authorize user access
 
 Database:
@@ -50,19 +54,20 @@ Database:
 
 **Human Resources:**
 
-| No.   | Member        | Tasks |  
-| ----- | ------------- | --------- |
+| No.   | Member        | Tasks                                           |  
+| ----- | ------------- | ----------------------------------------------- |
 |  1.   |    Andrew     | Does the role of manager, tester, developer, QA |
-|  2.   |    Sarah      | Does the role of manager, tester, developer, QA |
+|  2.   |    Brian      | Does the role of manager, tester, developer, QA |
+|  3.   |    Anthony    | Does the role of manager, tester, developer, QA |
 
 **System Resources:**
 
-| No.   | Resources         | Description |  
-| ----- | ----------------  | --------- |
-|  1.   |    Server         | Flask, AWS RDS (PostgreSQL) |
-|  2.   |     Test tools    | Pytest, Selenium, Postman |
+| No.   | Resources         | Description                    |  
+| ----- | ----------------  | ------------------------------ |
+|  1.   |    Server         | Javalin, AWS RDS (PostgreSQL)  |
+|  2.   |    Test tools     | TestNG, Selenium, Postman      |
 |  3.   |    Network        | Machine capable of hosting a localhost, or if manage to implement into AWS an internet connection |
-|  4.   |     Computer      | Any OS which can connect to the network |
+|  4.   |    Computer       | Any OS which can connect to the network |
 
 ## Test Environment
 
@@ -70,16 +75,16 @@ The testers need to have the server running in order to access the web applicati
 
 ## Schedule & Estimation
 
-| Task                          | Member                | Estimate Effort   |  
-| ----------------------------- | --------------------- | ----------------- |
-|  Create test specification    |     Andrew, Sarah     | 2 hours           |
-|  Perform test execution       |     Andrew, Sarah     | 0.5 hours         |
-|  Implement feature            |   Andrew, Sarah       | 3 hours           |
-|  Perform test execution       |     Andrew, Sarah     | 1 hours           |
-|  Test report/results          |    Andrew, Sarah      | 1 hours           |
-|  Test debug                   |    Andrew, Sarah      | 2 hours           |
-|  Test delivery                |     Andrew, Sarah     | 1.5 hours         |
-|  Total                        |                       | 11 hours          |
+| Task                          | Member                    | Estimate Effort   |  
+| ----------------------------- | ------------------------- | ----------------- |
+|  Create test specification    |   Andrew, Brian, Anthony  | 2 hours           |
+|  Perform test execution       |   Andrew, Brian, Anthony  | 0.5 hours         |
+|  Implement feature            |   Andrew, Brian, Anthony  | 3 hours           |
+|  Perform test execution       |   Andrew, Brian, Anthony  | 1 hours           |
+|  Test report/results          |   Andrew, Brian, Anthony  | 1 hours           |
+|  Test debug                   |   Andrew, Brian, Anthony  | 2 hours           |
+|  Test delivery                |   Andrew, Brian, Anthony  | 1.5 hours         |
+|  Total                        |                           | 11 hours          |
 
 ## Test Deliverables
 Before Testing:

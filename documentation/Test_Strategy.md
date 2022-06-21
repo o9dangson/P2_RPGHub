@@ -1,7 +1,7 @@
 # **Test Strategy**
 ## **Scope**
 
-The product, **Banana Guild Woes**, is an application that can serve as an expenditure reimbursement system for any small company or group. This app should allow employees and managers to submit new reimbursement requests and review all requests while also allowing managers to accept or reject pending requests.
+The product, **RPGHub**, is an application that can serve as a tool to that allows players of an RPG to find or start groups for activities they are looking to participate in. This app should allow players to apply to join a group as a specific role(Damage,Tank,Healer). Otherwise, they have the ability to create their own group of a specified size and activity.
 
 This document will be reviewed by all developing team members at regular intervals. This test strategy will be approved by the developers and client before any work is done.
 
@@ -10,17 +10,17 @@ This document will be reviewed by all developing team members at regular interva
 - Each member of the development team will be responsible for participating in all phases of testing. Thus, all members will be designated to all roles as well (unit tester, feature implementation, debugging, etc.)
 - A `Requirement Testing Matrix (RTM)` will be used to keep of all testing that has been completed and accepted.
 - All defects, whether discovered or preexisting, will be properly documented on the `RTM` along with their severity and priority. Eventual bug fixes will be indicated on the `RTM` as well.
-- Acceptance Criteria for a feature will be set at a minimum of `75%` coverage.
+- Acceptance Criteria for a feature will be set at a minimum of `70%` coverage.
 
 ### **Unit**
 
-- During this phase, the project will use Test Driven Development as its basis. The technology used for unit testing is `Pytest`. Before a functionality is implemented a unit test will be written with once passing case and several failing cases. Stubbing will be used to support bottom-up testing. `Pytest` parametrize and fixtures will be used to do so.
+- During this phase, the project will use Test Driven Development as its basis. The technology used for unit testing is `TestNG`. Before a functionality is implemented a unit test will be written with once passing case and several failing cases. Stubbing will be used to support bottom-up testing. `TestNG` parametrize and fixtures will be used to do so.
 
 ### **Integration**
 - `Postman` will be used for testing happy and bad paths, thus verifying routing functionality as expected features are added. Alternate path testing will be done as well. These tests will be done after features are completed. 
 
 ### **System**
-- `Selenium/Behave` are used here to verify features meet the requirements of the client and that various code works as intended as a whole. User stories will be used to create scenarios to be run in behave and it will be automated by selenium. 
+- `Selenium/Cucumber` are used here to verify features meet the requirements of the client and that various code works as intended as a whole. User stories will be used to create scenarios to be run in behave and it will be automated by selenium. 
 
 ### **Acceptance**
 - The acceptance criteria that will be enforced for testing will be using behave. If all the steps in a feature file pass then the user story implementation will be considered complete.
@@ -32,10 +32,10 @@ All coding and testing will be done using `Visual Studio Code` as the IDE. `Gith
 ## **Testing Tools**
 
 - Selenium with Google Chrome web driver
-- Behave
+- Cucumber
 - Postman
-- Pytest
-- (Code Coverage tool TBD)
+- TestNG
+- Mockito
 - All tools are open source and have no commercial requirements
 
 ## **Release Control**

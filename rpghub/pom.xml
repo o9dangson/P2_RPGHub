@@ -32,14 +32,24 @@
         <version>7.5</version>
         <scope>test</scope>
     </dependency>
-       <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-nop</artifactId>
         <version>1.7.36</version>
         <scope>test</scope>
     </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>4.5.1</version>
+        <scope>test</scope>
+    </dependency>
+
   </dependencies>
+
+
   <build>
     <plugins>
       <plugin>
@@ -48,7 +58,7 @@
         <version>3.0.0-M6</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>src/test/resources/test_suite_1.xml</suiteXmlFile>
+            <suiteXmlFile>src/test/resources/test_suite.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>

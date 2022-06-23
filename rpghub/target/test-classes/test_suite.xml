@@ -1,0 +1,7 @@
+<suite name="RPGHUB Test Suite">
+    <test name="Basic Test">
+        <classes>
+            <class name="com.revature.scramble.BasicTest" />
+        </classes>
+    </test>
+</suite>

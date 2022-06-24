@@ -54,4 +54,56 @@ public class Entry{
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + entry_id;
+        result = prime * result + list_id;
+        result = prime * result + ((status == null) ? 0 : status.hashCode());
+        result = prime * result + user_id;
+        result = prime * result + ((user_note == null) ? 0 : user_note.hashCode());
+        result = prime * result + ((user_role == null) ? 0 : user_role.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Entry other = (Entry) obj;
+        if (entry_id != other.entry_id)
+            return false;
+        if (list_id != other.list_id)
+            return false;
+        if (status == null) {
+            if (other.status != null)
+                return false;
+        } else if (!status.equals(other.status))
+            return false;
+        if (user_id != other.user_id)
+            return false;
+        if (user_note == null) {
+            if (other.user_note != null)
+                return false;
+        } else if (!user_note.equals(other.user_note))
+            return false;
+        if (user_role == null) {
+            if (other.user_role != null)
+                return false;
+        } else if (!user_role.equals(other.user_role))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Entry [entry_id=" + entry_id + ", list_id=" + list_id + ", status=" + status + ", user_id=" + user_id
+                + ", user_note=" + user_note + ", user_role=" + user_role + "]";
+    }
 }

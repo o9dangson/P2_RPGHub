@@ -2,6 +2,7 @@
     <test name="Basic Test">
         <classes>
             <class name="com.revature.scramble.BasicTest" />
+            <class name="com.revature.scramble.RepositoryTest"/>
         </classes>
     </test>
 </suite>

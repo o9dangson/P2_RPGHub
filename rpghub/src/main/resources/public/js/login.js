@@ -2,7 +2,7 @@
 function test_update_span(session){
     let element = document.getElementById("span-1")
     console.log(session)
-    element.innerHTML = `user_id: ${session.user_id} is_mod: ${session.is_mod} is_frozen: ${session.is_frozen}`
+    element.innerHTML = `user_id: ${session.user_id} is_mod: ${session.is_mod} is_frozen: ${session.is_frozen} error: ${session.error}`
 }
 
 //Async functions

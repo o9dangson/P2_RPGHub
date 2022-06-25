@@ -99,10 +99,10 @@ public class RepositoryTest {
         Assert.assertNotEquals(login_obj.getUsername(), "failed");
         login_obj = login_dao.selectUser(-1);
         Assert.assertEquals(login_obj.getUsername(), "failed");
-        //Test selectUser by username
-        login_obj = login_dao.selectUser("user1");
+        //Test selectUser by username, password
+        login_obj = login_dao.selectUser("user1", "pass");
         Assert.assertEquals(login_obj.getUsername(), "user1");
-        login_obj = login_dao.selectUser("user0");
+        login_obj = login_dao.selectUser("user0", "pass");
         Assert.assertEquals(login_obj.getUsername(), "failed");
     }
 

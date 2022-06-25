@@ -5,6 +5,6 @@ import com.revature.scramble.repository.entities.LoginInfo;
 public interface LoginInfoDaoInterface {
     
     LoginInfo selectUser(int id);
-    LoginInfo selectUser(String username);
+    LoginInfo selectUser(String username, String password);
     
 }

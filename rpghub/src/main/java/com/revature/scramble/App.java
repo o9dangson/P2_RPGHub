@@ -1,5 +1,6 @@
 package com.revature.scramble;
 
+import com.revature.scramble.controller.AccountController;
 import com.revature.scramble.controller.HomeController;
 import com.revature.scramble.controller.SessionController;
 import com.revature.scramble.models.Session;
@@ -23,6 +24,9 @@ public class App
 
         app.get("/", HomeController.homepageEntered);
         app.get("/session", SessionController.get_session);
+        app.post("/account", AccountController.post_account_page);
+        app.get("/account", AccountController.get_logged_in_account_page);
+        app.get("/logout", HomeController.logout);
     }
     
 }

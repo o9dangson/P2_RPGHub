@@ -33,12 +33,13 @@ public class LoginInfoDao implements LoginInfoDaoInterface{
     }
 
     @Override
-    public LoginInfo selectUser(String username) {
+    public LoginInfo selectUser(String username, String password) {
         Connection connection = ConnectionFactory.getConnection();
-        String sql = "SELECT * FROM user_login where username = ?;";
+        String sql = "SELECT * FROM user_login where username = ? AND password = ?;";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
             ResultSet results = preparedStatement.executeQuery();
             while(results.next()){
                 return new LoginInfo(

@@ -4,7 +4,7 @@ import com.revature.scramble.models.Session;
 import com.revature.scramble.repository.entities.UserInfo;
 
 import io.javalin.http.Handler;
-import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

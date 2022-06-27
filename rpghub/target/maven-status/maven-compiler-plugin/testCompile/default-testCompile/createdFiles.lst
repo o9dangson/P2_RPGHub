@@ -1,0 +1,4 @@
+com\revature\scramble\BasicTest.class
+com\revature\scramble\RepositoryTest.class
+com\revature\scramble\SeleniumTestRunner.class
+com\revature\scramble\StepDefinitions\LoginDemoSteps.class

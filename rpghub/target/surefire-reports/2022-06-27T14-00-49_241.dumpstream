@@ -1,0 +1,5 @@
+# Created at 2022-06-27T14:00:49.872
+Boot Manifest-JAR contains absolute paths in classpath 'D:\work\Repositories\P2_TeamScramble\rpghub\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="5" passed="5">
+<testng-results skipped="0" failed="0" ignored="0" total="6" passed="6">
   <reporter-output>
   </reporter-output>
-  <suite name="RPGHUB Test Suite" duration-ms="1736" started-at="2022-06-24T16:37:11 EDT" finished-at="2022-06-24T16:37:13 EDT">
+  <suite name="RPGHUB Test Suite" duration-ms="1869" started-at="2022-06-27T11:05:06 EDT" finished-at="2022-06-27T11:05:08 EDT">
     <groups>
     </groups>
-    <test name="Basic Test" duration-ms="1736" started-at="2022-06-24T16:37:11 EDT" finished-at="2022-06-24T16:37:13 EDT">
+    <test name="Basic Test" duration-ms="1869" started-at="2022-06-27T11:05:06 EDT" finished-at="2022-06-27T11:05:08 EDT">
       <class name="com.revature.scramble.BasicTest">
-        <test-method status="PASS" signature="testBasicTest()[pri:0, instance:com.revature.scramble.BasicTest@56aac163]" name="testBasicTest" duration-ms="6" started-at="2022-06-24T16:37:11 EDT" finished-at="2022-06-24T16:37:11 EDT">
+        <test-method status="PASS" signature="testBasicTest()[pri:0, instance:com.revature.scramble.BasicTest@1d29cf23]" name="testBasicTest" duration-ms="6" started-at="2022-06-27T11:05:06 EDT" finished-at="2022-06-27T11:05:06 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testBasicTest -->
       </class> <!-- com.revature.scramble.BasicTest -->
       <class name="com.revature.scramble.RepositoryTest">
-        <test-method status="PASS" signature="setup()[pri:0, instance:com.revature.scramble.RepositoryTest@76b0bfab]" name="setup" is-config="true" duration-ms="4" started-at="2022-06-24T16:37:11 EDT" finished-at="2022-06-24T16:37:11 EDT">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.revature.scramble.RepositoryTest@80503]" name="setup" is-config="true" duration-ms="41" started-at="2022-06-27T11:05:06 EDT" finished-at="2022-06-27T11:05:06 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="testEntryDAO()[pri:0, instance:com.revature.scramble.RepositoryTest@76b0bfab]" name="testEntryDAO" duration-ms="953" started-at="2022-06-24T16:37:11 EDT" finished-at="2022-06-24T16:37:12 EDT">
+        <test-method status="PASS" signature="testEntryDAO()[pri:0, instance:com.revature.scramble.RepositoryTest@80503]" name="testEntryDAO" duration-ms="988" started-at="2022-06-27T11:05:06 EDT" finished-at="2022-06-27T11:05:07 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testEntryDAO -->
-        <test-method status="PASS" signature="testListingDao()[pri:0, instance:com.revature.scramble.RepositoryTest@76b0bfab]" name="testListingDao" duration-ms="206" started-at="2022-06-24T16:37:12 EDT" finished-at="2022-06-24T16:37:12 EDT">
+        <test-method status="PASS" signature="testGetConnection()[pri:0, instance:com.revature.scramble.RepositoryTest@80503]" name="testGetConnection" duration-ms="0" started-at="2022-06-27T11:05:07 EDT" finished-at="2022-06-27T11:05:07 EDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetConnection -->
+        <test-method status="PASS" signature="testListingDao()[pri:0, instance:com.revature.scramble.RepositoryTest@80503]" name="testListingDao" duration-ms="217" started-at="2022-06-27T11:05:07 EDT" finished-at="2022-06-27T11:05:07 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testListingDao -->
-        <test-method status="PASS" signature="testLoginInfoDao()[pri:0, instance:com.revature.scramble.RepositoryTest@76b0bfab]" name="testLoginInfoDao" duration-ms="163" started-at="2022-06-24T16:37:12 EDT" finished-at="2022-06-24T16:37:13 EDT">
+        <test-method status="PASS" signature="testLoginInfoDao()[pri:0, instance:com.revature.scramble.RepositoryTest@80503]" name="testLoginInfoDao" duration-ms="179" started-at="2022-06-27T11:05:07 EDT" finished-at="2022-06-27T11:05:07 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLoginInfoDao -->
-        <test-method status="PASS" signature="testUserInfoDao()[pri:0, instance:com.revature.scramble.RepositoryTest@76b0bfab]" name="testUserInfoDao" duration-ms="373" started-at="2022-06-24T16:37:13 EDT" finished-at="2022-06-24T16:37:13 EDT">
+        <test-method status="PASS" signature="testUserInfoDao()[pri:0, instance:com.revature.scramble.RepositoryTest@80503]" name="testUserInfoDao" duration-ms="406" started-at="2022-06-27T11:05:07 EDT" finished-at="2022-06-27T11:05:08 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testUserInfoDao -->

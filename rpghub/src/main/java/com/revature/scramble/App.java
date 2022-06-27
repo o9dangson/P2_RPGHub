@@ -6,6 +6,7 @@ import com.revature.scramble.controller.SessionController;
 
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
+import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class App 
 {
@@ -19,11 +20,21 @@ public class App
 
         app.start(9090);
 
-        app.get("/", HomeController.homepageEntered);
-        app.get("/session", SessionController.get_session);
-        app.post("/account", AccountController.post_account_page);
-        app.get("/account", AccountController.get_logged_in_account_page);
-        app.get("/logout", HomeController.logout);
+        app.routes(() -> {
+            path("", ()->{
+                get(HomeController.homepageEntered);
+            });
+            path("session", ()->{
+                get(SessionController.get_session);
+            });
+            path("account", ()->{
+                post(AccountController.post_account_page);
+                get(AccountController.get_logged_in_account_page);
+            });
+            path("logout", ()->{
+                get(HomeController.logout);
+            });
+        });
     }
     
 }

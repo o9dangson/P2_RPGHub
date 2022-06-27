@@ -2,12 +2,9 @@ package com.revature.scramble;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.function.LongBinaryOperator;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.revature.scramble.repository.EntryDao;
@@ -34,6 +31,12 @@ public class RepositoryTest {
         list_dao = new ListingDao();
         login_dao = new LoginInfoDao();
         user_dao = new UserInfoDao();
+    }
+
+    @Test
+    public void testGetConnection(){
+        Connection conn = ConnectionFactory.getConnection();
+        Assert.assertNotEquals(conn, null);
     }
 
     // TC_10, TC_11

@@ -1,7 +1,9 @@
 package com.revature.scramble;
 
 import com.revature.scramble.controller.AccountController;
+import com.revature.scramble.controller.EntryController;
 import com.revature.scramble.controller.HomeController;
+import com.revature.scramble.controller.ListingController;
 import com.revature.scramble.controller.SessionController;
 
 import io.javalin.Javalin;
@@ -30,6 +32,19 @@ public class App
             path("account", ()->{
                 post(AccountController.post_account_page);
                 get(AccountController.get_logged_in_account_page);
+            });
+            path("listing", ()->{
+                get(AccountController.get_logged_in_account_page);
+                path("user-listings", ()->{
+                    get(ListingController.get_user_listings);
+                });
+                path("all-listings", ()->{
+                    get(ListingController.get_all_listings);
+                });
+                path("manage", ()->{
+                    get(EntryController.get_listing_info_page);
+                    post(EntryController.post_create_update_entry);
+                });
             });
             path("logout", ()->{
                 get(HomeController.logout);

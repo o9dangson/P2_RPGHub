@@ -6,7 +6,8 @@
       <class name="com.revature.scramble.SeleniumTestRunner">
         <methods>
           <include name="setUpClass"/>
-          <include name="runScenario" invocation-numbers="0"/>
+          <include name="feature" invocation-numbers="0 1"/>
+          <include name="runScenario" invocation-numbers="1"/>
           <include name="tearDownClass"/>
           <include name="setupClass"/>
         </methods>

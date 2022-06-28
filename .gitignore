@@ -1,5 +1,4 @@
-rpghub/target/
-*.class
+rpghub/target/*
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup

@@ -34,6 +34,10 @@ public class LoginDemoSteps {
 
     @Given("a user is on the login page")
     public void a_user_is_on_the_login_page() {
+        if(!driver.getTitle().equals("Homepage")){
+            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+            logoutButton.click();
+        }
         Assert.assertEquals(driver.getTitle(), "Homepage");
     }
 
@@ -42,20 +46,50 @@ public class LoginDemoSteps {
         loginPageFactory.inputUsername("user1");
         loginPageFactory.inputPassword("pass");
     }
+    @When("a user enters the incorrect username and password")
+    public void a_user_enters_the_incorrect_username_and_password() {
+        loginPageFactory.inputUsername("user0");
+        loginPageFactory.inputPassword("pass");
+    }
     @When("clicks on login button")
     public void clicks_on_login_button() {
         loginPageFactory.clickLoginButton();
     }
-    @Then("a user is navigated to the homepage")
-    public void a_user_is_navigated_to_the_homepage() {
+    @Then("a user is navigated to the account page")
+    public void a_user_is_navigated_to_the_account_page() {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         Assert.assertEquals(driver.getTitle(), "Account");
     }
+    @Then("a user is navigated to the homepage")
+    public void a_user_is_navigated_to_the_homepage() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        Assert.assertEquals(driver.getTitle(), "Homepage");
+    }
+
+    // @When("a user is logged in {logged_in}")
+    // public void a_user_is_logged_in(Boolean logged_in){
+    //     if(logged_in){
+    //         loginPageFactory.login("user1", "pass");
+    //         Assert.assertEquals(driver.getTitle(), "Account");
+    //     }
+    //     Assert.assertEquals(driver.getTitle(), "Homepage");
+    // }
+    // @When ("a user types in the url {url_path}")
+    // public void a_user_types_in_the_url(String url_path){
+    //     //driver.get(url);
+    // }
+    // @Then("they should be at {location}")
+    // public void they_should_be_at_location(String location){
+    //     //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+    //     //Assert.assertEquals(driver.getTitle(), location);
+    // }
 
     @After
     public void teardown(){
-        WebElement logoutButton = driver.findElement(By.id("logout-btn"));
-        logoutButton.click();
+        if(!driver.getTitle().equals("Homepage")){
+            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+            logoutButton.click();
+        }
         this.driver.quit();
     }
 }

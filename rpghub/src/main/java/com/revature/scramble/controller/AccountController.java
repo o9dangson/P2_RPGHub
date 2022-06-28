@@ -19,24 +19,24 @@ public class AccountController {
             SessionController.update_session(user_obj);
             //Log 
             //Render page
-            ctx.redirect("account.html");
+            ctx.redirect("/account.html");
         }
         else{
             //Log
             //Redirect to login
             SessionController.reset_session();
-            ctx.redirect("index.html");
+            ctx.redirect("/index.html");
         }
     };
 
     public static Handler get_logged_in_account_page = ctx ->{
         //Check Session
         if(Session.user_id != -1){
-            ctx.redirect("account.html");
+            ctx.redirect("/account.html");
         }
         else{
             SessionController.reset_session();
-            ctx.redirect("index.html");
+            ctx.redirect("/index.html");
         }
     };
 }

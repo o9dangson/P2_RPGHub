@@ -5,7 +5,7 @@
 ### Req No.1: As a user, I am able to login to my account
 
 - `TC_01`: Tests if database `dao` will return valid login & user_info obj
-- `TC_02`: Tests verification of login details (Cucumber)
+- `TC_02`: Tests verification of login details
 - `TC_03`: Tests if routing will take to correct html page upon success/failure
 - `TC_04`: Tests if user tries to directly access page via URL while/without logging in.
   

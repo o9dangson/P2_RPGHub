@@ -1,5 +1,6 @@
 package com.revature.scramble.controller;
 
+
 import com.revature.scramble.models.Session;
 import com.revature.scramble.repository.entities.LoginInfo;
 import com.revature.scramble.repository.entities.UserInfo;

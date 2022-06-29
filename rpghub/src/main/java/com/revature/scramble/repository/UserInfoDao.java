@@ -33,7 +33,6 @@ public class UserInfoDao implements UserInfoDaoInterface{
                     resultSet.getBoolean(5));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return new UserInfo(-1, -1, "failed", false, false);
@@ -41,7 +40,7 @@ public class UserInfoDao implements UserInfoDaoInterface{
 
     @Override
     public UserInfo select_user_by_user_id(int user_id) {
-       Connection connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         String sql = "SELECT * FROM user_info WHERE user_id=?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -67,7 +66,7 @@ public class UserInfoDao implements UserInfoDaoInterface{
 
     @Override
     public UserInfo select_user_by_char_name(String char_name) {
-       Connection connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         String sql = "SELECT * FROM user_info WHERE char_name=?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -85,7 +84,6 @@ public class UserInfoDao implements UserInfoDaoInterface{
                     resultSet.getBoolean(5));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return new UserInfo(-1, -1, "failed", false, false);
@@ -93,7 +91,7 @@ public class UserInfoDao implements UserInfoDaoInterface{
 
     @Override
     public boolean update_user_by_user_id(int user_id, boolean is_frozen) {
-   Connection connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         String sql = "UPDATE user_info SET is_frozen = ? WHERE user_id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -103,7 +101,6 @@ public class UserInfoDao implements UserInfoDaoInterface{
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             try {
                 connection.rollback();

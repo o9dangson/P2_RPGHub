@@ -36,7 +36,7 @@ public class App
             path("listing", ()->{
                 get(AccountController.get_logged_in_account_page);
                 path("user-listings", ()->{
-                    get(ListingController.get_user_listings);
+                    get(ListingController.get_user_listings_by_id);
                 });
                 path("all-listings", ()->{
                     get(ListingController.get_all_listings);

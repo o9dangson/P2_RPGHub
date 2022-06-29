@@ -37,7 +37,7 @@ public class ListingDao implements ListingDaoInterface{
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return groupListings;
+        return null;
     }
 
 

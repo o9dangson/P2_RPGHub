@@ -65,7 +65,6 @@ public class EntryDao implements EntryDaoInterface{
                     resultSet.getString(6));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return new Entry(-1, -1, -1, "", "", "Pending");
@@ -95,7 +94,6 @@ public class EntryDao implements EntryDaoInterface{
             }
             return list_of_entry;
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return list_of_entry;
@@ -114,7 +112,6 @@ public class EntryDao implements EntryDaoInterface{
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             try {
                 connection.rollback();
@@ -136,7 +133,6 @@ public class EntryDao implements EntryDaoInterface{
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             try {
                 connection.rollback();

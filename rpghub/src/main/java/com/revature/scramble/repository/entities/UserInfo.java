@@ -8,8 +8,8 @@ public class UserInfo {
     private Boolean is_frozen;
 
 
-    public UserInfo(int Info_id, int userId, String char_name, Boolean is_mod, Boolean is_frozen){
-        this.info_id = Info_id;
+    public UserInfo(int info_id, int userId, String char_name, Boolean is_mod, Boolean is_frozen){
+        this.info_id = info_id;
         this.userId = userId;
         this.char_name = char_name;
         this.is_mod = is_mod;

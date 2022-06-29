@@ -1,4 +1,5 @@
 rpghub/target/*
+!rpghub/target/cucumber.html
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup

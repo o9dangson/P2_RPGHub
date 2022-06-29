@@ -22,11 +22,8 @@ public class ListingService {
         String json_string = "";
         int my_list_size = my_list.size();
         int counter = 0;
-        //Code to convert to json
         json_string+="{\"my_list\":[";
         for(Listing listing:my_list){
-            //String str_to_add = String.format("{\"list_id\":%d,\"user_id\":%d,\"list_name\":%s,\"dungeonName\":%s,\"max_size\":%d,\"cur_size\":%d}", listing.getListingId(), listing.getUser_id(), listing.getListName(), listing.getDungeonName(), listing.getMax_size(), listing.getCur_size());
-            //json_string+= str_to_add;
             json_string+=new Gson().toJson(listing);
             counter++;
             if(counter != my_list_size)

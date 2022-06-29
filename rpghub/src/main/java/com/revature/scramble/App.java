@@ -42,8 +42,16 @@ public class App
                     get(ListingController.get_all_listings);
                 });
                 path("manage", ()->{
-                    get(EntryController.get_listing_info_page);
-                    post(EntryController.post_create_update_entry);
+                    get(AccountController.get_logged_in_account_page);
+                    post(EntryController.get_listing_info_page);
+                    path("create", ()->{
+                        post(EntryController.post_create_update_entry);
+                    });
+                    path("entry", ()->{
+                        path("{list_id}", ()->{
+                            get(EntryController.get_all_entries);
+                        });
+                    });
                 });
             });
             path("logout", ()->{

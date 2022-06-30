@@ -27,34 +27,40 @@ public class App
                 get(HomeController.homepageEntered);
             });
             path("session", ()->{
-                get(SessionController.get_session);
+                get(SessionController.fetch_get_session);
             });
             path("account", ()->{
+                //Account Page
                 post(AccountController.post_account_page);
+                //ReRouting
                 get(AccountController.get_logged_in_account_page);
             });
             path("listing", ()->{
+                //ReRouting
                 get(AccountController.get_logged_in_account_page);
-                post(EntryController.get_listing_info_page);
+                //Listing Page
+                post(ListingController.post_listing_info_page);
                 path("user-listings", ()->{
-                    get(ListingController.get_user_listings_by_id);
+                    get(ListingController.fetch_get_user_listings_by_id);
                 });
                 path("all-listings", ()->{
-                    get(ListingController.get_all_listings);
+                    get(ListingController.fetch_get_all_listings);
                 });
                 path("manage", ()->{
+                    //ReRouting
                     get(AccountController.get_logged_in_account_page);
                     path("{list_id}", ()->{
-                        get(EntryController.get_all_entries);
+                        get(ListingController.fetch_get_particular_listing);
                         path("entry", ()->{
+                            get(EntryController.fetch_get_all_entries);
                             path("create", ()->{
-                                post(EntryController.post_create_entry);
+                                post(EntryController.fetch_post_create_entry);
                             });
                             path("update", ()->{
-                                post(EntryController.post_update_entry);
+                                post(EntryController.fetch_post_update_entry);
                             });
                             path("delete", ()->{
-                                post(EntryController.post_delete_entry);
+                                post(EntryController.fetch_post_delete_entry);
                             });
                         });
                     });
@@ -62,9 +68,6 @@ public class App
             });
             path("logout", ()->{
                 get(HomeController.logout);
-            });
-            path("example", ()->{
-                get(ListingController.get_example);
             });
         });
     }

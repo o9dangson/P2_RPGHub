@@ -68,6 +68,30 @@ public class ListingDao implements ListingDaoInterface{
         return groupListings;
     }
 
+    @Override
+    public Listing select_listing_by_list_id(int list_id) {
+        Connection connection = ConnectionFactory.getConnection();
+        String sql = "SELECT * FROM listing_table WHERE list_id = ?;";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, list_id);
+            ResultSet results = preparedStatement.executeQuery();
+
+            while(results.next()){
+                return new Listing(
+                    results.getInt(1),
+                    results.getInt(2),
+                    results.getString(3),
+                    results.getString(4),
+                    results.getInt(5),
+                    results.getInt(6));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return new Listing(-1, -1, "failed", "failed", 0, 0);
+    }
+
 	@Override
 	public int insert_listing(Listing listing) {
         Connection connection = ConnectionFactory.getConnection();

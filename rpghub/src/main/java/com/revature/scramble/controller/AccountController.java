@@ -12,7 +12,6 @@ public class AccountController {
 
     public static Handler post_account_page = ctx -> {
         //Verify Login details
-        System.out.println(ctx.formParam("username") + "\t" + ctx.formParam("password"));
         LoginInfo login_obj = AccountService.verify_details(ctx.formParam("username"), ctx.formParam("password"));
         //If true, update Session
         if (login_obj.getUserId() != -1){
@@ -20,24 +19,22 @@ public class AccountController {
             SessionController.update_session(user_obj);
             //Log 
             //Render page
-            ctx.redirect("/account.html");
+            ctx.render("/templates/account.vm");
         }
         else{
             //Log
             //Redirect to login
-            SessionController.reset_session();
-            ctx.redirect("/index.html");
+            ctx.redirect("/logout");
         }
     };
 
     public static Handler get_logged_in_account_page = ctx ->{
         //Check Session
-        if(Session.user_id != -1){
-            ctx.redirect("/account.html");
+        if(HomeController.check_account()){
+            ctx.render("/templates/account.vm");
         }
         else{
-            SessionController.reset_session();
-            ctx.redirect("/index.html");
+            ctx.redirect("/logout");
         }
     };
 }

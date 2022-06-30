@@ -14,8 +14,12 @@ public class ListingService {
         return listings;
     }
 
-    public static List<Listing> get_listings_by_id(int id){
+    public static List<Listing> get_listings_by_user_id(int id){
         return listingDao.select_listing_by_user_id(id);
+    }
+
+    public static Listing get_listing_by_list_id(int id){
+        return listingDao.select_listing_by_list_id(id);
     }
 
     public static String get_json_string_from_list(List<Listing> my_list){
@@ -31,5 +35,9 @@ public class ListingService {
         }
         json_string+="]}";
         return json_string;
+    }
+
+    public static String get_json_string_from_list_obj(Listing listing){
+        return new Gson().toJson(listing);
     }
 }

@@ -14,11 +14,16 @@ public class ListingController {
 
     public static Handler post_listing_info_page = ctx ->{
         if(HomeController.check_account()){
-            //Log 
-            //Render page
-            Map<String,Integer> temp = new HashMap<>();
-            temp.put("list_id", Integer.parseInt(ctx.formParam("list_id")));
-            ctx.render("/templates/listing.vm", temp);
+            if(Integer.parseInt(ctx.formParam("list_id")) != -1){
+                //Log 
+                //Render page
+                Map<String,Integer> temp = new HashMap<>();
+                temp.put("list_id", Integer.parseInt(ctx.formParam("list_id")));
+                ctx.render("/templates/listing.vm", temp);
+            }else{
+                //Log
+                ctx.redirect("/account");
+            }
         }
         else{
             //Log

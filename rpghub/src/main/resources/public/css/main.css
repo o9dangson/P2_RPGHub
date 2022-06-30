@@ -50,3 +50,7 @@ body {background-color: rgb(228, 217, 194);}
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
   }
+
+  .hide {
+    display: none;
+  }

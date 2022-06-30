@@ -21,13 +21,14 @@ public class HomeController {
 
         }else{
             //Not logged in
-            ctx.redirect("/logout");
+            SessionController.reset_session();
+            ctx.render("/templates/index.vm");
         }
     };
 
     public static Handler logout = ctx ->{
         SessionController.reset_session();
-        ctx.render("/templates/index.vm");
+        ctx.redirect("/");
     };
     
 }

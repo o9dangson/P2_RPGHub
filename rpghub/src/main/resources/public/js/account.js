@@ -19,7 +19,7 @@ function create_row_div(){
 
 function create_list_id_element(listing){
     let element = document.createElement("div")
-    //element.setAttribute("class", "col-1 themed-grid-col")
+    element.setAttribute("class", "themed-grid-col")
     element.style.display = "none"
     let p_element = document.createElement("p")
     p_element.setAttribute("class", "list_id")
@@ -31,7 +31,7 @@ function create_list_id_element(listing){
 }
 function create_user_id_element(listing){
     let element = document.createElement("div")
-    element.setAttribute("class", "col-1 themed-grid-col")
+    element.setAttribute("class", "col-1 themed-grid-col mt-4")
     let p_element = document.createElement("p")
     p_element.setAttribute("class", "user_id")
     p_element.setAttribute("id", `user-id-${listing.user_id}`)
@@ -42,7 +42,7 @@ function create_user_id_element(listing){
 }
 function create_list_name_element(listing){
     let element = document.createElement("div")
-    element.setAttribute("class", "col-3 themed-grid-col")
+    element.setAttribute("class", "col-3 themed-grid-col mt-4")
     let p_element = document.createElement("p")
     p_element.setAttribute("class", "list_name")
     p_element.setAttribute("id", `list-name-${listing.list_name}`)
@@ -53,7 +53,7 @@ function create_list_name_element(listing){
 }
 function create_dungeonName_element(listing){
     let element = document.createElement("div")
-    element.setAttribute("class", "col-4 themed-grid-col")
+    element.setAttribute("class", "col-4 themed-grid-col mt-4")
     let p_element = document.createElement("p")
     p_element.setAttribute("class", "dungeonName")
     p_element.setAttribute("id", `dungeonName-${listing.dungeonName}`)
@@ -64,7 +64,7 @@ function create_dungeonName_element(listing){
 }
 function create_max_size_element(listing){
     let element = document.createElement("div")
-    element.setAttribute("class", "col-1 themed-grid-col")
+    element.setAttribute("class", "col-1 themed-grid-col mt-4")
     let p_element = document.createElement("p")
     p_element.setAttribute("class", "max_size")
     p_element.setAttribute("id", `max-size-${listing.max_size}`)
@@ -75,7 +75,7 @@ function create_max_size_element(listing){
 }
 function create_cur_size_element(listing){
     let element = document.createElement("div")
-    element.setAttribute("class", "col-1 themed-grid-col")
+    element.setAttribute("class", "col-1 themed-grid-col mt-4")
     let p_element = document.createElement("p")
     p_element.setAttribute("class", "cur_size")
     p_element.setAttribute("id", `cur-size-${listing.cur_size}`)
@@ -86,7 +86,7 @@ function create_cur_size_element(listing){
 }
 function create_view_listing_element(listing){
     let element = document.createElement("div")
-    element.setAttribute("class", "col-2 themed-grid-col m-6 auto")
+    element.setAttribute("class", "col-2 themed-grid-col mt-3 auto")
     element.append(create_button(listing))
     return element
 }
@@ -98,15 +98,6 @@ function create_button(listing){
     button.setAttribute("value", "Select Listing")
     button.addEventListener("click", update_list_id)
     return button
-}
-
-function create_hidden_info_element(item){
-    let req_id_element = document.createElement("input")
-    req_id_element.setAttribute("type", "hidden")
-    req_id_element.setAttribute("name", "req_id")
-    req_id_element.setAttribute("value", `${item.req_id}`)
-
-    return req_id_element
 }
 
 function remove_listings(){

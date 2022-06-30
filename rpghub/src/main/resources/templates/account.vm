@@ -16,19 +16,23 @@
             <div>
                 <h4>Session detail: <span id="span-1">Attempting to populate</span></h4>
             </div>
-            <div id = "logout-div" style="float: right">
-                <form action="/logout" method="GET">
-                    <button class="btn btn-outline-dark" id="logout-btn">Sign out</button>
-                </form>
-                <br>
-                <form action="/listing" method="POST">
-                    <div style="display:hidden">
-                        <input type="username" class="hide" name="list_id" id="list_id" placeholder="user_1" value="-1">
-                    </div>
-                    <button class="btn btn-primary" id="view-btn">View Selected Listing</button>
-                </form>
+            <div id = "logout-div" style="display:flex; justify-content: space-around">
+                <div></div>
+                <div class="mb-2 mt-2">
+                    <form action="/listing" method="POST">
+                        <div style="display:hidden">
+                            <input type="username" class="hide" name="list_id" id="list_id" placeholder="user_1" value="-1">
+                        </div>
+                        <button class="btn btn-primary" id="view-btn">View Selected Listing</button>
+                    </form>
+                </div>
+                <div class ="mb-2 mt-2">
+                    <form action="/logout" method="GET">
+                        <button class="btn btn-outline-dark" id="logout-btn">Sign out</button>
+                    </form>
+                </div>
             </div>
-            <div id="listing-display-div"></div>
+            <div id="listing-display-div" class="table-color"></div>
         </div>
 
         <script src = "../js/account.js" type = "text/javascript"></script>

@@ -54,3 +54,7 @@ body {background-color: rgb(228, 217, 194);}
   .hide {
     display: none;
   }
+
+  .table-color {
+    background-color: rgb(126, 211, 237);
+  }

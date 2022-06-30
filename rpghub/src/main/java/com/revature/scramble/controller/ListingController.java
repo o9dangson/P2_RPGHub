@@ -39,4 +39,9 @@ public class ListingController {
             ctx.redirect("/index.html");
         }
     };
+
+    public static Handler get_example = ctx ->{
+        //Testing ctx.attribute
+        ctx.attribute("list_id");
+    };
 }

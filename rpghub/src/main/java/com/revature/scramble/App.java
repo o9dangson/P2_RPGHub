@@ -35,6 +35,7 @@ public class App
             });
             path("listing", ()->{
                 get(AccountController.get_logged_in_account_page);
+                post(EntryController.get_listing_info_page);
                 path("user-listings", ()->{
                     get(ListingController.get_user_listings_by_id);
                 });
@@ -43,19 +44,27 @@ public class App
                 });
                 path("manage", ()->{
                     get(AccountController.get_logged_in_account_page);
-                    post(EntryController.get_listing_info_page);
-                    path("create", ()->{
-                        post(EntryController.post_create_update_entry);
-                    });
-                    path("entry", ()->{
-                        path("{list_id}", ()->{
-                            get(EntryController.get_all_entries);
+                    path("{list_id}", ()->{
+                        get(EntryController.get_all_entries);
+                        path("entry", ()->{
+                            path("create", ()->{
+                                post(EntryController.post_create_entry);
+                            });
+                            path("update", ()->{
+                                post(EntryController.post_update_entry);
+                            });
+                            path("delete", ()->{
+                                post(EntryController.post_delete_entry);
+                            });
                         });
                     });
                 });
             });
             path("logout", ()->{
                 get(HomeController.logout);
+            });
+            path("example", ()->{
+                get(ListingController.get_example);
             });
         });
     }

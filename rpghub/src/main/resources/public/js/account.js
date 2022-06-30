@@ -5,8 +5,12 @@ function test_update_span(session){
 }
 
 function render_listings(all_listings){
+    let listings = document.createElement("div")
+    listings.setAttribute("id","list_of_listings")
+    let logout_btn = document.getElementById("logout-div")
+    document.body.insertBefore(listings,logout_btn)
     for (let listing_json of all_listings) {
-        //Some function to create row 
+        listings.addendChild(listing_json)
     }
     //Populate page
 }
@@ -49,3 +53,16 @@ async function get_all_listings(){
 get_session()
 let all_listings = get_all_listings();
 render_listings(all_list)
+
+/**
+ * 
+const response = await fetch('/account/cancel', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            'req_id': reqId
+        })
+    })
+ */

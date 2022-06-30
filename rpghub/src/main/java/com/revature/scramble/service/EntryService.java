@@ -29,4 +29,16 @@ public class EntryService {
         json_string+="]}";
         return json_string;
     }
+
+    public static void create_new_entry(Entry entry){
+
+    }
+
+    public static void update_entry(int entry_id, String valName, String value){
+
+    }
+
+    public static void delete_entry(int entry_id){
+
+    }
 }

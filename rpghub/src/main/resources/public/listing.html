@@ -4,30 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="./css/listings.css">
     <title>Listing</title>
 </head>
-<body>
-    <script src = "../js/listing.js" type = "text/javascript"></script>
-    <h1>Listing Information</h1>
-    
-    <!-- div for listing information-->
-    <div id="listing-info-div"></div>
-    <!-- div for buttons -->
-    <div id="buttons-div">
-        <form action="" method="POST">
-            <button class="btn btn-primary" id="apply-btn">Apply Here!</button>
-        </form>
-        <form action="" method="POST">
-            <button class="btn btn-primary" id="leave-btn">Apply Here!</button>
-        </form>
-        <form  action="/logout" method="GET">
-            <button class="btn btn-outline-dark" id="logout-btn">Sign out</button>
-        </form>
-    </div>
-    <!-- div for entry information-->
-    <div id="entry-info-div"></div>
-</body>
+    <body>
+        
+        <h1>Listing Information</h1>
+        
+        <!-- div for listing information-->
+        <div id="listing-info-div"></div>
+        <!-- div for buttons -->
+        <div id="buttons-div">
+            <form action="/manage/{{list_id}}/create" method="POST">
+                <button class="btn btn-primary" id="apply-btn">Request Join</button>
+            </form>
+            <form action="/manage/{{list_id}}/delete" method="POST">
+                <button class="btn btn-primary" id="leave-btn">Leave Group</button>
+            </form>
+            <form  action="/logout" method="GET">
+                <button class="btn btn-outline-dark" id="logout-btn">Sign out</button>
+            </form>
+        </div>
+        <!-- div for entry information-->
+        <div id="entry-info-div"></div>
+        <script src = "../js/listing.js" type = "text/javascript"></script>
+    </body>
 </html>

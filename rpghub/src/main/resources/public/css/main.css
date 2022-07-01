@@ -49,8 +49,6 @@ body {background-color: rgb(228, 217, 194);}
     text-align: center;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-<<<<<<< HEAD
-=======
   }
 
   .hide {
@@ -77,5 +75,4 @@ body {background-color: rgb(228, 217, 194);}
 
   .view-listing-btn:hover,.view-listing-btn:focus {
     background-color: rgb(0,0,0);
->>>>>>> listingpage_backup
   }

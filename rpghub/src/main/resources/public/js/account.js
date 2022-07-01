@@ -4,8 +4,6 @@ function test_update_span(session){
     element.innerHTML = `user_id: ${session.user_id} is_mod: ${session.is_mod} is_frozen: ${session.is_frozen} error: ${session.error}`
 }
 
-<<<<<<< HEAD
-=======
 function create_listing_div(){
     let listing_div = document.createElement("div")
     listing_div.setAttribute("id","list_of_listings")
@@ -197,7 +195,6 @@ function filter_list() {
 //dungeonName
 //max_size
 
->>>>>>> listingpage_backup
 //Async functions
 async function get_session() {
     try{
@@ -213,9 +210,6 @@ async function get_session() {
     }
 }
 
-<<<<<<< HEAD
-get_session()
-=======
 async function get_all_listings(){
     try{
         const response = await fetch('/listing/all-listings')
@@ -284,4 +278,3 @@ if(!response.ok){
     console.log("Could not load listing.vm from javascript")
 }
  */
->>>>>>> listingpage_backup

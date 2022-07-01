@@ -108,9 +108,6 @@ function remove_listings(){
 }
 
 function render_listings(all_listings){
-    // for (let listing_json of all_listings.my_list) {
-    //     console.log(listing_json)
-    // }
     //Get location to append to
     let div_location = document.getElementById("listing-display-div")
     //Create new div to append to this location
@@ -119,7 +116,7 @@ function render_listings(all_listings){
     for (let listing_json of all_listings.my_list){
         let row_div = create_row_div(listing_json)
         listing_div.append(row_div)
-        let list_of_elements = []
+        const list_of_elements = []
         //Create element(s) for containing listing information
         list_of_elements.push(create_list_id_element(listing_json))
         list_of_elements.push(create_user_id_element(listing_json))
@@ -141,6 +138,7 @@ function render_listings(all_listings){
 function setup_btns(){
     let div_location = document.getElementById("filter-btn-container")
     let button = document.createElement("input")
+    //let fitler_button = document.get
     button.setAttribute("type", "button")
     button.setAttribute("name", "filter-collapse")
     button.setAttribute("class", "btn btn-secondary filter-btn")
@@ -175,19 +173,50 @@ function update_list_id(){
     console.log(element_form.getAttribute("value"))
 }
 
-function filter_list() {
-    let input = document.getElementById('amount-input').value
-    input=input.toLowerCase();
-    let x = document.getElementsByClassName('btn btn-success');
+function filter_listing() {
+    let categories = document.getElementById('filter-category');
+    let category = categories.options[categories.selectedIndex].value;
+    let filtered_listings = document.getElementsByClassName(category);
+    const filtered_html = [];
+    for(listing of filtered_listings){
+        /*
+        if(listing.innerText == second_filter_param_inner_text){
+
+            push into array(put stuff below here)
+
+        }*/
+        console.log(listing);
+        let cat_element = listing.parentElement;
+        let listing_row_html = cat_element.parentElement;
+        filtered_html.push(listing_row_html);
+    }
+    let filtered_json = html_to_json(filtered_html);
     
-    for (i = 0; i < x.length; i++) { 
-        if (!x[i].innerHTML.toLowerCase().includes(input)) {
-            x[i].style.display="none";
-        }
-        else {
-            x[i].style.display="list-item"; 
+    remove_listings();
+    render_listings(filtered_json);
+    
+}
+
+function html_to_json(html_list){
+    let json_string = "";
+    json_string+="{\"my_list\":[";
+    for(let html of html_list){
+        json_string+=`{\"list_id\": ${html.children[0].innerText},`;
+        json_string+=`\"user_id\": ${html.children[1].innerText},`;
+        json_string+=`\"list_name\": "${html.children[2].innerText}",`;
+        json_string+=`\"dungeonName\": "${html.children[3].innerText}",`;
+        json_string+=`\"max_size\": ${html.children[4].innerText},`;
+        json_string+=`\"cur_size\": ${html.children[5].innerText}}`;
+        if(html_list.indexOf(html)<html_list.length-1){
+            json_string+=",";
         }
     }
+    json_string+="]}";
+    let json_obj = JSON.parse(json_string);
+    //console.log(json_string);
+    //console.log("json parsed" + json_obj);
+    console.log(json_obj);
+    return json_obj;
 }
 
 //user_id
@@ -231,29 +260,12 @@ get_session()
 get_all_listings()
 setup_btns()
 
+
 /*
-function filter_listing() {
-    let input = document.getElementById('amount-input').value
-    let all_listings = [].slice.call(document.getElementById("list_of_listings").children);
-    let filtered_listings = [];
 
-    let counter = 0;
-    //Code below needs confirmation
-    for(let div of all_listings){
-        for(let i = 1; i<5:i++){
-            if(div.children[counter].children[i].innerHTML==input){
-                filtered_listings.push(div)
-            }
-            counter++;
-        }
-    }
-    
-    remove_listings();
-    render_filter_listings(filtered_listings);
-}
 
-let listings = document.getElementById("list_of_listings").children[0].children[1].children[0].innerHTML; - return user_id
-*/
+//let listings = document.getElementById("list_of_listings").children[0].children[1].children[0].innerHTML; - return user_id
+
 
 
 /**

@@ -44,9 +44,9 @@
                                 <label for="filter-category">Choose a category to filter by: </label>
                                     <select name="filter-category" id="filter-category">
                                         <option value="user_id">User ID</option>
-                                        <option value="dave">Dungeon Name</option>
-                                        <option value="pumpernickel">Current Party Size</option>
-                                        <option value="reeses">Max Party Size</option>
+                                        <option value="dungeonName">Dungeon Name</option>
+                                        <option value="cur_size">Current Party Size</option>
+                                        <option value="max_size">Max Party Size</option>
                                     </select>
                             </div>  
                             <div class="input-group mb-3">
@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input class="btn btn-success" id="create-button" onkeyup="filter_list()" type="button" value="Filter">
+                                <input class="btn btn-success" id="create-button" onclick="filter_listing()" type="button" value="Filter">
                             </div>
                         </div>
                     </div>
@@ -91,19 +91,19 @@
             <div id="listing-container">
                 <div id="listing-header-div" class="row table-header mt-2">
                     <div id="user-id-header" class="col-1 themed-grid-col mt-4">
-                        <p class="user_id" id="user-id-col">user_id</p>
+                        <p class="user_id-title" id="user-id-col">user_id</p>
                     </div>
                     <div id="list-name-header" class="col-3 themed-grid-col mt-4">
-                        <p class="list_name" id="list-name-col">list_name</p>
+                        <p class="list_name-header" id="list-name-col">list_name</p>
                     </div>
                     <div id="dungeon-name-header" class="col-4 themed-grid-col mt-4">
-                        <p class="dungeonName" id="dungeonName-col">dungeonName</p>
+                        <p class="dungeonName-header" id="dungeonName-col">dungeonName</p>
                     </div>
                     <div id="max-size-header" class="col-1 themed-grid-col mt-4">
-                        <p class="max_size" id="max-size-col">max_size</p>
+                        <p class="max_size-header" id="max-size-col">max_size</p>
                     </div>
                     <div id="cur-size-header" class="col-1 themed-grid-col mt-4">
-                        <p class="cur_size" id="cur-size-col">cur_size</p>
+                        <p class="cur_size-header" id="cur-size-col">cur_size</p>
                     </div>
                 </div>
                 <div id="listing-display-div" class="table-color"></div>

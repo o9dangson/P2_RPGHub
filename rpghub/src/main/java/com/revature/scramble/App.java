@@ -65,6 +65,15 @@ public class App
                         });
                     });
                 });
+                path("create", ()->{
+                    post(ListingController.fetch_post_create_listing);
+                });
+                path("update", ()->{
+                    post(ListingController.fetch_post_update_listing);
+                });
+                path("delete", ()->{
+                    post(ListingController.fetch_post_delete_listing);
+                });
             });
             path("logout", ()->{
                 get(HomeController.logout);

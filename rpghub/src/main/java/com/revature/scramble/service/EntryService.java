@@ -31,14 +31,14 @@ public class EntryService {
     }
 
     public static void create_new_entry(Entry entry){
-
+        entryDao.insert_entry(entry);
     }
 
-    public static void update_entry(int entry_id, String valName, String value){
-
+    public static void update_entry(int entry_id, String status){
+        boolean attempt_update = entryDao.update_entry_by_entry_id(entry_id,status);
     }
 
     public static void delete_entry(int entry_id){
-
+        entryDao.remove_entry_by_entry_id(entry_id);
     }
 }

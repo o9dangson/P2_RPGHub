@@ -116,6 +116,27 @@ public class ListingDao implements ListingDaoInterface{
         return result_list_id;
 	}
 
+    @Override
+	public void update_listing(Listing listing){
+        Connection connection = ConnectionFactory.getConnection();
+        String sql = "UPDATE listing_table SET max_size=?, cur_size=? WHERE list_id=?;";
+        try{
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1,listing.getMax_size());
+                preparedStatement.setInt(2,listing.getCur_size());
+                preparedStatement.setInt(3,listing.getListingId());
+
+                preparedStatement.execute();
+            }catch(SQLException e){
+                connection.rollback();
+                e.printStackTrace();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+	}
+
 	@Override
 	public void delete_listing(Listing listing) {
 		Connection connection = ConnectionFactory.getConnection();

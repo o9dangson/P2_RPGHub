@@ -100,15 +100,14 @@ public class EntryDao implements EntryDaoInterface{
     }
 
     @Override
-    public boolean update_entry_by_entry_id(int entry_id, String varName, String value) {
+    public boolean update_entry_by_entry_id(int entry_id, String value) {
         Connection connection = ConnectionFactory.getConnection();
-        String sql = "UPDATE entry_table SET ? = ? WHERE entry_id = ?;";
+        String sql = "UPDATE entry_table SET status = ? WHERE entry_id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             
-            preparedStatement.setString(1, varName);
-            preparedStatement.setString(2, value);
-            preparedStatement.setInt(3, entry_id);
+            preparedStatement.setString(1, value);
+            preparedStatement.setInt(2, entry_id);
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {

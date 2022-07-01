@@ -13,7 +13,7 @@ function create_listing_div(){
 
 function create_row_div(){
     let row_div = document.createElement("div")
-    row_div.setAttribute("class", "row mb-3")
+    row_div.setAttribute("class", "row mb-3 listing-row-div")
     return row_div
 }
 
@@ -29,6 +29,7 @@ function create_list_id_element(listing){
 
     return element
 }
+
 function create_user_id_element(listing){
     let element = document.createElement("div")
     element.setAttribute("class", "col-1 themed-grid-col mt-4")
@@ -92,6 +93,7 @@ function create_view_listing_element(listing){
 }
 function create_button(listing){
     let button = document.createElement("input")
+    button.setAttribute("id", `select-listing-${listing.list_id}`)
     button.setAttribute("type", "button")
     button.setAttribute("name", `${listing.list_id}`)
     button.setAttribute("class", "btn btn-secondary view-listing-btn")
@@ -133,14 +135,59 @@ function render_listings(all_listings){
         }
     }
     //Append new div to location
-    div_location.append(listing_div)
+    div_location.append(listing_div);
+}
+
+function setup_btns(){
+    let div_location = document.getElementById("filter-btn-container")
+    let button = document.createElement("input")
+    button.setAttribute("type", "button")
+    button.setAttribute("name", "filter-collapse")
+    button.setAttribute("class", "btn btn-secondary filter-btn")
+    button.setAttribute("value", "Filter Listings")
+    button.addEventListener("click", hideCollapse)
+    div_location.append(button)
+
+    let div_location2 = document.getElementById("create-btn-container")
+    let button2 = document.createElement("input")
+    button2.setAttribute("type", "button")
+    button2.setAttribute("name", "create-collapse")
+    button2.setAttribute("class", "btn btn-secondary create-btn")
+    button2.setAttribute("value", "Create Listing")
+    button2.addEventListener("click", hideCollapse)
+    div_location2.append(button2)
+}
+
+function hideCollapse() {
+    var myCollapse = document.getElementById(this.getAttribute("name"));
+    var bsCollapse = new bootstrap.Collapse(myCollapse, {
+        toggle: true
+    })
+    bsCollapse.hide();
 }
 
 function update_list_id(){
     let element_list_id = this.getAttribute("name")
     let element_form = document.getElementById("list_id")
     element_form.setAttribute("value", element_list_id)
+    let view_btn = document.getElementById("view-btn")
+    view_btn.setAttribute("class", "btn btn-success")
     console.log(element_form.getAttribute("value"))
+}
+
+function filter_list() {
+    let input = document.getElementById('amount-input').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('btn btn-success');
+    
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item"; 
+        }
+    }
 }
 
 //user_id
@@ -182,7 +229,32 @@ console.log("this is working")
 
 get_session()
 get_all_listings()
-//render_listings(all_listings)
+setup_btns()
+
+/*
+function filter_listing() {
+    let input = document.getElementById('amount-input').value
+    let all_listings = [].slice.call(document.getElementById("list_of_listings").children);
+    let filtered_listings = [];
+
+    let counter = 0;
+    //Code below needs confirmation
+    for(let div of all_listings){
+        for(let i = 1; i<5:i++){
+            if(div.children[counter].children[i].innerHTML==input){
+                filtered_listings.push(div)
+            }
+            counter++;
+        }
+    }
+    
+    remove_listings();
+    render_filter_listings(filtered_listings);
+}
+
+let listings = document.getElementById("list_of_listings").children[0].children[1].children[0].innerHTML; - return user_id
+*/
+
 
 /**
  * 
@@ -205,6 +277,4 @@ const response = await fetch("/listing", {
 if(!response.ok){
     console.log("Could not load listing.vm from javascript")
 }
-
  */
-

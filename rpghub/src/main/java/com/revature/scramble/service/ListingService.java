@@ -22,6 +22,19 @@ public class ListingService {
         return listingDao.select_listing_by_list_id(id);
     }
 
+    public static int create_listing(Listing listing){
+        int new_list_id = listingDao.insert_listing(listing);
+        return new_list_id;
+    }
+
+    public static void update_listing_service(Listing listing){
+        listingDao.update_listing(listing);
+    }
+
+    public static void delete_listing_using_obj(Listing listing){
+        listingDao.delete_listing(listing);
+    }
+
     public static String get_json_string_from_list(List<Listing> my_list){
         String json_string = "";
         int my_list_size = my_list.size();

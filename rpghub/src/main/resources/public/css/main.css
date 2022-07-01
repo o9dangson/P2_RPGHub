@@ -55,6 +55,24 @@ body {background-color: rgb(228, 217, 194);}
     display: none;
   }
 
+  .table-header{
+    background-color: rgb(105, 132, 133);
+  }
+
   .table-color {
-    background-color: rgb(126, 211, 237);
+    background-color: rgb(139, 139, 139);
+    border-radius: 25px;
+  }
+
+  .logout-button, .view-btn {
+    background-color:rgb(0, 0, 0);
+    color:rgb(228, 217, 194);
+  }
+
+  #listing-display-div, #listing-header-div {
+    border-radius: 25px;
+  }
+
+  .view-listing-btn:hover,.view-listing-btn:focus {
+    background-color: rgb(0,0,0);
   }

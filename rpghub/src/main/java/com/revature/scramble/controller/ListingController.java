@@ -71,6 +71,40 @@ public class ListingController {
         }
     };
 
+    public static Handler fetch_post_create_listing = ctx->{
+        if(HomeController.check_account()){
+            Listing new_listing = new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size")));
+            int result_list_id = ListingService.create_listing(new_listing);
+            System.out.println("result_list_id: " + result_list_id);
+        }
+        else{
+            //Log
+            ctx.redirect("/logout");
+        }
+    };
+
+    public static Handler fetch_post_update_listing = ctx->{
+        if(HomeController.check_account()){
+            Listing new_listing = new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size")));
+            ListingService.update_listing_service(new_listing);
+        }else{
+            //log
+            ctx.redirect("/logout");
+        }
+    };
+    
+    public static Handler fetch_post_delete_listing = ctx->{
+        if(HomeController.check_account()){
+            Listing new_listing = new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size")));
+            ListingService.delete_listing_using_obj(new_listing);
+            System.out.println("fetch_post_delete_listing: Attempted");
+        }
+        else{
+            //Log
+            ctx.redirect("/logout");
+        }
+    };
+
     // public static Handler post_example = ctx ->{
     //     //ctx.redirect("/example.html");
     //     Map<String, Integer> temp = new HashMap<>();

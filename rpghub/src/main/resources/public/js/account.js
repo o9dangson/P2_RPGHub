@@ -173,24 +173,30 @@ function update_list_id(){
     console.log(element_form.getAttribute("value"))
 }
 
-function filter_listing() {
-    let categories = document.getElementById('filter-category');
-    let category = categories.options[categories.selectedIndex].value;
-    let filtered_listings = document.getElementsByClassName(category);
+function clear_filters(){
+    remove_listings()
+    get_all_listings()
+}
+async function filter_listing() {
+    remove_listings();
+    await get_all_listings()
+
+    let categories = document.getElementById('filter-category')
+    let category = categories.options[categories.selectedIndex].value
+    let filtered_elements = document.getElementsByClassName(category)
+    let specific_filter_val = document.getElementById("specific-filter-input").value
     const filtered_html = [];
-    for(listing of filtered_listings){
-        /*
-        if(listing.innerText == second_filter_param_inner_text){
-
-            push into array(put stuff below here)
-
-        }*/
-        console.log(listing);
-        let cat_element = listing.parentElement;
-        let listing_row_html = cat_element.parentElement;
-        filtered_html.push(listing_row_html);
+    for(listing of filtered_elements){
+        
+        
+        if(listing.innerText == specific_filter_val){
+            console.log(listing);
+            let cat_element = listing.parentElement
+            let listing_row_html = cat_element.parentElement
+            filtered_html.push(listing_row_html)
+        }
     }
-    let filtered_json = html_to_json(filtered_html);
+    let filtered_json = html_to_json(filtered_html)
     
     remove_listings();
     render_listings(filtered_json);

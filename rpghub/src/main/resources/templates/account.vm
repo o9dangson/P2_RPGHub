@@ -41,26 +41,25 @@
                     <div class="card card-body bg-dark text-light">
                         <div class="input-group">             
                             <div class="input-group mb-3">
-                                <label for="filter-category">Choose a category to filter by: </label>
+                                <label for="filter-category">Choose a category to filter by:&nbsp;&nbsp;</label>
                                     <select name="filter-category" id="filter-category">
                                         <option value="user_id">User ID</option>
+                                        <option value="list_name">List Name</option>
                                         <option value="dungeonName">Dungeon Name</option>
                                         <option value="cur_size">Current Party Size</option>
                                         <option value="max_size">Max Party Size</option>
                                     </select>
                             </div>  
                             <div class="input-group mb-3">
-                                <div class="col-5">
-                                    <label for="filter-names">Show only </label>
-                                        <select name="filter-names" id="filter-names">
-                                        </select>
-                                </div>
-                                <div class="col-1">
-                                    <input type="checkbox" id="filter-names-cb">  
-                                </div>
+                                <input id="specific-filter-input" type="text" class="form-control" placeholder="Specific Filter" aria-label="Specific Filter">
                             </div>
-                            <div class="input-group mb-3">
-                                <input class="btn btn-success" id="create-button" onclick="filter_listing()" type="button" value="Filter">
+                            <div class="row">
+                                <div class="input-group col mb-3">
+                                    <input class="btn btn-success" id="create-button" onclick="filter_listing()" type="button" value="Filter">
+                                </div>
+                                <div class="input-group col mb-3">
+                                    <input class="btn btn-danger" id="remove-filter-button" onclick="clear_filters()" type="button" value="Remove Filters">
+                                </div>
                             </div>
                         </div>
                     </div>

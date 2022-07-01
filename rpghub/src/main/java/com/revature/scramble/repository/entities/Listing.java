@@ -2,11 +2,7 @@ package com.revature.scramble.repository.entities;
 
 public class Listing{
 
-<<<<<<< HEAD
-    private int list_Id;
-=======
     private int list_id;
->>>>>>> listingpage_backup
     private int user_id;
     private String list_name;
     private String dungeonName;
@@ -14,11 +10,7 @@ public class Listing{
     private int cur_size;
     
     public Listing(int listingId, int user_id, String list_name, String dungeonName, int max_size, int cur_size){
-<<<<<<< HEAD
-        this.list_Id = listingId;
-=======
         this.list_id = listingId;
->>>>>>> listingpage_backup
         this.user_id = user_id;
         this.list_name = list_name;
         this.dungeonName = dungeonName;
@@ -27,19 +19,11 @@ public class Listing{
     }
 
     public int getListingId() {
-<<<<<<< HEAD
-        return list_Id;
-    }
-
-    public void setListingId(int listingId) {
-        this.list_Id = listingId;
-=======
         return list_id;
     }
 
     public void setListingId(int listingId) {
         this.list_id = listingId;
->>>>>>> listingpage_backup
     }
 
     public int getUser_id() {
@@ -88,11 +72,7 @@ public class Listing{
         int result = 1;
         result = prime * result + cur_size;
         result = prime * result + ((dungeonName == null) ? 0 : dungeonName.hashCode());
-<<<<<<< HEAD
-        result = prime * result + list_Id;
-=======
         result = prime * result + list_id;
->>>>>>> listingpage_backup
         result = prime * result + ((list_name == null) ? 0 : list_name.hashCode());
         result = prime * result + max_size;
         result = prime * result + user_id;
@@ -115,11 +95,7 @@ public class Listing{
                 return false;
         } else if (!dungeonName.equals(other.dungeonName))
             return false;
-<<<<<<< HEAD
-        if (list_Id != other.list_Id)
-=======
         if (list_id != other.list_id)
->>>>>>> listingpage_backup
             return false;
         if (list_name == null) {
             if (other.list_name != null)
@@ -135,11 +111,7 @@ public class Listing{
 
     @Override
     public String toString() {
-<<<<<<< HEAD
-        return "Listing [cur_size=" + cur_size + ", dungeonName=" + dungeonName + ", list_Id=" + list_Id
-=======
         return "Listing [cur_size=" + cur_size + ", dungeonName=" + dungeonName + ", list_id=" + list_id
->>>>>>> listingpage_backup
                 + ", list_name=" + list_name + ", max_size=" + max_size + ", user_id=" + user_id + "]";
     }
     

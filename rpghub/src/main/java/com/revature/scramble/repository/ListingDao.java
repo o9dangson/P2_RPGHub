@@ -68,8 +68,6 @@ public class ListingDao implements ListingDaoInterface{
         return groupListings;
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public Listing select_listing_by_list_id(int list_id) {
         Connection connection = ConnectionFactory.getConnection();
@@ -94,7 +92,6 @@ public class ListingDao implements ListingDaoInterface{
         return new Listing(-1, -1, "failed", "failed", 0, 0);
     }
 
->>>>>>> listingpage_backup
 	@Override
 	public int insert_listing(Listing listing) {
         Connection connection = ConnectionFactory.getConnection();
@@ -119,8 +116,6 @@ public class ListingDao implements ListingDaoInterface{
         return result_list_id;
 	}
 
-<<<<<<< HEAD
-=======
     @Override
 	public void update_listing(Listing listing){
         Connection connection = ConnectionFactory.getConnection();
@@ -142,7 +137,6 @@ public class ListingDao implements ListingDaoInterface{
         }
 	}
 
->>>>>>> listingpage_backup
 	@Override
 	public void delete_listing(Listing listing) {
 		Connection connection = ConnectionFactory.getConnection();

@@ -1,16 +1,5 @@
 package com.revature.scramble.controller;
 
-<<<<<<< HEAD
-import io.javalin.http.Handler;
-
-public class EntryController {
-    
-    public static Handler get_listing_info_page = ctx ->{
-        if(HomeController.check_account()){
-            //Log 
-            //Render page
-            ctx.redirect("/listing.html");
-=======
 import java.util.List;
 
 import com.revature.scramble.service.EntryService;
@@ -38,19 +27,10 @@ public class EntryController {
             //call the service method here
             EntryService.create_new_entry(new_entry);
             //Entry_Service.create_new_entry()
->>>>>>> listingpage_backup
         }
         else{
             //Log
             //Render page
-<<<<<<< HEAD
-            ctx.redirect("/index.html");
-        }
-    };
-
-    public static Handler post_create_update_entry = ctx ->{
-        
-=======
             ctx.redirect("/logout");
         }
     };
@@ -103,6 +83,5 @@ public class EntryController {
             //Render page
             ctx.redirect("/logout");
         }
->>>>>>> listingpage_backup
     };
 }

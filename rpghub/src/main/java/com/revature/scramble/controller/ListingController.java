@@ -1,20 +1,5 @@
 package com.revature.scramble.controller;
 
-<<<<<<< HEAD
-import io.javalin.http.Handler;
-
-public class ListingController {
-    
-    public static Handler get_user_listings = ctx ->{
-        //Request from db
-        //Send listings as a json
-    };
-
-    public static Handler get_all_listings = ctx ->{
-        //Request from db
-        //Send listings as a json
-    };
-=======
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,5 +111,4 @@ public class ListingController {
     //     temp.put("list_id", Integer.parseInt(ctx.formParam("list_id")));
     //     ctx.render("/templates/example.vm", temp);
     // };
->>>>>>> listingpage_backup
 }

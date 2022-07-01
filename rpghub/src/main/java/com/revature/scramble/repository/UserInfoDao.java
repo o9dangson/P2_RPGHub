@@ -33,10 +33,6 @@ public class UserInfoDao implements UserInfoDaoInterface{
                     resultSet.getBoolean(5));
             }
         } catch (SQLException e) {
-<<<<<<< HEAD
-            // TODO Auto-generated catch block
-=======
->>>>>>> listingpage_backup
             e.printStackTrace();
         }
         return new UserInfo(-1, -1, "failed", false, false);
@@ -44,11 +40,7 @@ public class UserInfoDao implements UserInfoDaoInterface{
 
     @Override
     public UserInfo select_user_by_user_id(int user_id) {
-<<<<<<< HEAD
-       Connection connection = ConnectionFactory.getConnection();
-=======
         Connection connection = ConnectionFactory.getConnection();
->>>>>>> listingpage_backup
         String sql = "SELECT * FROM user_info WHERE user_id=?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -74,11 +66,7 @@ public class UserInfoDao implements UserInfoDaoInterface{
 
     @Override
     public UserInfo select_user_by_char_name(String char_name) {
-<<<<<<< HEAD
-       Connection connection = ConnectionFactory.getConnection();
-=======
         Connection connection = ConnectionFactory.getConnection();
->>>>>>> listingpage_backup
         String sql = "SELECT * FROM user_info WHERE char_name=?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -96,10 +84,6 @@ public class UserInfoDao implements UserInfoDaoInterface{
                     resultSet.getBoolean(5));
             }
         } catch (SQLException e) {
-<<<<<<< HEAD
-            // TODO Auto-generated catch block
-=======
->>>>>>> listingpage_backup
             e.printStackTrace();
         }
         return new UserInfo(-1, -1, "failed", false, false);
@@ -107,11 +91,7 @@ public class UserInfoDao implements UserInfoDaoInterface{
 
     @Override
     public boolean update_user_by_user_id(int user_id, boolean is_frozen) {
-<<<<<<< HEAD
-   Connection connection = ConnectionFactory.getConnection();
-=======
         Connection connection = ConnectionFactory.getConnection();
->>>>>>> listingpage_backup
         String sql = "UPDATE user_info SET is_frozen = ? WHERE user_id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -121,10 +101,6 @@ public class UserInfoDao implements UserInfoDaoInterface{
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
-<<<<<<< HEAD
-            // TODO Auto-generated catch block
-=======
->>>>>>> listingpage_backup
             e.printStackTrace();
             try {
                 connection.rollback();

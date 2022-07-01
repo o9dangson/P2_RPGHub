@@ -27,25 +27,6 @@ public class App
                 get(HomeController.homepageEntered);
             });
             path("session", ()->{
-<<<<<<< HEAD
-                get(SessionController.get_session);
-            });
-            path("account", ()->{
-                post(AccountController.post_account_page);
-                get(AccountController.get_logged_in_account_page);
-            });
-            path("listing", ()->{
-                get(AccountController.get_logged_in_account_page);
-                path("user-listings", ()->{
-                    get(ListingController.get_user_listings);
-                });
-                path("all-listings", ()->{
-                    get(ListingController.get_all_listings);
-                });
-                path("manage", ()->{
-                    get(EntryController.get_listing_info_page);
-                    post(EntryController.post_create_update_entry);
-=======
                 get(SessionController.fetch_get_session);
             });
             path("account", ()->{
@@ -92,7 +73,6 @@ public class App
                 });
                 path("delete", ()->{
                     post(ListingController.fetch_post_delete_listing);
->>>>>>> listingpage_backup
                 });
             });
             path("logout", ()->{

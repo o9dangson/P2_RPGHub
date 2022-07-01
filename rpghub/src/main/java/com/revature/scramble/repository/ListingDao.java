@@ -68,6 +68,33 @@ public class ListingDao implements ListingDaoInterface{
         return groupListings;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public Listing select_listing_by_list_id(int list_id) {
+        Connection connection = ConnectionFactory.getConnection();
+        String sql = "SELECT * FROM listing_table WHERE list_id = ?;";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, list_id);
+            ResultSet results = preparedStatement.executeQuery();
+
+            while(results.next()){
+                return new Listing(
+                    results.getInt(1),
+                    results.getInt(2),
+                    results.getString(3),
+                    results.getString(4),
+                    results.getInt(5),
+                    results.getInt(6));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return new Listing(-1, -1, "failed", "failed", 0, 0);
+    }
+
+>>>>>>> listingpage_backup
 	@Override
 	public int insert_listing(Listing listing) {
         Connection connection = ConnectionFactory.getConnection();
@@ -92,6 +119,30 @@ public class ListingDao implements ListingDaoInterface{
         return result_list_id;
 	}
 
+<<<<<<< HEAD
+=======
+    @Override
+	public void update_listing(Listing listing){
+        Connection connection = ConnectionFactory.getConnection();
+        String sql = "UPDATE listing_table SET max_size=?, cur_size=? WHERE list_id=?;";
+        try{
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1,listing.getMax_size());
+                preparedStatement.setInt(2,listing.getCur_size());
+                preparedStatement.setInt(3,listing.getListingId());
+
+                preparedStatement.execute();
+            }catch(SQLException e){
+                connection.rollback();
+                e.printStackTrace();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+	}
+
+>>>>>>> listingpage_backup
 	@Override
 	public void delete_listing(Listing listing) {
 		Connection connection = ConnectionFactory.getConnection();

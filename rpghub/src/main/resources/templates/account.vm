@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <title>Account</title>
+</head>
+    <body class="text-center">
+        
+        <h1>Welcome to your account page</h1>
+        <div class="container">
+            <div>
+                <h4>Session detail: <span id="span-1">Attempting to populate</span></h4>
+            </div>
+            <div id = "logout-div" style="display:flex; justify-content: space-around">
+                <div class="mb-2 mt-2" id="filter-btn-container"></div>
+                <div class="mb-2 mt-2" id="create-btn-container"></div>
+                <div class="mb-2 mt-2">
+                    <form action="/listing" method="POST">
+                        <div style="display:hidden">
+                            <input type="username" class="hide" name="list_id" id="list_id" placeholder="user_1" value="-1">
+                        </div>
+                        <button class="btn btn-primary" id="view-btn">View Selected Listing</button>
+                    </form>
+                </div>
+                <div class ="mb-2 mt-2">
+                    <form action="/logout" method="GET">
+                        <button class="btn btn-outline-dark" id="logout-btn">Sign out <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
+                        <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
+                        </svg></button>
+                    </form>
+                    </form>
+                </div>
+            </div>
+            <div id="collapsible-container" class="row">
+                <div class="collapse col-6" id="filter-collapse">
+                    <div class="card card-body bg-dark text-light">
+                        <div class="input-group">             
+                            <div class="input-group mb-3">
+                                <label for="filter-category">Choose a category to filter by: </label>
+                                    <select name="filter-category" id="filter-category">
+                                        <option value="user_id">User ID</option>
+                                        <option value="dave">Dungeon Name</option>
+                                        <option value="pumpernickel">Current Party Size</option>
+                                        <option value="reeses">Max Party Size</option>
+                                    </select>
+                            </div>  
+                            <div class="input-group mb-3">
+                                <div class="col-5">
+                                    <label for="filter-names">Show only </label>
+                                        <select name="filter-names" id="filter-names">
+                                        </select>
+                                </div>
+                                <div class="col-1">
+                                    <input type="checkbox" id="filter-names-cb">  
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input class="btn btn-success" id="create-button" onkeyup="filter_list()" type="button" value="Filter">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse col-6" id="create-collapse">
+                    <div class="card card-body bg-dark text-light">
+                        <div class="input-group">                 
+                            <div class="input-group mb-3">
+                                <input id="amount-input" type="text" class="form-control" placeholder="Amount" aria-label="Amount">
+                                <span class="input-group-text">G</span>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Description</span>
+                                <textarea id="desc-input" class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                            
+                            <div class="input-group mb-3">
+                                <input class="btn btn-success" id="create-button" type="button" value="Create">
+                            </div>
+
+                            <div id="error-message">
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <div id="listing-container">
+                <div id="listing-header-div" class="row table-header mt-2">
+                    <div id="user-id-header" class="col-1 themed-grid-col mt-4">
+                        <p class="user_id" id="user-id-col">user_id</p>
+                    </div>
+                    <div id="list-name-header" class="col-3 themed-grid-col mt-4">
+                        <p class="list_name" id="list-name-col">list_name</p>
+                    </div>
+                    <div id="dungeon-name-header" class="col-4 themed-grid-col mt-4">
+                        <p class="dungeonName" id="dungeonName-col">dungeonName</p>
+                    </div>
+                    <div id="max-size-header" class="col-1 themed-grid-col mt-4">
+                        <p class="max_size" id="max-size-col">max_size</p>
+                    </div>
+                    <div id="cur-size-header" class="col-1 themed-grid-col mt-4">
+                        <p class="cur_size" id="cur-size-col">cur_size</p>
+                    </div>
+                </div>
+                <div id="listing-display-div" class="table-color"></div>
+            </div>
+        </div>
+
+        <script src = "../js/account.js" type = "text/javascript"></script>
+    </body>
+</html>

@@ -11,7 +11,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SessionController {
 
+<<<<<<< HEAD
     public static Handler get_session = ctx -> {
+=======
+    public static Handler fetch_get_session = ctx -> {
+>>>>>>> listingpage_backup
         String json_string = Session.get_json_string();
         
         ObjectMapper om = new ObjectMapper();

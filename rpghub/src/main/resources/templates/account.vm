@@ -62,7 +62,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-group col mb-3">
-                                    <input class="btn btn-success" id="create-button" onclick="filter_listing()" type="button" value="Filter">
+                                    <input class="btn btn-success" id="filter-submit" onclick="filter_listing()" type="button" value="Filter">
                                 </div>
                                 <div class="input-group col mb-3">
                                     <input class="btn btn-danger" id="remove-filter-button" onclick="clear_filters()" type="button" value="Remove Filters">
@@ -85,7 +85,7 @@
                                 <input id="create-max-size" type="number" min="1" max="10" class="form-control" placeholder="Max Party Size" aria-label="Max Party Size">
                             </div>
                             <div class="input-group mb-3">
-                                <input class="btn btn-success" id="create-button" onclick= "create_new_listing()" type="button" value="Submit">
+                                <input class="btn btn-success" id="listing-submit" onclick= "create_new_listing()" type="button" value="Submit">
                             </div>
                             </form>
                             <div id="error-message">

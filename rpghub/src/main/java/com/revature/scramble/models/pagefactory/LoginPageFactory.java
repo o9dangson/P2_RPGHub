@@ -44,5 +44,4 @@ public class LoginPageFactory {
     public void inputUsername(String username) {
         usernameInput.sendKeys(username);
     }
-  
 }

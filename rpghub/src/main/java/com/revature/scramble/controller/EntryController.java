@@ -44,10 +44,14 @@ public class EntryController {
             //Update particular entry 
             EntryService.update_entry(entry_id, user_status);
             //Update particular listing
-            Listing new_listing = new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size")));
-            ListingService.update_listing_service(new_listing);
+            if(user_status.equals("Accepted")){
+                ListingService.update_listing_service(new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size"))+1 ));
+            }
+            else if(user_status.equals("Rejected")){
+                ListingService.update_listing_service(new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size"))));
+            }
             
-            ctx.redirect("/listing/"+ctx.formParam("list_id"));
+            ctx.redirect("/view/"+ctx.formParam("list_id"));
         }else if(Session.is_frozen){
             ctx.redirect("/frozen");
         }
@@ -64,9 +68,18 @@ public class EntryController {
                 //Log 
                 //database request
                 int entry_id = Integer.parseInt(ctx.formParam("entry_id"));
+                int list_id = Integer.parseInt(ctx.formParam("list_id"));
+                //Check if entry was previously accepted
+                Entry entry_obj = EntryService.get_entry_by_entry_id(entry_id);
+                if (entry_obj.getStatus().equals("Accepted")){
+                    Listing listing_obj = ListingService.get_listing_by_list_id( list_id );
+                    listing_obj.setCur_size( listing_obj.getCur_size() > 0 ? listing_obj.getCur_size() -1 : 0 );
+                    ListingService.update_listing_service(listing_obj);
+                }
+                //Delete Entry
                 EntryService.delete_entry(entry_id);
             }
-            ctx.redirect("/listing/manage/"+ctx.formParam("list_id")+"/view");
+            ctx.redirect("/view/"+ctx.formParam("list_id"));
         }else if(Session.is_frozen){
             ctx.redirect("/frozen");
         }

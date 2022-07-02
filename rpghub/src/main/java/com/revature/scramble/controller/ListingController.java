@@ -134,7 +134,7 @@ public class ListingController {
                 ListingService.delete_listing_using_obj(Integer.parseInt(ctx.formParam("list_id")));
                 System.out.println("fetch_post_delete_listing: Attempted");
             }
-            //Lo
+            //Log
             ctx.redirect("/account");
         }else if(Session.is_frozen){
             ctx.redirect("/frozen");

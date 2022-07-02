@@ -40,6 +40,7 @@ public class App
                 get(AccountController.get_logged_in_account_page);
                 //Listing Page
                 post(ListingController.post_listing_info_page);
+                //Other listing routes
                 path("user-listings", ()->{
                     get(ListingController.fetch_get_user_listings_by_id);
                 });
@@ -83,6 +84,9 @@ public class App
             });
             path("frozen", ()->{
                 get(HomeController.frozen_page);
+            });
+            path("view/{list_id}", ()->{
+                get(ListingController.get_listing_info_page);
             });
         });
     }

@@ -42,4 +42,8 @@ public class EntryService {
     public static void delete_entry(int entry_id){
         entryDao.remove_entry_by_entry_id(entry_id);
     }
+
+    public static Entry get_entry_by_entry_id(int entry_id){
+        return entryDao.select_entry_by_entry_id(entry_id);
+    }
 }

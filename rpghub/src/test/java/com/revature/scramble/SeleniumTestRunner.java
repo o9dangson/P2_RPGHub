@@ -14,23 +14,22 @@ import io.cucumber.testng.TestNGCucumberRunner;
 
 @CucumberOptions(
     plugin = {"pretty", "html:target/cucumber.html"},
-    features = "src/test/resources/features/LoginDemo.feature",
+    features = "src/test/resources/features",
     glue = {"com/revature/scramble/StepDefinitions"}
 )
 public class SeleniumTestRunner extends AbstractTestNGCucumberTests{
     
     private TestNGCucumberRunner testNGCucumberRunner;
 
-    @BeforeClass( alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setupClass(){
         testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
     }
 
     @Test(dataProvider = "features")
     public void feature( PickleWrapper pickleWrapper, FeatureWrapper feature){
-       testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
+        testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
     }
-
 
     @DataProvider
     public Object[][] features(){

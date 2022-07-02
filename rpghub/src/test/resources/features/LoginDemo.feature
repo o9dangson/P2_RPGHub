@@ -14,6 +14,10 @@ Scenario: A user enters the incorrect credentials
     And clicks on login button
     Then a user is navigated to the homepage
 
+Scenario: A user logs in correctly but is banned
+    When a user enters frozen login information
+    And clicks on login button
+    Then a user will be navigated to a page telling them they are banned
 
 ## TC_04 Tests direct html routing
 #Scenario Outline: A user tries to directly access routes

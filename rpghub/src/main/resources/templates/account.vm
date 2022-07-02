@@ -14,7 +14,7 @@
         <h1>Welcome to your account page</h1>
         <div class="container">
             <div>
-                <h4>Session detail: <span id="span-1">Attempting to populate</span></h4>
+                <h4>Session detail: user_id: <span id="user-id-span"></span> is_mod: <span id="is-mod-span"></span> is_frozen: <span id="is-frozen-span"></span> error: <span id="error-span"></span></h4>
             </div>
             <div id = "logout-div" style="display:flex; justify-content: space-around">
                 <div class="mb-2 mt-2" id="filter-btn-container"></div>
@@ -22,9 +22,17 @@
                 <div class="mb-2 mt-2">
                     <form action="/listing" method="POST">
                         <div style="display:hidden">
-                            <input type="username" class="hide" name="list_id" id="list_id" placeholder="user_1" value="-1">
+                            <input type="username" class="hide" name="list_id" id="display-list_id" placeholder="user_1" value="-1">
                         </div>
-                        <button class="btn btn-primary" id="view-btn">View Selected Listing</button>
+                        <button class="btn btn-secondary" id="view-btn">View Selected Listing</button>
+                    </form>
+                </div>
+                <div class="mb-2 mt-2">
+                    <form action="/listing/delete" method="POST">
+                        <div style="display:hidden">
+                            <input type="username" class="hide" name="list_id" id="remove-list_id" placeholder="user_1" value="-1">
+                        </div>
+                        <button class="btn btn-secondary" id="delete-btn">Remove Selected Listing</button>
                     </form>
                 </div>
                 <div class ="mb-2 mt-2">
@@ -33,11 +41,10 @@
                         <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
                         </svg></button>
                     </form>
-                    </form>
                 </div>
             </div>
             <div id="collapsible-container" class="row">
-                <div class="collapse col-6" id="filter-collapse">
+                <div class="collapse col-5" id="filter-collapse">
                     <div class="card card-body bg-dark text-light">
                         <div class="input-group">             
                             <div class="input-group mb-3">
@@ -64,23 +71,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="collapse col-6" id="create-collapse">
+                <div class="collapse col-5" id="create-collapse">
                     <div class="card card-body bg-dark text-light">
-                        <div class="input-group">                 
+                        <div class="input-group">
+                            <form action="/listing/create" method="POST">         
                             <div class="input-group mb-3">
-                                <input id="amount-input" type="text" class="form-control" placeholder="Amount" aria-label="Amount">
-                                <span class="input-group-text">G</span>
+                                <input id="create-list-name" type="text" class="form-control" placeholder="List Name" aria-label="List Name">
                             </div>
-
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Description</span>
-                                <textarea id="desc-input" class="form-control" aria-label="With textarea"></textarea>
+                                <input id="create-dungeon-name" type="text" class="form-control" placeholder="Dungeon Name" aria-label="Dungeon Name">
                             </div>
-                            
                             <div class="input-group mb-3">
-                                <input class="btn btn-success" id="create-button" type="button" value="Create">
+                                <input id="create-max-size" type="number" min="1" max="10" class="form-control" placeholder="Max Party Size" aria-label="Max Party Size">
                             </div>
-
+                            <div class="input-group mb-3">
+                                <input class="btn btn-success" id="create-button" onclick= "create_new_listing()" type="button" value="Submit">
+                            </div>
+                            </form>
                             <div id="error-message">
                             </div>
                         </div>

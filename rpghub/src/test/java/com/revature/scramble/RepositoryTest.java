@@ -61,7 +61,7 @@ public class RepositoryTest {
         Assert.assertTrue(attempt_delete);
 
         //Remove new listing
-        list_dao.delete_listing(listing);
+        list_dao.delete_listing(listing.getListingId());
     }
 
     // TC_05, TC_09
@@ -84,7 +84,7 @@ public class RepositoryTest {
         List<Listing> new_list_of_listings2 = list_dao.select_listing_by_user_id(1);
         Assert.assertTrue( new_list_of_listings2.size() > 0 );
         //Test delete listing
-        list_dao.delete_listing(listing);
+        list_dao.delete_listing(listing.getListingId());
         is_new_list_found = false;
         new_list_of_listings = list_dao.select_listing_by_user_id(1);
         for(Listing new_l : new_list_of_listings){

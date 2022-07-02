@@ -1,4 +1,18 @@
 //Functions
+function test_update_span(session){
+    let user_id = document.getElementById("user-id-span")
+    let is_mod = document.getElementById("is-mod-span")
+    let error = document.getElementById("error-span")
+    user_id.innerHTML = session.user_id
+    is_mod.innerHTML = session.is_mod
+    error.innerHTML = session.error
+}
+
+function remove_entries(){
+    let div_location = document.getElementById("list_of_entries")
+    div_location.remove()
+}
+
 function render_listing_info(listing_obj){
     let listing_desc = document.getElementById("listing-desc")
     let list_name_p = document.createElement("p")
@@ -66,7 +80,6 @@ function create_entry_user_status_element(entry){
 }
 
 async function render_entry_info(list_of_entry){
-    console.log("render_entry_info: " + list_of_entry)
     let entry_div = document.getElementById("entry-info-div")
 
     let entries = create_entry_div()
@@ -94,9 +107,10 @@ function toggle_leave_btn(){
         leave_btn.style.display = "none";
 }
 
-function setup_leave_btn(listing_obj, session_obj, entry_list){
-    if (listing_obj.user_id != session_obj.user_id)
-        if(check_user_id_for_entries(session_obj.user_id, entry_list))
+function setup_leave_btn(listing_obj, entry_list){
+    let user_id = document.getElementById("user-id-span")
+    if (listing_obj.user_id != user_id)
+        if(check_user_id_for_entries(user_id, entry_list))
             toggle_leave_btn()
 }
 
@@ -111,7 +125,7 @@ function check_user_id_for_entries(user_id, entry_list){
 
 function create_row_div(){
     let row_div = document.createElement("div")
-    row_div.setAttribute("class", "row mb-3 listing-row-div")
+    row_div.setAttribute("class", "row mb-3 entry-row-div")
     return row_div
 }
 
@@ -132,8 +146,8 @@ function setup_btns(){
     button.addEventListener("click", hideCollapse)
     div_location.append(button)
 
-    let apply_button = document.getElementById("create-entry-btn")
-    apply_button.addEventListener("click", create_entry)
+    //let apply_button = document.getElementById("create-entry-btn")
+    //apply_button.addEventListener("click", create_entry)
 }
 
 function hideCollapse() {
@@ -187,6 +201,7 @@ async function get_session() {
             const message = `Couldn't obtain requests! An error occured: ${res.status}`
             throw message
         }
+        test_update_span(pReq)
         return pReq
     }catch(err){
         console.log(err)
@@ -195,12 +210,28 @@ async function get_session() {
 
 async function create_entry(list_id){
     //Check input
-    if(check_input()){
-        const response = await fetch(`/listing/manage/${list_id}/entry/create`)
-        const new_entry = await response
-    }else{
+    console.log(list_id)
+    let roles = document.getElementById("entry-role")
+    let user_role = roles.options[roles.selectedIndex].innerText
+    let user_id = document.getElementById("user-id-span").innerHTML
+    let user_note = document.getElementById("desc-input").value
+    let formData = new FormData()
+    formData.append('list_id', list_id)
+    formData.append('user_id', user_id)
+    formData.append('user_role', user_role)
+    formData.append('user_note', user_note)
+    
+            
 
-    }
+    const response = await fetch(`/listing/manage/${list_id}/entry/create`, {
+        method: 'POST',
+        body: formData
+    })
+    
+    
+    remove_entries()
+    let list_of_entry = await get_all_entries_of_listing(list_id)
+    render_entry_info(list_of_entry)
 }
 
 async function update_entry(){
@@ -219,10 +250,11 @@ async function render_full_page(){
     let listing_obj = await get_particular_listing(list_id)
     let list_of_entry = await get_all_entries_of_listing(list_id)
     let session_obj = await get_session()
+    
     setup_btns()
-    setup_leave_btn(listing_obj, session_obj, list_of_entry)
+    setup_leave_btn(listing_obj, list_of_entry)
     render_listing_info(listing_obj)
     render_entry_info(list_of_entry)
 }
-
+//get_all_entries_of_listing(list_id)
 render_full_page()

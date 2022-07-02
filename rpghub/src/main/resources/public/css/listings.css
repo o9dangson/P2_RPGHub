@@ -54,6 +54,10 @@ body {background-color: rgb(228, 217, 194);}
     justify-content: center;
     align-items: center;
 }
+
+.collapse, .collapsing{
+    margin:auto;
+  }
 /* #buttons-div{
     background-color: rgba(0, 0, 0, .1);
     border: solid rgba(0, 0, 0, .15);

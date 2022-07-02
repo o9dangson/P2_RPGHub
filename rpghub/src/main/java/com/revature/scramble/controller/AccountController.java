@@ -13,12 +13,15 @@ public class AccountController {
         //Verify Login details
         LoginInfo login_obj = AccountService.verify_details(ctx.formParam("username"), ctx.formParam("password"));
         //If true, update Session
-        if (login_obj.getUserId() != -1){
+        if (login_obj.getUserId() != -1 && !Session.is_frozen){
             UserInfo user_obj = AccountService.get_user_details(login_obj.getUserId());
             SessionController.update_session(user_obj);
-            //Log 
-            //Render page
-            ctx.render("/templates/account.vm");
+            if(Session.is_frozen)
+                ctx.redirect("/frozen");
+            else
+                ctx.render("/templates/account.vm");
+        }else if(Session.is_frozen){
+            ctx.redirect("/frozen");
         }
         else{
             //Log
@@ -29,8 +32,10 @@ public class AccountController {
 
     public static Handler get_logged_in_account_page = ctx ->{
         //Check Session
-        if(HomeController.check_account()){
+        if(HomeController.check_account() && !Session.is_frozen){
             ctx.render("/templates/account.vm");
+        }else if(Session.is_frozen){
+            ctx.redirect("/frozen");
         }
         else{
             ctx.redirect("/logout");

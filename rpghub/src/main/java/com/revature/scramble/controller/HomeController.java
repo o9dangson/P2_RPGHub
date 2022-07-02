@@ -19,7 +19,8 @@ public class HomeController {
             //Logged in
             ctx.render("/templates/account.vm");
 
-        }else{
+        }
+        else{
             //Not logged in
             SessionController.reset_session();
             ctx.render("/templates/index.vm");
@@ -29,6 +30,10 @@ public class HomeController {
     public static Handler logout = ctx ->{
         SessionController.reset_session();
         ctx.redirect("/");
+    };
+
+    public static Handler frozen_page = ctx ->{
+        ctx.render("/templates/frozen.vm");
     };
     
 }

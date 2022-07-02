@@ -1,7 +1,13 @@
 //Functions
 function test_update_span(session){
-    let element = document.getElementById("span-1")
-    element.innerHTML = `user_id: ${session.user_id} is_mod: ${session.is_mod} is_frozen: ${session.is_frozen} error: ${session.error}`
+    let user_id = document.getElementById("user-id-span")
+    let is_mod = document.getElementById("is-mod-span")
+    let is_frozen = document.getElementById("is-frozen-span")
+    let error = document.getElementById("error-span")
+    user_id.innerHTML = session.user_id
+    is_mod.innerHTML = session.is_mod
+    is_frozen.innerHTML = session.is_frozen
+    error.innerHTML = session.error
 }
 
 function create_listing_div(){
@@ -166,17 +172,93 @@ function hideCollapse() {
 
 function update_list_id(){
     let element_list_id = this.getAttribute("name")
-    let element_form = document.getElementById("list_id")
-    element_form.setAttribute("value", element_list_id)
+
+    let display_form = document.getElementById("display-list_id")
+    display_form.setAttribute("value", element_list_id)
     let view_btn = document.getElementById("view-btn")
     view_btn.setAttribute("class", "btn btn-success")
-    console.log(element_form.getAttribute("value"))
+
+    let remove_form = document.getElementById("remove-list_id")
+    remove_form.setAttribute("value", element_list_id)
+    let delete_btn = document.getElementById("delete-btn")
+    delete_btn.setAttribute("class", "btn btn-danger")
 }
 
 function clear_filters(){
     remove_listings()
     get_all_listings()
 }
+
+function html_to_json(html_list){
+    let json_string = "";
+    json_string+="{\"my_list\":[";
+    for(let html of html_list){
+        json_string+=`{\"list_id\": ${html.children[0].innerText},`;
+        json_string+=`\"user_id\": ${html.children[1].innerText},`;
+        json_string+=`\"list_name\": "${html.children[2].innerText}",`;
+        json_string+=`\"dungeonName\": "${html.children[3].innerText}",`;
+        json_string+=`\"max_size\": ${html.children[4].innerText},`;
+        json_string+=`\"cur_size\": ${html.children[5].innerText}}`;
+        if(html_list.indexOf(html)<html_list.length-1){
+            json_string+=",";
+        }
+    }
+    json_string+="]}";
+    let json_obj = JSON.parse(json_string);
+    console.log(json_obj);
+    return json_obj;
+}
+
+//Async functions
+async function get_session() {
+    try{
+        const response = await fetch('/session')
+        const pReq = await response.json()
+        if (response.status != 200){
+            const message = `Couldn't obtain requests! An error occured: ${res.status}`
+            throw message
+        }
+        test_update_span(pReq)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+async function create_new_listing(){
+    let list_name = document.getElementById("create-list-name")
+    let dungeonName = document.getElementById("create-dungeon-name")
+    let max_size = document.getElementById("create-max-size")
+    let user_id = document.getElementById("user-id-span")
+    console.log(user_id)
+    let formData = new FormData()
+    formData.append('user_id', user_id.innerHTML)
+    formData.append('list_name', list_name.value)
+    formData.append('dungeonName', dungeonName.value)
+    formData.append('max_size' , max_size.value)
+            
+
+    const response = await fetch("/listing/create", {
+        method: 'POST',
+        body: formData
+    })
+    remove_listings()
+    await get_all_listings()
+}
+
+async function get_all_listings(){
+    try{
+        const response = await fetch('/listing/all-listings')
+        const results = await response.json()
+        if(response.status =! 200){
+            const message = `An error occured: Couldn't obtain listings  ${res.status}`
+            throw message
+        }
+        render_listings(results)
+    }catch(e){
+        console.log(e)
+    }
+}
+
 async function filter_listing() {
     remove_listings();
     await get_all_listings()
@@ -202,63 +284,6 @@ async function filter_listing() {
     render_listings(filtered_json);
     
 }
-
-function html_to_json(html_list){
-    let json_string = "";
-    json_string+="{\"my_list\":[";
-    for(let html of html_list){
-        json_string+=`{\"list_id\": ${html.children[0].innerText},`;
-        json_string+=`\"user_id\": ${html.children[1].innerText},`;
-        json_string+=`\"list_name\": "${html.children[2].innerText}",`;
-        json_string+=`\"dungeonName\": "${html.children[3].innerText}",`;
-        json_string+=`\"max_size\": ${html.children[4].innerText},`;
-        json_string+=`\"cur_size\": ${html.children[5].innerText}}`;
-        if(html_list.indexOf(html)<html_list.length-1){
-            json_string+=",";
-        }
-    }
-    json_string+="]}";
-    let json_obj = JSON.parse(json_string);
-    //console.log(json_string);
-    //console.log("json parsed" + json_obj);
-    console.log(json_obj);
-    return json_obj;
-}
-
-//user_id
-//list_name
-//dungeonName
-//max_size
-
-//Async functions
-async function get_session() {
-    try{
-        const response = await fetch('/session')
-        const pReq = await response.json()
-        if (response.status != 200){
-            const message = `Couldn't obtain requests! An error occured: ${res.status}`
-            throw message
-        }
-        test_update_span(pReq)
-    }catch(err){
-        console.log(err)
-    }
-}
-
-async function get_all_listings(){
-    try{
-        const response = await fetch('/listing/all-listings')
-        const results = await response.json()
-        if(response.status =! 200){
-            const message = `An error occured: Couldn't obtain listings  ${res.status}`
-            throw message
-        }
-        render_listings(results)
-    }catch(e){
-        console.log(e)
-    }
-}
-
 
 console.log("this is working")
 

@@ -138,12 +138,12 @@ public class ListingDao implements ListingDaoInterface{
 	}
 
 	@Override
-	public void delete_listing(Listing listing) {
+	public void delete_listing(int list_id) {
 		Connection connection = ConnectionFactory.getConnection();
         String sql = "DELETE FROM listing_table where list_id = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,listing.getListingId());
+            preparedStatement.setInt(1,list_id);
 
             preparedStatement.execute();
 		}catch(SQLException e){

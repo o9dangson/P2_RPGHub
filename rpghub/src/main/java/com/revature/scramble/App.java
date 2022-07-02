@@ -51,6 +51,9 @@ public class App
                     get(AccountController.get_logged_in_account_page);
                     path("{list_id}", ()->{
                         get(ListingController.fetch_get_particular_listing);
+                        path("view", ()->{
+                            get(ListingController.get_listing_info_page);
+                        });
                         path("entry", ()->{
                             get(EntryController.fetch_get_all_entries);
                             path("create", ()->{
@@ -77,6 +80,9 @@ public class App
             });
             path("logout", ()->{
                 get(HomeController.logout);
+            });
+            path("frozen", ()->{
+                get(HomeController.frozen_page);
             });
         });
     }

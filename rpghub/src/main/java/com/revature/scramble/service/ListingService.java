@@ -31,8 +31,8 @@ public class ListingService {
         listingDao.update_listing(listing);
     }
 
-    public static void delete_listing_using_obj(Listing listing){
-        listingDao.delete_listing(listing);
+    public static void delete_listing_using_obj(int list_id){
+        listingDao.delete_listing(list_id);
     }
 
     public static String get_json_string_from_list(List<Listing> my_list){

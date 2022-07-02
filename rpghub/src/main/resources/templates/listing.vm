@@ -13,20 +13,35 @@
         <div class="container">
             <h1>Listing Information</h1>
             <h3 id = "listing-desc"><span id="listing-info-span" style="display:none">$list_id</span></h3>
+            <!-- hidden stuff for javascript -->
+            <h4 style="display:none">
+            <span id="hasJoined"></span>
+            </h4>
+            <div>
+                <h4>Session detail: user_id: <span id="user-id-span"></span> is_mod: <span id="is-mod-span"></span> error: <span id="error-span"></span></h4>
+            </div>
             <!-- div for buttons -->
             <div id="buttons-div" class="row" style="display:flex; justify-content: space-around">
-                <div class="col-4"></div>
+                <div class="col-2">
+                    <form  action="/account" method="GET">
+                        <button class="mt-2 btn btn-outline-dark" id="account-btn">Account Page <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                        <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                        </svg></button>
+                    </form>
+                </div>
+                <div class="col-2"></div>
                 <div class="mb-2 mt-2 col-2" id="join-btn-container"></div>
                 <div class="col-2">
                     <form action="/manage/$list_id/entry/delete" method="POST">
                         <input type="username" style="display:none" name="list_id" value=$list_id readonly >
+                        <input type="username" style="display:none" name="entry_id" value="-1" readonly >
                         <button class="btn btn-danger mt-2" id="leave-btn" style="align-center">Leave Group</button>
                     </form>
                 </div>
                 <div class="col-2"></div>
                 <div class="col-2">
                     <form  action="/logout" method="GET">
-                        <button class="btn btn-outline-dark" id="logout-btn">Sign out <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
+                        <button class="mt-2 btn btn-outline-dark" id="logout-btn">Sign out <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
                         <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
                         </svg></button>
                     </form>
@@ -37,20 +52,22 @@
                 <div class="card card-body bg-dark text-light">
                     <div class="input-group">                 
                         <div class="input-group mb-3">
-                            <input id="amount-input" type="text" class="form-control" placeholder="Amount" aria-label="Amount">
-                            <span class="input-group-text">G</span>
-                        </div>
+                                <label for="entry-role">Role&nbsp;&nbsp;</label>
+                                    <select name="entry-role" id="entry-role">
+                                        <option value="user_role_tank">Tank</option>
+                                        <option value="user_role_healer">Healer</option>
+                                        <option value="user_role_dps">DPS</option>
+                                    </select>
+                            </div> 
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Description</span>
+                            <span class="input-group-text">Note</span>
                             <textarea id="desc-input" class="form-control" aria-label="With textarea"></textarea>
                         </div>
-                            
-                        <div class="input-group mb-3">
-                            <input class="btn btn-success" id="create-entry-btn" type="button" value="Apply">
-                        </div>
-
                         <div id="error-message">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input class="btn btn-success" id="create-button" onclick= "create_entry($list_id)" type="button" value="Submit">
                         </div>
                     </div>
                 </div>

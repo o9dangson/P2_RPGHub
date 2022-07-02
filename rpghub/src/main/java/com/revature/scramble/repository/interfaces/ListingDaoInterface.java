@@ -10,5 +10,5 @@ public interface ListingDaoInterface {
     Listing select_listing_by_list_id(int list_id);
     int insert_listing(Listing listing);
     void update_listing(Listing listing);
-    void delete_listing(Listing listing);
+    void delete_listing(int list_id);
 }

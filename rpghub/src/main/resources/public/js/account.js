@@ -331,6 +331,9 @@ async function manipulate_account(){
 }
 
 async function create_new_listing(){
+    remove_listings();
+    await get_all_listings()
+    
     let list_name = document.getElementById("create-list-name")
     let dungeonName = document.getElementById("create-dungeon-name")
     let max_size = document.getElementById("create-max-size")

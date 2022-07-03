@@ -353,6 +353,9 @@ async function get_session() {
 }
 
 async function create_entry(list_id){
+    remove_entries()
+    let list_of_entry = await get_all_entries_of_listing(list_id)
+    render_entry_info(list_of_entry)
     //Check input
     console.log("create_entry: " + list_id)
     let roles = document.getElementById("entry-role")
@@ -377,6 +380,7 @@ async function create_entry(list_id){
         console.log("Could not create entry from javascript")
     }
     
+
     await reload_page(list_id)
 }
 

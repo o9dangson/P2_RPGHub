@@ -58,7 +58,6 @@ public class UserInfoDao implements UserInfoDaoInterface{
                     resultSet.getBoolean(5));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return new UserInfo(-1, -1, "failed", false, false);

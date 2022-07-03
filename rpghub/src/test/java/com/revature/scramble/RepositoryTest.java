@@ -43,7 +43,7 @@ public class RepositoryTest {
     @Test
     public void testEntryDAO(){
         //Insert new listing for this test
-        Listing listing = new Listing(-1, 1, "ex_listing", "ex_dungeon", 4, 1);
+        Listing listing = new Listing(-1, 1, "ex_listing", "ex_dungeon", 4, 0);
         int new_list_id = list_dao.insert_listing(listing);
         listing.setListingId(new_list_id);
         //Test Insert Entry
@@ -68,7 +68,7 @@ public class RepositoryTest {
     @Test
     public void testListingDao(){
         //Test insert listing
-        Listing listing = new Listing(-1, 1, "ex_listing", "ex_dungeon", 4, 1);
+        Listing listing = new Listing(-1, 1, "ex_listing", "ex_dungeon", 4, 0);
         int new_list_id = list_dao.insert_listing(listing);
         listing.setListingId(new_list_id);
         Assert.assertNotEquals(new_list_id, 0);

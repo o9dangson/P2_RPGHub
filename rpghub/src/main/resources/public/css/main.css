@@ -92,3 +92,14 @@ body {background-color: rgb(228, 217, 194);}
     top: 10%;
     left: 50%;
   }
+
+  span{
+    color: rgb(21, 117, 124)
+}
+
+#listing-display-div{
+  overflow-x: hidden;
+  overflow-y:auto;
+  max-height:500px;
+  height: fit-content
+}

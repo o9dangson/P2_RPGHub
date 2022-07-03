@@ -27,7 +27,7 @@ public class EntryService {
                 json_string+=",";
         }
         json_string+="]}";
-        System.out.println(json_string);
+        //System.out.println(json_string);
         return json_string;
     }
 

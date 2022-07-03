@@ -100,5 +100,6 @@ body {background-color: rgb(228, 217, 194);}
 #listing-display-div{
   overflow-x: hidden;
   overflow-y:auto;
-  height:500px
+  max-height:500px;
+  height: fit-content
 }

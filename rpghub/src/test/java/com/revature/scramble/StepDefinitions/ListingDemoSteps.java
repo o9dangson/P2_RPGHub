@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import io.cucumber.java.After;
@@ -17,6 +18,8 @@ import io.cucumber.java.en.When;
 import com.revature.scramble.models.pagefactory.AccountPageFactory;
 import com.revature.scramble.models.pagefactory.ListingPageFactory;
 import com.revature.scramble.models.pagefactory.LoginPageFactory;
+import com.revature.scramble.repository.entities.Entry;
+import com.revature.scramble.service.EntryService;
 public class ListingDemoSteps {
     
     public WebDriver driver;
@@ -57,15 +60,19 @@ public class ListingDemoSteps {
     @When("user clicks view selected listing button")
     public void user_clicks_view_selected_listing_button() {
         accountPageFactory.view_selected_listing();
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        String list_id = driver.findElement(By.id("listing-info-span")).getAttribute("innerHTML");
+        String user_id = driver.findElement(By.id("user-id-span")).getAttribute("innerHTML");
+        EntryService.create_new_entry(new Entry(-1,Integer.valueOf(list_id),Integer.valueOf(user_id),"Tank","Im a tank","Pending"));
+        all_entries = driver.findElements(By.className("entry-row-div"));
+        amt_of_entries = all_entries.size();
+        System.out.println("...................current elements:"+amt_of_entries+"...........................");
         
     }
 
     @When("user clicks join listing button")
     public void user_clicks_join_listing_button() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        all_entries = driver.findElements(By.className("entry-row-div"));
-        amt_of_entries = all_entries.size();
+        new WebDriverWait(driver, Duration.ofSeconds(1));
         listingPageFactory.clickJoinListingButton();
     }
     @When("user clicks a role")
@@ -83,6 +90,7 @@ public class ListingDemoSteps {
 
     @When("user clicks leave group button")
     public void user_clicks_leave_group_button() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         listingPageFactory.clickLeaveGroupButton();  
     }
 
@@ -91,6 +99,7 @@ public class ListingDemoSteps {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         updated_entries = driver.findElements(By.className("entry-info-div"));
         updated_entry_amt = updated_entries.size();
+        System.out.println("...................updated elements:"+updated_entry_amt+"...........................");
         Assert.assertTrue(updated_entry_amt>amt_of_entries);
         Assert.assertEquals(driver.getTitle(), "Listing");
     
@@ -98,10 +107,11 @@ public class ListingDemoSteps {
 
     @Then("user will be removed from listing")
     public void user_will_be_removed_from_listing() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
         updated_entries = driver.findElements(By.className("entry-info-div"));
         updated_entry_amt = updated_entries.size();
         Boolean list_updated = updated_entry_amt < amt_of_entries;
+        System.out.println("...................updateed elements:"+updated_entry_amt+"...........................");
         Assert.assertTrue(list_updated);
         Assert.assertEquals(driver.getTitle(), "Listing");
         }

@@ -203,10 +203,12 @@ function html_to_json(html_list){
 }
 
 function update_moderator_list(username_list){
+    let user_id_span = document.getElementById("user-id-span").innerHTML
     let dropdown_ele = document.getElementById("account-category")
     dropdown_ele.options.length = 0
     for(let user of username_list){
-        dropdown_ele.options[dropdown_ele.options.length] = new Option(`${user.username}`, `${user.userId}`)
+        if(user_id_span != user.userId)
+            dropdown_ele.options[dropdown_ele.options.length] = new Option(`${user.username}`, `${user.userId}`)
     }
 }
 
@@ -246,6 +248,7 @@ async function setup_btns(){
     button.setAttribute("type", "button")
     button.setAttribute("name", "filter-collapse")
     button.setAttribute("class", "btn btn-secondary filter-btn")
+    button.setAttribute("id", "filter-collapse-btn")
     button.setAttribute("value", "Filter Listings")
     button.addEventListener("click", hideCollapse)
     div_location.append(button)
@@ -255,6 +258,7 @@ async function setup_btns(){
     button2.setAttribute("type", "button")
     button2.setAttribute("name", "create-collapse")
     button2.setAttribute("class", "btn btn-secondary create-btn")
+    button2.setAttribute("id", "create-collapse-btn")
     button2.setAttribute("value", "Create Listing")
     button2.addEventListener("click", hideCollapse)
     div_location2.append(button2)
@@ -264,6 +268,7 @@ async function setup_btns(){
     let button3 = document.createElement("input")
     button3.setAttribute("type", "button")
     button3.setAttribute("name", "mod-collapse")
+    button3.setAttribute("id", "mod-collapse-btn")
     if(is_mod !== "true"){
         console.log(is_mod)
         console.log("You are not a mod")

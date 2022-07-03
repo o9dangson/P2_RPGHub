@@ -16,19 +16,24 @@ public class AccountPageFactory {
     WebDriver webdriver;
 
     @FindBy(id = "view-btn")
-    WebElement view_selected_listing_button;
+    public WebElement view_selected_listing_button;
 
-    @FindBy(xpath = "/html/body/div/div[2]/div[1]/input")
+    //Moderator
+    @FindBy(id= "mod-collapse-btn")
+    public WebElement mod_menu_button;
+
+    @FindBy(id= "account-category")
+    public WebElement mod_user_category;
+
+    @FindBy(id= "mod-freeze-btn")
+    public WebElement mod_freeze_btn;
+    
+    @FindBy(id= "mod-unfreeze-btn")
+    public WebElement mod_unfreeze_btn;
+
+    //Filter Listings
+    @FindBy(id = "filter-collapse-btn")
     WebElement filter_button;
-
-    @FindBy(className = "create-btn")
-    WebElement create_listing_button;
-
-    @FindBy(id = "delete-btn")
-    WebElement delete_button;
-
-    @FindBy(id = "logout-btn")
-    WebElement logout_button;
 
     @FindBy(id = "filter-category")
     WebElement filter_category_dropdown;
@@ -36,8 +41,12 @@ public class AccountPageFactory {
     @FindBy(id = "specific-filter-input")
     WebElement specific_filter_input;
 
-    @FindBy(className = "filter-submit")
+    @FindBy(id = "filter-submit")
     WebElement filter_listing_submit_button;
+
+    //Create Listings
+    @FindBy(id = "create-collapse-btn")
+    WebElement create_listing_button;
 
     @FindBy(id = "create-list-name")
     WebElement list_name_field;
@@ -51,6 +60,16 @@ public class AccountPageFactory {
     @FindBy(id = "listing-submit")
     WebElement listing_submit_button;
 
+
+    //Other Buttons
+
+    @FindBy(id = "delete-btn")
+    WebElement delete_button;
+
+    @FindBy(id = "logout-btn")
+    WebElement logout_button;
+
+    
     List<WebElement> list_of_listings;
 
     public AccountPageFactory(WebDriver webDriver){
@@ -60,7 +79,7 @@ public class AccountPageFactory {
     }
 
     private WebElement get_select_listing_element(){
-        WebElement select_listing = webdriver.findElement(By.xpath("/html/body/div/div[4]/div[2]/div/div[1]/div[7]/input"));
+        WebElement select_listing = webdriver.findElement(By.xpath("/html/body/div/div[6]/div[2]/div/div[1]/div[8]/input"));
         return select_listing;
     }
 
@@ -68,9 +87,6 @@ public class AccountPageFactory {
         get_select_listing_element().click();
     }
 
-    public void click_filter_button() {
-        filter_button.click();
-    }
 
     public void select_category(){
         Select category_dropdown = new Select(filter_category_dropdown);
@@ -104,8 +120,7 @@ public class AccountPageFactory {
         Random rand = new Random();
         int max_size = 8;
         int min_size = 2;
-        int rand_max_size = rand.nextInt(max_size);
-        max_size+=min_size;
+        int rand_max_size = rand.nextInt(max_size)+min_size;
         max_size_field.sendKeys(String.valueOf(rand_max_size));
     }
 

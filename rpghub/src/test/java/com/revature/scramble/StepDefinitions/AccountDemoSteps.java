@@ -7,10 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.revature.scramble.models.pagefactory.AccountPageFactory;
 import com.revature.scramble.models.pagefactory.LoginPageFactory;
+import com.revature.scramble.repository.entities.Entry;
+import com.revature.scramble.service.EntryService;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -42,18 +45,20 @@ public class AccountDemoSteps {
 
     @Given("a user is logged in and on the Account page")
     public void a_user_is_logged_in_and_on_the_account_page() {
-        loginPageFactory.login("user1","pass");
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        loginPageFactory.login("user1","pass");
         Assert.assertEquals(driver.getTitle(), "Account");
         listings = driver.findElements(By.className("listing-row-div"));
         amt_of_listings = listings.size();
         
     }
+
     @When("user clicks Filter Listing button")
     public void user_clicks_filter_listing_button() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        accountPageFactory.click_filter_button();
-        
+        new WebDriverWait(driver, Duration.ofSeconds(1));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+        WebElement btn = driver.findElement(By.xpath("//*[@id='filter-btn-container']/input"));
+        btn.click();
     }
     @When("user chooses a category to filter by")
     public void user_chooses_a_category_to_filter_by() {
@@ -66,6 +71,7 @@ public class AccountDemoSteps {
     }
     @When("user clicks Filter button")
     public void user_clicks_filter_button() {
+        new WebDriverWait(driver, Duration.ofSeconds(1));
         accountPageFactory.apply_filter();
     }
 

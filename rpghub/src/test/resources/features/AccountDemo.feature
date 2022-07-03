@@ -3,6 +3,7 @@ Feature: Test Account Page Functionality
 Background: 
     Given a user is logged in and on the Account page
 
+    # TC_06 07 08 15
     Scenario: User creates a new listing
         When user clicks Create Listing button
         When user inputs a list name
@@ -11,6 +12,7 @@ Background:
         When user clicks Submit button
         Then there should be a new listing 
 
+    # TC_07 08
     Scenario: User uses filter listing
         When user clicks Filter Listing button
         When user chooses a category to filter by
@@ -23,6 +25,7 @@ Background:
         When user clicks View Selected Listing button
         Then user should be shown listing in listing page
 
+    # TC_16
     Scenario: User removes selected listing
         When user clicks Select Listing button
         When user clicks Remove Selected Listing button

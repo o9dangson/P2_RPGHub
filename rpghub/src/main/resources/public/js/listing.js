@@ -363,6 +363,7 @@ async function get_session() {
 }
 
 async function create_entry(list_id){
+    await reload_page(list_id)
     let hasJoined = document.getElementById("hasJoined").innerHTML
     if(hasJoined === "false"){
         remove_entries()
@@ -397,7 +398,7 @@ async function create_entry(list_id){
     }
 }
 
- async function update_entry(){
+    async function update_entry(){
     // /listing/manage/$list_id/entry/update POST
     let list_id_input = 0, entry_id_input = 0, status_input = 0
     let list_id = document.getElementById("listing-info-span").innerHTML

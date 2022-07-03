@@ -13,9 +13,34 @@
         
         <h1 style="color:green">Welcome to your account page</h1>
         <div class="container">
+            <!-- account page details -->
             <div>
                 <h4>Session detail: user_id: <span id="user-id-span"></span> is_mod: <span id="is-mod-span"></span> is_frozen: <span id="is-frozen-span"></span></h4>
                 <h4 style="color:rgb(226, 131, 131)">error: <span id="error-span"></span></h4>
+            </div>
+            <!-- div for moderator options -->
+            <div class="row" style="display:flex; justify-content: space-around">
+                <div class="col-2 mb-2 mt-2" id="mod-btn-container"></div>
+            </div>
+            <div id="collapsible-mod-div" style="display:flex; justify-content: space-around">
+                <div class="collapse col-5" id="mod-collapse">
+                    <div class="card card-body bg-dark text-light">
+                        <div class="input-group" style="display:flex; justify-content: space-around">             
+                            <div class="input-group mb-3">
+                                <div class="row"><div class="col">Choose an account manipulate:</div></div>
+                                <div class="row"><div class="col"><select name="account-category" id="account-category"></select></div></div>
+                            </div> 
+                            <div class="row">
+                                <div class="input-group col mb-3">
+                                    <input class="btn btn-danger" id="mod-freeze-btn" type="button" value="Freeze Account">
+                                </div>
+                                <div class="input-group col mb-3">
+                                    <input class="btn btn-success" id="mod-unfreeze-btn" type="button" value="UnFreeze Account">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- div for buttons -->
             <div id = "logout-div" style="display:flex; justify-content: space-around">
@@ -56,7 +81,7 @@
                             <div class="input-group mb-3">
                                 <label for="filter-category">Choose a category to filter by:&nbsp;&nbsp;</label>
                                     <select name="filter-category" id="filter-category">
-                                        <option value="user_id">User ID</option>
+                                        <option value="username">Username</option>
                                         <option value="list_name">List Name</option>
                                         <option value="dungeonName">Dungeon Name</option>
                                         <option value="cur_size">Current Party Size</option>
@@ -104,7 +129,7 @@
             <div id="listing-container">
                 <div id="listing-header-div" class="row table-header mt-2">
                     <div id="user-id-header" class="col-1 themed-grid-col mt-4">
-                        <p class="user_id-title" id="user-id-col">user_id</p>
+                        <p class="username-title" id="user-id-col">username</p>
                     </div>
                     <div id="list-name-header" class="col-3 themed-grid-col mt-4">
                         <p class="list_name-header" id="list-name-col">list_name</p>

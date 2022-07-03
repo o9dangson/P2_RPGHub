@@ -26,6 +26,9 @@ public class App
             path("", ()->{
                 get(HomeController.homepageEntered);
             });
+            path("username", ()->{
+                get(AccountController.fetch_get_all_username);
+            });
             path("session", ()->{
                 get(SessionController.fetch_get_session);
             });
@@ -34,6 +37,10 @@ public class App
                 post(AccountController.post_account_page);
                 //ReRouting
                 get(AccountController.get_logged_in_account_page);
+                path("moderator", ()->{
+                    get(AccountController.get_logged_in_account_page);
+                    post(AccountController.fetch_post_moderate_account);
+                });
             });
             path("listing", ()->{
                 //ReRouting

@@ -96,3 +96,9 @@ body {background-color: rgb(228, 217, 194);}
   span{
     color: rgb(21, 117, 124)
 }
+
+#listing-display-div{
+  overflow-x: hidden;
+  overflow-y:auto;
+  height:500px
+}

@@ -45,10 +45,23 @@ function create_entry_entry_id_element(entry){
 function create_entry_user_id_element(entry){
     let element = document.createElement("div")
     element.setAttribute("class", "col-1 themed-grid-col mt-4")
+    element.style.display = "none"
     let p_element = document.createElement("p")
     p_element.setAttribute("class", "entry-user-id")
     p_element.setAttribute("id", `entry-user-id-${entry.user_id}`)
     p_element.innerHTML = `${entry.user_id}`
+    element.append(p_element)
+
+    return element
+}
+
+function create_username_element(username){
+    let element = document.createElement("div")
+    element.setAttribute("class", "col-1 themed-grid-col mt-4")
+    let p_element = document.createElement("p")
+    p_element.setAttribute("class", "username")
+    //p_element.setAttribute("id", `username-${user_obj.username}`)
+    p_element.innerHTML = `${username}`
     element.append(p_element)
 
     return element
@@ -253,9 +266,12 @@ async function render_entry_info(list_of_entry){
     let entries = create_entry_div()
     for(let entry_json of list_of_entry.my_list){
         let row_div = create_row_div(entry_json)
+        let login_obj = await get_username(entry_json.user_id)
+        let username = login_obj.username
         entries.append(row_div)
         list_of_elements = []
         list_of_elements.push(create_entry_user_id_element(entry_json))
+        list_of_elements.push(create_username_element(username))
         list_of_elements.push(create_entry_user_role_element(entry_json))
         list_of_elements.push(create_entry_user_note_element(entry_json))
         list_of_elements.push(create_entry_user_status_element(entry_json))
@@ -277,11 +293,11 @@ async function render_user_info(){
     let leave_btn_element = document.getElementById("leave-btn")
     let my_list_rows = document.getElementsByClassName("entry-row-div")
     for(let entry_row of my_list_rows){
-        
+        let entry_status = entry_row.children[4].firstElementChild.innerHTML
         let entry_entry_id = entry_row.lastElementChild.firstElementChild.innerHTML
         let entry_user_id = entry_row.firstElementChild.firstElementChild.innerHTML
         console.log("entryID: " + entry_entry_id + " entryUID: " + entry_user_id)
-        if (entry_user_id == user_id){
+        if (entry_user_id == user_id && entry_status === "Accepted"){
             post_entry_id_element.setAttribute("value", entry_entry_id)
             post_user_id_element.setAttribute("value", user_id)
             leave_btn_element.setAttribute("class", "btn btn-danger mt-2")
@@ -435,6 +451,26 @@ async function kick_entry(){
     }
 
     await reload_page(list_id)
+}
+
+async function get_username(user_id){
+    try{
+        let formData = new FormData()
+        formData.append('user_id', user_id)
+
+        const response = await fetch("/username", {
+            method: 'POST',
+            body: formData
+        })
+        const pReq = await response.json()
+        if(!response.ok){
+            const message = `get username failed`
+            throw message
+        }
+        return pReq
+    }catch(err){
+        update_error_span(err)
+    }
 }
 
 async function render_full_page(){

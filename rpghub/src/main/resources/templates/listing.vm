@@ -112,7 +112,7 @@
                 <div>
                     <div id="entry-header-div" class="row table-header mt-4">
                         <div id="entry-user-id-header" class="col-1 themed-grid-col mt-4">
-                            <p class="user_id" id="entry-user-id-col">user_id</p>
+                            <p class="username" id="entry-username-col">username</p>
                         </div>
                         <div id="entry-user-role-header" class="col-2 themed-grid-col mt-4">
                             <p class="user_role" id="entry-user-role-col">user_role</p>

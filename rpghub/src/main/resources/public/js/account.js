@@ -163,8 +163,17 @@ function setup_btns(){
 }
 
 function hideCollapse() {
-    var myCollapse = document.getElementById(this.getAttribute("name"));
-    var bsCollapse = new bootstrap.Collapse(myCollapse, {
+    let collapse_elements = document.getElementsByClassName("collapse")
+    for ( element of collapse_elements){
+        if (element.classList.contains("show") && element.getAttribute("id") !== this.getAttribute("name")){
+            let temp_collapse = new bootstrap.Collapse(element, {
+                toggle: true
+            })
+            temp_collapse.hide();
+        }
+    }
+    let myCollapse = document.getElementById(this.getAttribute("name"));
+    let bsCollapse = new bootstrap.Collapse(myCollapse, {
         toggle: true
     })
     bsCollapse.hide();

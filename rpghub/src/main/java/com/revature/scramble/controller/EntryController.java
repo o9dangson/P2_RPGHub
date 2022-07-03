@@ -36,21 +36,24 @@ public class EntryController {
 
     public static Handler fetch_post_update_entry = ctx ->{
         if(HomeController.check_account() && !Session.is_frozen){
-            //Log 
-            //database request
-            String user_status = ctx.formParam("status");
-            int entry_id = Integer.parseInt(ctx.formParam("entry_id"));
+            System.out.println("fetch_post_update_entry: " + ctx.formParam("status"));
+            if(Integer.parseInt(ctx.formParam("entry_id")) != -1 &&
+                Integer.parseInt(ctx.formParam("list_id")) != -1){    
+                //Log 
+                //database request
+                String user_status = ctx.formParam("status");
+                int entry_id = Integer.parseInt(ctx.formParam("entry_id"));
 
-            //Update particular entry 
-            EntryService.update_entry(entry_id, user_status);
-            //Update particular listing
-            if(user_status.equals("Accepted")){
-                ListingService.update_listing_service(new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size"))+1 ));
+                //Update particular entry 
+                EntryService.update_entry(entry_id, user_status);
+                //Update particular listing
+                if(user_status.equals("Accepted")){
+                    ListingService.update_listing_service(new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size"))+1 ));
+                }
+                else if(user_status.equals("Rejected")){
+                    ListingService.update_listing_service(new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size"))));
+                }
             }
-            else if(user_status.equals("Rejected")){
-                ListingService.update_listing_service(new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size"))));
-            }
-            
             ctx.redirect("/view/"+ctx.formParam("list_id"));
         }else if(Session.is_frozen){
             ctx.redirect("/frozen");
@@ -64,7 +67,9 @@ public class EntryController {
 
     public static Handler fetch_post_delete_entry = ctx ->{
         if(HomeController.check_account() && !Session.is_frozen){
-            if(Integer.parseInt(ctx.formParam("entry_id")) != -1 && Integer.parseInt(ctx.formParam("list_id")) != -1){
+            if(Integer.parseInt(ctx.formParam("entry_id")) != -1 && 
+                Integer.parseInt(ctx.formParam("list_id")) != -1 &&
+                Integer.parseInt(ctx.formParam("user_id")) != -1){
                 //Log 
                 //database request
                 int entry_id = Integer.parseInt(ctx.formParam("entry_id"));

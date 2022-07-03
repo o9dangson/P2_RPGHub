@@ -79,26 +79,6 @@ function create_entry_user_status_element(entry){
     return element
 }
 
-async function render_entry_info(list_of_entry){
-    let entry_div = document.getElementById("entry-info-div")
-
-    let entries = create_entry_div()
-    for(let entry_json of list_of_entry.my_list){
-        let row_div = create_row_div(entry_json)
-        entries.append(row_div)
-        list_of_elements = []
-        list_of_elements.push(create_entry_user_id_element(entry_json))
-        list_of_elements.push(create_entry_user_role_element(entry_json))
-        list_of_elements.push(create_entry_user_note_element(entry_json))
-        list_of_elements.push(create_entry_user_status_element(entry_json))
-
-        for(element of list_of_elements){
-            row_div.append(element)
-        }
-    }
-    entry_div.append(entries)
-}
-
 function toggle_leave_btn(){
     let leave_btn = document.getElementById("leave-btn")
     if(leave_btn.style.display ==="none")
@@ -146,16 +126,50 @@ function setup_btns(){
     button.addEventListener("click", hideCollapse)
     div_location.append(button)
 
+    let div_location2 = document.getElementById("update-btn-container")
+    let button2 = document.createElement("input")
+    button2.setAttribute("type", "button")
+    button2.setAttribute("name", "accept-reject-collapse")
+    button2.setAttribute("class", "btn btn-secondary update-btn")
+    button2.setAttribute("value", "Update Selected Entry")
+    button2.addEventListener("click", hideCollapse)
+    div_location2.append(button2)
+
     //let apply_button = document.getElementById("create-entry-btn")
     //apply_button.addEventListener("click", create_entry)
 }
 
 function hideCollapse() {
-    var myCollapse = document.getElementById(this.getAttribute("name"));
-    var bsCollapse = new bootstrap.Collapse(myCollapse, {
+    //Collapse other collapsible
+    let collapse_elements = document.getElementsByClassName("collapse")
+    for ( element of collapse_elements){
+        if (element.classList.contains("show") && element.getAttribute("id") !== this.getAttribute("name")){
+            let temp_collapse = new bootstrap.Collapse(element, {
+                toggle: true
+            })
+            temp_collapse.hide();
+        }
+    }
+    //Toggle selected one
+    let myCollapse = document.getElementById(this.getAttribute("name"));
+    let bsCollapse = new bootstrap.Collapse(myCollapse, {
         toggle: true
     })
     bsCollapse.hide();
+}
+
+function update_list_id(){
+    let element_list_id = this.getAttribute("name")
+
+    let display_form = document.getElementById("display-list_id")
+    display_form.setAttribute("value", element_list_id)
+    let view_btn = document.getElementById("view-btn")
+    view_btn.setAttribute("class", "btn btn-success")
+
+    let remove_form = document.getElementById("remove-list_id")
+    remove_form.setAttribute("value", element_list_id)
+    let delete_btn = document.getElementById("delete-btn")
+    delete_btn.setAttribute("class", "btn btn-danger")
 }
 
 function check_input(){
@@ -165,6 +179,46 @@ function check_input(){
 }
 
 //Async Functions
+async function render_entry_info(list_of_entry){
+    let entry_div = document.getElementById("entry-info-div")
+    let entries = create_entry_div()
+    for(let entry_json of list_of_entry.my_list){
+        let row_div = create_row_div(entry_json)
+        entries.append(row_div)
+        list_of_elements = []
+        list_of_elements.push(create_entry_user_id_element(entry_json))
+        list_of_elements.push(create_entry_user_role_element(entry_json))
+        list_of_elements.push(create_entry_user_note_element(entry_json))
+        list_of_elements.push(create_entry_user_status_element(entry_json))
+
+        for(element of list_of_elements){
+            row_div.append(element)
+        }
+    }
+    entry_div.append(entries)
+}
+
+async function render_user_info(){
+    let user_id = document.getElementById("user-id-span").innerHTML
+    let post_user_id_element = document.getElementById("leave-input")
+    let leave_btn_element = document.getElementById("leave-btn")
+    let my_list_rows = document.getElementsByClassName("entry-row-div")
+    let my_list = []
+    let changed_element = 0
+    for(let entry_row of my_list_rows){
+        my_list.push(entry_row.firstElementChild.firstElementChild.innerHTML)
+    }
+    for (let user of my_list){
+        if (user == user_id){
+            changed_element = user
+            post_user_id_element.setAttribute("value", user_id)
+            leave_btn_element.setAttribute("class", "btn btn-danger mt-2")
+            break
+        }
+    }
+    //console.log("User_id is changed to: " + changed_element.getAttribute("value"))
+}
+
 async function get_particular_listing(list_id){
     try{
         const response = await fetch(`/listing/manage/${list_id}`)
@@ -232,14 +286,7 @@ async function create_entry(list_id){
     remove_entries()
     let list_of_entry = await get_all_entries_of_listing(list_id)
     render_entry_info(list_of_entry)
-}
-
-async function update_entry(){
-
-}
-
-async function delete_entry(){
-
+    render_user_info()
 }
 
 async function render_full_page(){
@@ -255,6 +302,7 @@ async function render_full_page(){
     setup_leave_btn(listing_obj, list_of_entry)
     render_listing_info(listing_obj)
     render_entry_info(list_of_entry)
+    render_user_info()
 }
 //get_all_entries_of_listing(list_id)
 render_full_page()

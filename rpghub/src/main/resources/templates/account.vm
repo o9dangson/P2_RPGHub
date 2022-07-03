@@ -16,6 +16,7 @@
             <div>
                 <h4>Session detail: user_id: <span id="user-id-span"></span> is_mod: <span id="is-mod-span"></span> is_frozen: <span id="is-frozen-span"></span> error: <span id="error-span"></span></h4>
             </div>
+            <!-- div for buttons -->
             <div id = "logout-div" style="display:flex; justify-content: space-around">
                 <div class="mb-2 mt-2" id="filter-btn-container"></div>
                 <div class="mb-2 mt-2" id="create-btn-container"></div>
@@ -43,6 +44,7 @@
                     </form>
                 </div>
             </div>
+            <!-- div for collapsible -->
             <div id="collapsible-container" class="row">
                 <div class="collapse col-5" id="filter-collapse">
                     <div class="card card-body bg-dark text-light">
@@ -82,7 +84,7 @@
                                 <input id="create-dungeon-name" type="text" class="form-control" placeholder="Dungeon Name" aria-label="Dungeon Name">
                             </div>
                             <div class="input-group mb-3">
-                                <input id="create-max-size" type="number" min="1" max="10" class="form-control" placeholder="Max Party Size" aria-label="Max Party Size">
+                                <input id="create-max-size" type="number" min="1" max="10" value="1" class="form-control" placeholder="Max Party Size" aria-label="Max Party Size">
                             </div>
                             <div class="input-group mb-3">
                                 <input class="btn btn-success" id="listing-submit" onclick= "create_new_listing()" type="button" value="Submit">
@@ -94,6 +96,7 @@
                     </div>
                 </div>  
             </div>
+            <!-- div for listings -->
             <div id="listing-container">
                 <div id="listing-header-div" class="row table-header mt-2">
                     <div id="user-id-header" class="col-1 themed-grid-col mt-4">

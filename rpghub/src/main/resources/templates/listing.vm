@@ -29,16 +29,16 @@
                         </svg></button>
                     </form>
                 </div>
-                <div class="col-2"></div>
+                <div class="mb-2 mt-2 col-2" id="update-btn-container"></div>
                 <div class="mb-2 mt-2 col-2" id="join-btn-container"></div>
                 <div class="col-2">
                     <form action="/listing/manage/$list_id/entry/delete" method="POST">
                         <input type="username" style="display:none" name="list_id" value=$list_id readonly >
                         <input type="username" style="display:none" name="entry_id" value="-1" readonly >
+                        <input type="username" style="display:none" name="user_id" id="leave-input" value="-1" readonly >
                         <button class="btn btn-secondary mt-2" id="leave-btn" style="align-center">Leave Group</button>
                     </form>
                 </div>
-                <div class="col-2"></div>
                 <div class="col-2">
                     <form  action="/logout" method="GET">
                         <button class="mt-2 btn btn-outline-dark" id="logout-btn">Sign out <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
@@ -67,7 +67,37 @@
                         <div id="error-message">
                         </div>
                         <div class="input-group mb-3">
-                            <input class="btn btn-success" id="create-button" onclick= "create_entry($list_id)" type="button" value="Submit">
+                            <input class="btn btn-success" id="create-button" onclick="create_entry($list_id)" type="button" value="Submit">
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <div class="collapse col-6" id="accept-reject-collapse">
+                <div class="card card-body bg-dark text-light">
+                    <div class="row" style="display:flex; justify-content: space-around">
+                        <div class="col">
+                            <form action="/listing/manage/$list_id/entry/update" method="POST">
+                                <input type="username" style="display:none" name="list_id" value=$list_id readonly >
+                                <input type="username" style="display:none" name="entry_id" value="-1" readonly >
+                                <input type="username" style="display:none" name="status" value="Accepted" readonly>
+                                <input class="btn btn-secondary mt-1" id="accept-button" type="submit" value="Accept">
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="/listing/manage/$list_id/entry/update" method="POST">
+                                <input type="username" style="display:none" name="list_id" value=$list_id readonly >
+                                <input type="username" style="display:none" name="entry_id" value="-1" readonly >
+                                <input type="username" style="display:none" name="status" value="Rejected" readonly>
+                                <input class="btn btn-secondary mt-1" id="reject-button" type="submit" value="Reject">
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="/listing/manage/$list_id/entry/delete" method="POST">
+                                <input type="username" style="display:none" name="list_id" value=$list_id readonly >
+                                <input type="username" style="display:none" name="entry_id" value="-1" readonly >
+                                <input type="username" style="display:none" name="user_id" value="0" readonly >
+                                <button class="btn btn-secondary mt-1" id="leave-btn" style="align-center">Kick</button>
+                            </form>
                         </div>
                     </div>
                 </div>

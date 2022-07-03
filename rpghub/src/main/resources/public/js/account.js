@@ -331,7 +331,7 @@ async function manipulate_account(){
 }
 
 async function create_new_listing(){
-    remove_listings();
+    remove_listings()
     await get_all_listings()
     
     let list_name = document.getElementById("create-list-name")

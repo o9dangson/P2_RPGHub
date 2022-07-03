@@ -35,6 +35,7 @@ public class ListingController {
 
     public static Handler post_listing_info_page = ctx ->{
         if(HomeController.check_account() && !Session.is_frozen){
+            System.out.println("post_listing_info_page: attempt\n\tlist_id: "+ ctx.formParam("list_id"));
             if(Integer.parseInt(ctx.formParam("list_id")) != -1){
                 //Log 
                 //Render page
@@ -104,7 +105,7 @@ public class ListingController {
         if(HomeController.check_account() && !Session.is_frozen){
             Listing new_listing = new Listing(-1, Session.user_id, ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), 0);
             int result_list_id = ListingService.create_listing(new_listing);
-            System.out.println("result_list_id: " + result_list_id);
+            System.out.println("fetch_post_create_listing: " + result_list_id);
         }else if(Session.is_frozen){
             ctx.redirect("/frozen");
         }
@@ -130,7 +131,10 @@ public class ListingController {
     public static Handler fetch_post_delete_listing = ctx->{
         if(HomeController.check_account() && !Session.is_frozen){
             System.out.println("fetch_post_delete_listing: list_id= " + ctx.formParam("list_id"));
-            if(Integer.parseInt(ctx.formParam("list_id")) != -1){
+            if(Integer.parseInt(ctx.formParam("list_id")) != -1 &&
+                (Integer.parseInt(ctx.formParam("user_user_id")) 
+                == Integer.parseInt(ctx.formParam("list_user_id"))
+                    || Session.is_mod) ){
                 ListingService.delete_listing_using_obj(Integer.parseInt(ctx.formParam("list_id")));
                 System.out.println("fetch_post_delete_listing: Attempted");
             }

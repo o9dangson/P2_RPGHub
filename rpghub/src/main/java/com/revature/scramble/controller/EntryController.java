@@ -14,16 +14,23 @@ import io.javalin.http.Handler;
 public class EntryController {
 
     public static Handler fetch_post_create_entry = ctx ->{
-        System.out.println("fetch_post_create_entry");
         if(HomeController.check_account() && !Session.is_frozen){
-            //Log 
-            //database request
-            Entry new_entry = new Entry(-1,Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("user_role"), ctx.formParam("user_note"),"Pending");
-            System.out.println("new_entry");
-            //call the service method here
-            EntryService.create_new_entry(new_entry);
-            System.out.println("fetch_post_create_entry: creation done");
-            ctx.redirect("/listing/manage/"+ctx.formParam("list_id")+"/view");
+            System.out.println("fetch_post_create_entry: list_id: " + ctx.formParam("list_id"));
+            if(Integer.parseInt(ctx.formParam("user_id")) != -1 &&
+                Integer.parseInt(ctx.formParam("list_id")) != -1){
+                //Log 
+                //database request
+                //Parameters
+                int list_id = Integer.parseInt(ctx.formParam("list_id"));
+                int user_id = Integer.parseInt(ctx.formParam("user_id"));
+                String user_role = ctx.formParam("user_role");
+                String user_note = ctx.formParam("user_note");
+                //Database Obj
+                Entry new_entry = new Entry(-1, list_id, user_id, user_role, user_note,"Pending");
+                //call the service method here
+                EntryService.create_new_entry(new_entry);
+            }
+            //ctx.redirect("/listing/manage/"+ctx.formParam("list_id")+"/view");
         }else if(Session.is_frozen){
             ctx.redirect("/frozen");
         }
@@ -43,18 +50,25 @@ public class EntryController {
                 //database request
                 String user_status = ctx.formParam("status");
                 int entry_id = Integer.parseInt(ctx.formParam("entry_id"));
-
-                //Update particular entry 
-                EntryService.update_entry(entry_id, user_status);
+                int list_id = Integer.parseInt(ctx.formParam("list_id"));
+                Entry entry_obj = EntryService.get_entry_by_entry_id(entry_id);
+                Listing listing_obj = ListingService.get_listing_by_list_id(list_id);
                 //Update particular listing
+                int max_size = listing_obj.getMax_size();
+                int cur_size = listing_obj.getCur_size();
                 if(user_status.equals("Accepted")){
-                    ListingService.update_listing_service(new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size"))+1 ));
+                    listing_obj.setCur_size(cur_size+1 <= max_size ? cur_size+1 : cur_size);
+                    ListingService.update_listing_service( listing_obj );
                 }
                 else if(user_status.equals("Rejected")){
-                    ListingService.update_listing_service(new Listing(Integer.parseInt(ctx.formParam("list_id")), Integer.parseInt(ctx.formParam("user_id")), ctx.formParam("list_name"), ctx.formParam("dungeonName"), Integer.parseInt(ctx.formParam("max_size")), Integer.parseInt(ctx.formParam("cur_size"))));
+                    if(entry_obj.getStatus().equals("Accepted"))
+                        listing_obj.setCur_size(cur_size-1 >= 0 ? cur_size-1 : cur_size);
+                    ListingService.update_listing_service( listing_obj );
                 }
+                //Update particular entry 
+                EntryService.update_entry(entry_id, user_status);
             }
-            ctx.redirect("/view/"+ctx.formParam("list_id"));
+            //ctx.redirect("/view/"+ctx.formParam("list_id"));
         }else if(Session.is_frozen){
             ctx.redirect("/frozen");
         }
@@ -67,6 +81,7 @@ public class EntryController {
 
     public static Handler fetch_post_delete_entry = ctx ->{
         if(HomeController.check_account() && !Session.is_frozen){
+            System.out.println("fetch_post_delete_entry: entry_id: " + ctx.formParam("entry_id"));
             if(Integer.parseInt(ctx.formParam("entry_id")) != -1 && 
                 Integer.parseInt(ctx.formParam("list_id")) != -1 &&
                 Integer.parseInt(ctx.formParam("user_id")) != -1){

@@ -11,10 +11,14 @@
 </head>
     <body class="text-center">
         <div class="container">
-            <h1>Listing Information</h1>
-            <h3 id = "listing-desc"><span id="listing-info-span" style="display:none">$list_id</span></h3>
+            <h1 style="color:green">Listing Information</h1>
+            <h3 id = "listing-desc">
+                <p>List Name: <span id="list_name-span"></span></p>
+                <p>Leader: <span id="user_id-span"></span> - Size: <span id="cur_size-span"></span>/<span id="max_size-span"></span></p>
+            </h3>
             <!-- hidden stuff for javascript -->
             <h4 style="display:none">
+            <span id="listing-info-span">$list_id</span>
             <span id="hasJoined"></span>
             </h4>
             <div>
@@ -34,8 +38,8 @@
                 <div class="col-2">
                     <form action="/listing/manage/$list_id/entry/delete" method="POST">
                         <input type="username" style="display:none" name="list_id" value=$list_id readonly >
-                        <input type="username" style="display:none" name="entry_id" value="-1" readonly >
-                        <input type="username" style="display:none" name="user_id" id="leave-input" value="-1" readonly >
+                        <input type="username" style="display:none" name="entry_id" id="leave-entry-input" value="-1" readonly >
+                        <input type="username" style="display:none" name="user_id" id="leave-user-input" value="-1" readonly >
                         <button class="btn btn-secondary mt-2" id="leave-btn" style="align-center">Leave Group</button>
                     </form>
                 </div>
@@ -75,28 +79,28 @@
             <div class="collapse col-6" id="accept-reject-collapse">
                 <div class="card card-body bg-dark text-light">
                     <div class="row" style="display:flex; justify-content: space-around">
-                        <div class="col">
-                            <form action="/listing/manage/$list_id/entry/update" method="POST">
-                                <input type="username" style="display:none" name="list_id" value=$list_id readonly >
-                                <input type="username" style="display:none" name="entry_id" value="-1" readonly >
-                                <input type="username" style="display:none" name="status" value="Accepted" readonly>
-                                <input class="btn btn-secondary mt-1" id="accept-button" type="submit" value="Accept">
+                        <div class="col" id="accept-btn-div">
+                            <form action="javascript:void(0);" method="POST">
+                                <input type="username" style="display:none" id="accept-list_id-input" name="list_id" value=$list_id readonly >
+                                <input type="username" style="display:none" id="accept-entry_id-input" name="entry_id" value="-1" readonly >
+                                <input type="username" style="display:none" id="accept-status-input" name="status" value="Accepted" readonly>
+                                <input class="btn btn-secondary mt-1" id="accept-button" type="button" value="Accept">
                             </form>
                         </div>
-                        <div class="col">
-                            <form action="/listing/manage/$list_id/entry/update" method="POST">
-                                <input type="username" style="display:none" name="list_id" value=$list_id readonly >
-                                <input type="username" style="display:none" name="entry_id" value="-1" readonly >
-                                <input type="username" style="display:none" name="status" value="Rejected" readonly>
-                                <input class="btn btn-secondary mt-1" id="reject-button" type="submit" value="Reject">
+                        <div class="col" id="reject-btn-div">
+                            <form action="javascript:void(0);" method="POST">
+                                <input type="username" style="display:none" id="reject-list_id-input" name="list_id" value=$list_id readonly >
+                                <input type="username" style="display:none" id="reject-entry_id-input" name="entry_id" value="-1" readonly >
+                                <input type="username" style="display:none" id="reject-status-input" name="status" value="Rejected" readonly>
+                                <input class="btn btn-secondary mt-1" id="reject-button" type="button" value="Reject">
                             </form>
                         </div>
-                        <div class="col">
-                            <form action="/listing/manage/$list_id/entry/delete" method="POST">
-                                <input type="username" style="display:none" name="list_id" value=$list_id readonly >
-                                <input type="username" style="display:none" name="entry_id" value="-1" readonly >
-                                <input type="username" style="display:none" name="user_id" value="0" readonly >
-                                <button class="btn btn-secondary mt-1" id="leave-btn" style="align-center">Kick</button>
+                        <div class="col" id="kick-btn-div">
+                            <form action="javascript:void(0);" method="POST">
+                                <input type="username" style="display:none" id="kick-list_id-input"name="list_id" value=$list_id readonly >
+                                <input type="username" style="display:none" id="kick-entry_id-input"name="entry_id" value="-1" readonly >
+                                <input type="username" style="display:none" id="kick-user_id-input"name="user_id" value="0" readonly >
+                                <button class="btn btn-secondary mt-1" id="kick-button" style="align-center" onclick="kick_entry()">Kick</button>
                             </form>
                         </div>
                     </div>

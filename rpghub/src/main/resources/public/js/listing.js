@@ -14,21 +14,27 @@ function remove_entries(){
 }
 
 function render_listing_info(listing_obj){
-    let listing_desc = document.getElementById("listing-desc")
-    let list_name_p = document.createElement("p")
-    let list_dungeon_p = document.createElement("p")
-    let list_leader_p = document.createElement("p")
-    let list_group_size_p = document.createElement("p")
-    list_name_p.setAttribute("id", `list_name_p`)
-    list_dungeon_p.setAttribute("id", `list_dungeon_p`)
-    list_leader_p.setAttribute("id", `list_leader_p`)
-    list_name_p.innerHTML = `${listing_obj.list_name}`
-    list_dungeon_p.innerHTML = `${listing_obj.dungeonName}`
-    list_leader_p.innerHTML = `Leader: ${listing_obj.user_id} - `
-    list_leader_p.innerHTML += `Size: ${listing_obj.cur_size}/${listing_obj.max_size}`
-    listing_desc.append(list_name_p)
-    listing_desc.append(list_dungeon_p)
-    listing_desc.append(list_leader_p)
+    let list_name_span = document.getElementById("list_name-span")
+    let user_id_span = document.getElementById("user_id-span")
+    let cur_size_span = document.getElementById("cur_size-span")
+    let max_size_span = document.getElementById("max_size-span")
+    list_name_span.innerHTML = listing_obj.list_name
+    user_id_span.innerHTML = listing_obj.user_id
+    cur_size_span.innerHTML = listing_obj.cur_size
+    max_size_span.innerHTML = listing_obj.max_size
+}
+
+function create_entry_entry_id_element(entry){
+    let element = document.createElement("div")
+    element.setAttribute("class", "themed-grid-col mt-4")
+    element.style.display = "none"
+    let p_element = document.createElement("p")
+    p_element.setAttribute("class", "entry-entry-id")
+    p_element.setAttribute("id", `entry-entry-id-${entry.entry_id}`)
+    p_element.innerHTML = `${entry.entry_id}`
+    element.append(p_element)
+
+    return element
 }
 
 function create_entry_user_id_element(entry){
@@ -77,6 +83,23 @@ function create_entry_user_status_element(entry){
     element.append(p_element)
 
     return element
+}
+
+function create_view_entry_element(listing){
+    let element = document.createElement("div")
+    element.setAttribute("class", "col-2 themed-grid-col mt-3 auto")
+    element.append(create_button(listing))
+    return element
+}
+function create_button(entry){
+    let button = document.createElement("input")
+    button.setAttribute("id", `select-entry-${entry.entry_id}`)
+    button.setAttribute("type", "button")
+    button.setAttribute("name", `${entry.entry_id}`)
+    button.setAttribute("class", "btn btn-secondary view-entry-btn")
+    button.setAttribute("value", "Select Listing")
+    button.addEventListener("click", update_entry_id)
+    return button
 }
 
 function toggle_leave_btn(){
@@ -135,8 +158,21 @@ function setup_btns(){
     button2.addEventListener("click", hideCollapse)
     div_location2.append(button2)
 
+    let accept_btn = document.getElementById("accept-button")
+    accept_btn.addEventListener("click", update_entry)
+    let reject_btn = document.getElementById("reject-button")
+    reject_btn.addEventListener("click", update_entry)
     //let apply_button = document.getElementById("create-entry-btn")
     //apply_button.addEventListener("click", create_entry)
+}
+
+function reset_button_class(){
+    let accept_btn = document.getElementById("accept-button")
+        let reject_btn = document.getElementById("reject-button")
+        let kick_btn = document.getElementById("kick-button")
+        accept_btn.setAttribute("class", "btn btn-secondary mt-1")
+        reject_btn.setAttribute("class", "btn btn-secondary mt-1")
+        kick_btn.setAttribute("class", "btn btn-secondary mt-1")
 }
 
 function hideCollapse() {
@@ -158,18 +194,27 @@ function hideCollapse() {
     bsCollapse.hide();
 }
 
-function update_list_id(){
-    let element_list_id = this.getAttribute("name")
+//function for updating upon selecting an entry
+function update_entry_id(){
+    let element_entry_id = this.getAttribute("name")
+    if(check_valid_user()){
+        let accept_btn = document.getElementById("accept-button")
+        let reject_btn = document.getElementById("reject-button")
+        let kick_btn = document.getElementById("kick-button")
+        let accept_input = document.getElementById("accept-entry_id-input")
+        let reject_input = document.getElementById("reject-entry_id-input")
+        let kick_input = document.getElementById("kick-entry_id-input")
+        
+        //Set Value
+        accept_input.value = element_entry_id
+        reject_input.value = element_entry_id
+        kick_input.value = element_entry_id
 
-    let display_form = document.getElementById("display-list_id")
-    display_form.setAttribute("value", element_list_id)
-    let view_btn = document.getElementById("view-btn")
-    view_btn.setAttribute("class", "btn btn-success")
-
-    let remove_form = document.getElementById("remove-list_id")
-    remove_form.setAttribute("value", element_list_id)
-    let delete_btn = document.getElementById("delete-btn")
-    delete_btn.setAttribute("class", "btn btn-danger")
+        //Set attributes
+        accept_btn.setAttribute("class", "btn btn-success mt-1")
+        reject_btn.setAttribute("class", "btn btn-danger mt-1")
+        kick_btn.setAttribute("class", "btn btn-primary mt-1")
+    }
 }
 
 function check_input(){
@@ -178,7 +223,26 @@ function check_input(){
     return true
 }
 
+function check_valid_user(){
+    let listing_user_id = document.getElementById("user_id-span").innerHTML
+    let user_id = document.getElementById("user-id-span").innerHTML
+    let is_mod = document.getElementById("is-mod-span").innerHTML
+    console.log("check_valid_user: \n\tlisting_user_id: " + listing_user_id
+        + "\n\tuser_id: " + user_id
+        + "\n\tis_mod" + is_mod)
+    return listing_user_id == user_id || is_mod ==="true"
+}
+
 //Async Functions
+async function reload_page(list_id){
+    let listing_obj = await get_particular_listing(list_id)
+    render_listing_info(listing_obj)
+    remove_entries()
+    reset_button_class()
+    let list_of_entry = await get_all_entries_of_listing(list_id)
+    render_entry_info(list_of_entry)
+    render_user_info()
+}
 async function render_entry_info(list_of_entry){
     let entry_div = document.getElementById("entry-info-div")
     let entries = create_entry_div()
@@ -190,6 +254,9 @@ async function render_entry_info(list_of_entry){
         list_of_elements.push(create_entry_user_role_element(entry_json))
         list_of_elements.push(create_entry_user_note_element(entry_json))
         list_of_elements.push(create_entry_user_status_element(entry_json))
+        list_of_elements.push(create_view_entry_element(entry_json))
+        //This element is hidden and must be last for render_user_info()
+        list_of_elements.push(create_entry_entry_id_element(entry_json))
 
         for(element of list_of_elements){
             row_div.append(element)
@@ -200,23 +267,22 @@ async function render_entry_info(list_of_entry){
 
 async function render_user_info(){
     let user_id = document.getElementById("user-id-span").innerHTML
-    let post_user_id_element = document.getElementById("leave-input")
+    let post_entry_id_element = document.getElementById("leave-entry-input")
+    let post_user_id_element = document.getElementById("leave-user-input")
     let leave_btn_element = document.getElementById("leave-btn")
     let my_list_rows = document.getElementsByClassName("entry-row-div")
-    let my_list = []
-    let changed_element = 0
     for(let entry_row of my_list_rows){
-        my_list.push(entry_row.firstElementChild.firstElementChild.innerHTML)
-    }
-    for (let user of my_list){
-        if (user == user_id){
-            changed_element = user
+        
+        let entry_entry_id = entry_row.lastElementChild.firstElementChild.innerHTML
+        let entry_user_id = entry_row.firstElementChild.firstElementChild.innerHTML
+        console.log("entryID: " + entry_entry_id + " entryUID: " + entry_user_id)
+        if (entry_user_id == user_id){
+            post_entry_id_element.setAttribute("value", entry_entry_id)
             post_user_id_element.setAttribute("value", user_id)
             leave_btn_element.setAttribute("class", "btn btn-danger mt-2")
             break
         }
     }
-    //console.log("User_id is changed to: " + changed_element.getAttribute("value"))
 }
 
 async function get_particular_listing(list_id){
@@ -264,7 +330,7 @@ async function get_session() {
 
 async function create_entry(list_id){
     //Check input
-    console.log(list_id)
+    console.log("create_entry: " + list_id)
     let roles = document.getElementById("entry-role")
     let user_role = roles.options[roles.selectedIndex].innerText
     let user_id = document.getElementById("user-id-span").innerHTML
@@ -277,16 +343,87 @@ async function create_entry(list_id){
     
             
 
-    const response = await fetch(`/listing/manage/${list_id}/entry/create`, {
+    let response = await fetch(`/listing/manage/${list_id}/entry/create`, {
         method: 'POST',
         body: formData
     })
     
+    if(!response.ok){
+        console.log("Could not create entry from javascript")
+    }
     
-    remove_entries()
-    let list_of_entry = await get_all_entries_of_listing(list_id)
-    render_entry_info(list_of_entry)
-    render_user_info()
+    await reload_page(list_id)
+}
+
+ async function update_entry(){
+    // /listing/manage/$list_id/entry/update POST
+    let list_id_input = 0, entry_id_input = 0, status_input = 0
+    let list_id = document.getElementById("listing-info-span").innerHTML
+    //Check if user is listing leader or moderator
+    if(check_valid_user()){
+        if (this.getAttribute("id") === "accept-button"){
+            list_id_input = document.getElementById("accept-list_id-input").value
+            entry_id_input = document.getElementById("accept-entry_id-input").value
+            status_input = document.getElementById("accept-status-input").value
+        }else if(this.getAttribute("id") == "reject-button"){
+            list_id_input = document.getElementById("reject-list_id-input").value
+            entry_id_input = document.getElementById("reject-entry_id-input").value
+            status_input = document.getElementById("reject-status-input").value
+        }
+        
+        console.log("update_entry=> \n\tlist_id_input: " + list_id_input 
+            + "\n\tentry_id_input: " + entry_id_input 
+            + "\n\tstatus_input: " + status_input)
+
+        let formData = new FormData()
+        formData.append('list_id', list_id_input)
+        formData.append('entry_id', entry_id_input)
+        formData.append('status', status_input)
+
+        let response = await fetch(`/listing/manage/${list_id}/entry/update`, {
+            method: 'POST',
+            body: formData
+        })
+
+        if(!response.ok){
+            console.log("Could not update entry from javascript")
+        }        
+    }
+
+    
+    await reload_page(list_id)
+}
+
+async function kick_entry(){
+    // /listing/manage/$list_id/entry/delete POST
+    let list_id_input = 0, entry_id_input = 0, user_id_input = 0
+    let list_id = document.getElementById("listing-info-span").innerHTML
+    //Check if user is listing leader or moderator
+    if(check_valid_user()){
+        list_id_input = document.getElementById("kick-list_id-input").value
+        entry_id_input = document.getElementById("kick-entry_id-input").value
+        user_id_input = document.getElementById("kick-user_id-input").value
+        
+        console.log("kick_entry=> \n\tlist_id_input:" + list_id_input 
+            + "\n\tentry_id_input: " + entry_id_input 
+            + "\n\tuser_id_input: " + user_id_input)
+
+        let formData = new FormData()
+        formData.append('list_id', list_id_input)
+        formData.append('entry_id', entry_id_input)
+        formData.append('user_id', user_id_input)
+
+        let response = await fetch(`/listing/manage/${list_id}/entry/delete`, {
+            method: 'POST',
+            body: formData
+        })
+
+        if(!response.ok){
+            console.log("Could not update entry from javascript")
+        }        
+    }
+
+    await reload_page(list_id)
 }
 
 async function render_full_page(){
@@ -299,7 +436,7 @@ async function render_full_page(){
     let session_obj = await get_session()
     
     setup_btns()
-    setup_leave_btn(listing_obj, list_of_entry)
+    //setup_leave_btn(listing_obj, list_of_entry)
     render_listing_info(listing_obj)
     render_entry_info(list_of_entry)
     render_user_info()

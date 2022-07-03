@@ -57,16 +57,20 @@ public class EntryController {
                 int max_size = listing_obj.getMax_size();
                 int cur_size = listing_obj.getCur_size();
                 if(user_status.equals("Accepted")){
-                    listing_obj.setCur_size(cur_size+1 <= max_size ? cur_size+1 : cur_size);
-                    ListingService.update_listing_service( listing_obj );
+                    if(!entry_obj.getStatus().equals("Accepted") &&
+                    listing_obj.getCur_size() < listing_obj.getMax_size()){
+                        listing_obj.setCur_size(cur_size+1 <= max_size ? cur_size+1 : cur_size);
+                        //Update particular entry and listing
+                        ListingService.update_listing_service( listing_obj );
+                        EntryService.update_entry(entry_id, user_status);
+                    }
                 }
                 else if(user_status.equals("Rejected")){
                     if(entry_obj.getStatus().equals("Accepted"))
                         listing_obj.setCur_size(cur_size-1 >= 0 ? cur_size-1 : cur_size);
                     ListingService.update_listing_service( listing_obj );
+                    EntryService.update_entry(entry_id, user_status);
                 }
-                //Update particular entry 
-                EntryService.update_entry(entry_id, user_status);
             }
             //ctx.redirect("/view/"+ctx.formParam("list_id"));
         }else if(Session.is_frozen){

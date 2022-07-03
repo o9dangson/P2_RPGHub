@@ -115,7 +115,7 @@ function create_button(entry){
     button.setAttribute("type", "button")
     button.setAttribute("name", `${entry.entry_id}`)
     button.setAttribute("class", "btn btn-secondary view-entry-btn")
-    button.setAttribute("value", "Select Listing")
+    button.setAttribute("value", "Select Entry")
     button.addEventListener("click", update_entry_id)
     return button
 }
@@ -254,11 +254,11 @@ function check_valid_user(){
 //Async Functions
 async function reload_page(list_id){
     let listing_obj = await get_particular_listing(list_id)
-    render_listing_info(listing_obj)
+    await render_listing_info(listing_obj)
     remove_entries()
     reset_button_class()
     let list_of_entry = await get_all_entries_of_listing(list_id)
-    render_entry_info(list_of_entry)
+    await render_entry_info(list_of_entry)
     render_user_info()
 }
 async function render_entry_info(list_of_entry){
@@ -266,8 +266,12 @@ async function render_entry_info(list_of_entry){
     let entries = create_entry_div()
     for(let entry_json of list_of_entry.my_list){
         let row_div = create_row_div(entry_json)
-        let login_obj = await get_username(entry_json.user_id)
-        let username = login_obj.username
+        let login_list = await get_all_username()
+        let username =""
+        for(let login of login_list.my_list){
+            if(login.userId == entry_json.user_id)
+                username = login.username
+        }
         entries.append(row_div)
         list_of_elements = []
         list_of_elements.push(create_entry_user_id_element(entry_json))
@@ -291,17 +295,23 @@ async function render_user_info(){
     let post_entry_id_element = document.getElementById("leave-entry-input")
     let post_user_id_element = document.getElementById("leave-user-input")
     let leave_btn_element = document.getElementById("leave-btn")
-    let my_list_rows = document.getElementsByClassName("entry-row-div")
+    let my_list_rows = await document.getElementsByClassName("entry-row-div")
+    let hasJoined = document.getElementById("hasJoined")
+
     for(let entry_row of my_list_rows){
         let entry_status = entry_row.children[4].firstElementChild.innerHTML
         let entry_entry_id = entry_row.lastElementChild.firstElementChild.innerHTML
         let entry_user_id = entry_row.firstElementChild.firstElementChild.innerHTML
         console.log("entryID: " + entry_entry_id + " entryUID: " + entry_user_id)
         if (entry_user_id == user_id && entry_status === "Accepted"){
+            hasJoined.innerHTML = "true"
             post_entry_id_element.setAttribute("value", entry_entry_id)
             post_user_id_element.setAttribute("value", user_id)
             leave_btn_element.setAttribute("class", "btn btn-danger mt-2")
             break
+        }
+        else{
+            hasJoined.innerHTML = "false"
         }
     }
 }
@@ -353,35 +363,38 @@ async function get_session() {
 }
 
 async function create_entry(list_id){
-    remove_entries()
-    let list_of_entry = await get_all_entries_of_listing(list_id)
-    render_entry_info(list_of_entry)
-    //Check input
-    console.log("create_entry: " + list_id)
-    let roles = document.getElementById("entry-role")
-    let user_role = roles.options[roles.selectedIndex].innerText
-    let user_id = document.getElementById("user-id-span").innerHTML
-    let user_note = document.getElementById("desc-input").value
-    let formData = new FormData()
-    formData.append('list_id', list_id)
-    formData.append('user_id', user_id)
-    formData.append('user_role', user_role)
-    formData.append('user_note', user_note)
-    
-            
+    let hasJoined = document.getElementById("hasJoined").innerHTML
+    if(hasJoined === "false"){
+        remove_entries()
+        let list_of_entry = await get_all_entries_of_listing(list_id)
+        await render_entry_info(list_of_entry)
+        //Check input
+        console.log("create_entry: " + list_id)
+        let roles = document.getElementById("entry-role")
+        let user_role = roles.options[roles.selectedIndex].innerText
+        let user_id = document.getElementById("user-id-span").innerHTML
+        let user_note = document.getElementById("desc-input").value
+        let formData = new FormData()
+        formData.append('list_id', list_id)
+        formData.append('user_id', user_id)
+        formData.append('user_role', user_role)
+        formData.append('user_note', user_note)
+        
+                
 
-    let response = await fetch(`/listing/manage/${list_id}/entry/create`, {
-        method: 'POST',
-        body: formData
-    })
-    
-    if(!response.ok){
-        update_error_span("Could not create entry from javascript")
-        console.log("Could not create entry from javascript")
+        let response = await fetch(`/listing/manage/${list_id}/entry/create`, {
+            method: 'POST',
+            body: formData
+        })
+        
+        if(!response.ok){
+            update_error_span("Could not create entry from javascript")
+            console.log("Could not create entry from javascript")
+        }
+        
+
+        await reload_page(list_id)
     }
-    
-
-    await reload_page(list_id)
 }
 
  async function update_entry(){
@@ -457,18 +470,12 @@ async function kick_entry(){
     await reload_page(list_id)
 }
 
-async function get_username(user_id){
+async function get_all_username(user_id){
     try{
-        let formData = new FormData()
-        formData.append('user_id', user_id)
-
-        const response = await fetch("/username", {
-            method: 'POST',
-            body: formData
-        })
+        const response = await fetch("/username", {method: 'GET'})
         const pReq = await response.json()
         if(!response.ok){
-            const message = `get username failed`
+            const message = `get usernames failed`
             throw message
         }
         return pReq
@@ -489,7 +496,7 @@ async function render_full_page(){
     setup_btns()
     //setup_leave_btn(listing_obj, list_of_entry)
     render_listing_info(listing_obj)
-    render_entry_info(list_of_entry)
+    await render_entry_info(list_of_entry)
     render_user_info()
 }
 //get_all_entries_of_listing(list_id)

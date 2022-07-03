@@ -1,5 +1,6 @@
 package com.revature.scramble.models.pagefactory;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
@@ -20,10 +21,10 @@ public class AccountPageFactory {
     @FindBy(xpath = "/html/body/div/div[2]/div[1]/input")
     WebElement filter_button;
 
-    @FindBy(xpath = "/html/body/div/div[2]/div[2]/input")
+    @FindBy(className = "create-btn")
     WebElement create_listing_button;
 
-    @FindBy(xpath = "delete-btn")
+    @FindBy(id = "delete-btn")
     WebElement delete_button;
 
     @FindBy(id = "logout-btn")
@@ -50,6 +51,7 @@ public class AccountPageFactory {
     @FindBy(id = "listing-submit")
     WebElement listing_submit_button;
 
+    List<WebElement> list_of_listings;
 
     public AccountPageFactory(WebDriver webDriver){
         this.webdriver = webDriver;
@@ -58,9 +60,8 @@ public class AccountPageFactory {
     }
 
     private WebElement get_select_listing_element(){
-        List<WebElement> all_select_buttons = webdriver.findElements(By.className("view-listing-button"));
-        int btn_count = all_select_buttons.size();
-        return all_select_buttons.get((int)Math.random()*btn_count);
+        WebElement select_listing = webdriver.findElement(By.xpath("/html/body/div/div[4]/div[2]/div/div[1]/div[7]/input"));
+        return select_listing;
     }
 
     public void click_select_listing_button(){
@@ -112,8 +113,20 @@ public class AccountPageFactory {
         listing_submit_button.click();
     }
 
+    public void view_selected_listing() {
+        view_selected_listing_button.click();
+    }
 
-
-
-
+    public Boolean listing_selected(){
+        String remove_button_class = delete_button.getAttribute("class");
+        if(remove_button_class.equals("btn btn-danger")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void click_remove_listing_button() {
+        delete_button.click();
+    }
 }

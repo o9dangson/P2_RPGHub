@@ -25,7 +25,7 @@ public class AccountDemoSteps {
     public AccountPageFactory accountPageFactory;
 
     List<WebElement> listings;
-    List<WebElement>updated_listings;
+    List<WebElement> updated_listings;
     int amt_of_listings;
     int updated_list_size;
 
@@ -47,8 +47,6 @@ public class AccountDemoSteps {
         Assert.assertEquals(driver.getTitle(), "Account");
         listings = driver.findElements(By.className("listing-row-div"));
         amt_of_listings = listings.size();
-        System.out.println("..................logged in:"+listings+" ......................");
-        System.out.println(".............................size:"+amt_of_listings+" ......................................");
         
     }
     @When("user clicks Filter Listing button")
@@ -121,16 +119,13 @@ public class AccountDemoSteps {
     }
     @Then("there should be a new listing")
     public void there_should_be_a_new_listing() {
-        updated_listings = driver.findElements(By.className("listing-row-div"));
+        
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+        updated_listings = driver.findElements(By.className("listing-row-div"));
         updated_list_size = updated_listings.size();
         Boolean list_updated = updated_list_size > amt_of_listings;
-        System.out.println("..................................................new listing created......................................");
-        System.out.println("...................previous listings: "+listings+"..............................");
-        System.out.println("...................updated listings: "+updated_listings+"..............................");
         Assert.assertTrue(list_updated);
         Assert.assertEquals(driver.getTitle(), "Account");
-
     }
 
     @Then("user should be shown listing in listing page")

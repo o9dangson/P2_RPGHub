@@ -209,6 +209,9 @@ async function get_session() {
 }
 
 async function create_entry(list_id){
+    remove_entries()
+    let list_of_entry = await get_all_entries_of_listing(list_id)
+    render_entry_info(list_of_entry)
     //Check input
     console.log(list_id)
     let roles = document.getElementById("entry-role")
@@ -230,7 +233,7 @@ async function create_entry(list_id){
     
     
     remove_entries()
-    let list_of_entry = await get_all_entries_of_listing(list_id)
+    list_of_entry = await get_all_entries_of_listing(list_id)
     render_entry_info(list_of_entry)
 }
 

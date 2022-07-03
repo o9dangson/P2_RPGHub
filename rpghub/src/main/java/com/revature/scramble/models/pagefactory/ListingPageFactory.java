@@ -21,7 +21,7 @@ public class ListingPageFactory {
     @FindBy(id = "account-btn")
     WebElement accountPageButton;
 
-    @FindBy(xpath = "html/body/div/div/div[1]/input")
+    @FindBy(className = "create-btn")
     WebElement joinListingButton;
 
     @FindBy(id = "entry-role")
@@ -42,19 +42,25 @@ public class ListingPageFactory {
         }
         public void clickAccountPageButton(){
             accountPageButton.click();
+        }
+    public void select_role(){
+        Select user_role_select = new Select(roleCategoryDropdown);
+        List<WebElement> categories = user_role_select.getOptions();
 
-  
- }
- public void select_role(){
-    Select user_role_select = new Select(roleCategoryDropdown);
-    List<WebElement> categories = user_role_select.getOptions();
+        int random_role = (int)Math.random()*categories.size();
+        user_role_select.selectByIndex(random_role);
+    }
 
-    int random_role = (int)Math.random()*categories.size();
-    user_role_select.selectByIndex(random_role);
-}
+    public void input_user_note(String user_note){
+        noteCategory.sendKeys(user_note);
+    }
 
-public void input_user_note(String user_note){
-    noteCategory.sendKeys(user_note);
-}
 
-}
+    public void clickLeaveGroupButton(){
+        leaveGroupButton.click();
+    }
+
+    public void clickJoinListingButton(){
+        joinListingButton.click();
+    }
+} 

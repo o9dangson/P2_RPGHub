@@ -1,6 +1,7 @@
 package com.revature.scramble.StepDefinitions;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -22,6 +24,11 @@ public class ListingDemoSteps {
     public AccountPageFactory accountPageFactory;
     public ListingPageFactory listingPageFactory;
 
+    List<WebElement> all_entries;
+    List<WebElement> updated_entries;
+    int amt_of_entries;
+    int updated_entry_amt;
+    
 
     @Before
     public void setup(){
@@ -32,42 +39,79 @@ public class ListingDemoSteps {
 
         driver.get("http://localhost:9090/");
         loginPageFactory = new LoginPageFactory(driver);
+        accountPageFactory = new AccountPageFactory(driver);
+        listingPageFactory = new ListingPageFactory(driver);
     }
 
 
     @Given("User is logged in")
     public void user_is_logged_in() {
-        // Write code here that turns the phrase above into concrete actions
-        loginPageFactory.inputUsername("user1");
-        loginPageFactory.inputPassword("pass");
-        throw new io.cucumber.java.PendingException();
-        
+        loginPageFactory.login("user1","pass");
+
     }
     @When("user clicks select listing button")
     public void user_clicks_select_listing_button() {
         accountPageFactory.click_select_listing_button();
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        
     }
     @When("user clicks view selected listing button")
     public void user_clicks_view_selected_listing_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        accountPageFactory.view_selected_listing();
+
+        
     }
+
+    @When("user clicks join listing button")
+    public void user_clicks_join_listing_button() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        all_entries = driver.findElements(By.className("entry-row-div"));
+        amt_of_entries = all_entries.size();
+        listingPageFactory.clickJoinListingButton();
+    }
+    @When("user clicks a role")
+        public void select_role(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        listingPageFactory.select_role();
+    }
+
+    @When("user inputs a note")
+    public void input_user_note(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        listingPageFactory.input_user_note("test");
+        
+    }
+
     @When("user clicks leave group button")
     public void user_clicks_leave_group_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        listingPageFactory.clickLeaveGroupButton();  
     }
+
+    @Then("user will be added to the list")
+    public void user_will_be_added_to_the_list() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        updated_entries = driver.findElements(By.className("entry-info-div"));
+        updated_entry_amt = updated_entries.size();
+        Assert.assertTrue(updated_entry_amt>amt_of_entries);
+        Assert.assertEquals(driver.getTitle(), "Listing");
+    
+    }
+
     @Then("user will be removed from listing")
     public void user_will_be_removed_from_listing() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        updated_entries = driver.findElements(By.className("entry-info-div"));
+        updated_entry_amt = updated_entries.size();
+        Boolean list_updated = updated_entry_amt < amt_of_entries;
+        Assert.assertTrue(list_updated);
+        Assert.assertEquals(driver.getTitle(), "Listing");
+        }
+
+    @After
+    public void teardown(){
+        if(!driver.getTitle().equals("Homepage")){
+            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+            logoutButton.click();
+        }
+        this.driver.quit();
     }
-
-
-
-
-
-
 }

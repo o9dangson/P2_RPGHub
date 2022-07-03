@@ -14,7 +14,8 @@
         <h1 style="color:green">Welcome to your account page</h1>
         <div class="container">
             <div>
-                <h4>Session detail: user_id: <span id="user-id-span"></span> is_mod: <span id="is-mod-span"></span> is_frozen: <span id="is-frozen-span"></span> error: <span id="error-span"></span></h4>
+                <h4>Session detail: user_id: <span id="user-id-span"></span> is_mod: <span id="is-mod-span"></span> is_frozen: <span id="is-frozen-span"></span></h4>
+                <h4 style="color:rgb(226, 131, 131)">error: <span id="error-span"></span></h4>
             </div>
             <!-- div for buttons -->
             <div id = "logout-div" style="display:flex; justify-content: space-around">
@@ -23,15 +24,18 @@
                 <div class="mb-2 mt-2">
                     <form action="/listing" method="POST">
                         <div style="display:hidden">
+                            <input type="username" class="hide" name="user_id" id="display-user_id" placeholder="user_id" value="-1">
                             <input type="username" class="hide" name="list_id" id="display-list_id" placeholder="user_1" value="-1">
                         </div>
-                        <button class="btn btn-secondary" id="view-btn">View Selected Listing</button>
+                        <input type="submit" class="btn btn-secondary" id="view-btn" value="View Selected Listing">
                     </form>
                 </div>
                 <div class="mb-2 mt-2">
                     <form action="/listing/delete" method="POST">
                         <div style="display:hidden">
-                            <input type="username" class="hide" name="list_id" id="remove-list_id" placeholder="user_1" value="-1">
+                            <input type="username" class="hide" name="user_user_id" id="remove-user-user_id" placeholder="user-user_id" value="-1">
+                            <input type="username" class="hide" name="list_user_id" id="remove-list-user_id" placeholder="list-user_id" value="-1">
+                            <input type="username" class="hide" name="list_id" id="remove-list_id" placeholder="list_id" value="-1">
                         </div>
                         <button class="btn btn-secondary" id="delete-btn">Remove Selected Listing</button>
                     </form>

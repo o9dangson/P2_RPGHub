@@ -3,11 +3,14 @@ function test_update_span(session){
     let user_id = document.getElementById("user-id-span")
     let is_mod = document.getElementById("is-mod-span")
     let is_frozen = document.getElementById("is-frozen-span")
-    let error = document.getElementById("error-span")
     user_id.innerHTML = session.user_id
     is_mod.innerHTML = session.is_mod
     is_frozen.innerHTML = session.is_frozen
-    error.innerHTML = session.error
+}
+
+function update_error_span(msg){
+    let error = document.getElementById("error-span")
+    error.innerHTML = msg     
 }
 
 function create_listing_div(){
@@ -180,16 +183,25 @@ function hideCollapse() {
 }
 
 function update_list_id(){
+    let element_user_id = this.parentElement.parentElement.firstElementChild.nextSibling.firstElementChild.innerHTML
     let element_list_id = this.getAttribute("name")
+    let user_id = document.getElementById("user-id-span").innerHTML
 
-    let display_form = document.getElementById("display-list_id")
-    display_form.setAttribute("value", element_list_id)
+    let display_user_id = document.getElementById("display-user_id")
+    let display_list_id = document.getElementById("display-list_id")
+    let remove_user_user_id = document.getElementById("remove-user-user_id")
+    let remove_list_user_id = document.getElementById("remove-list-user_id")
+    let remove_list_id = document.getElementById("remove-list_id")
     let view_btn = document.getElementById("view-btn")
-    view_btn.setAttribute("class", "btn btn-success")
-
-    let remove_form = document.getElementById("remove-list_id")
-    remove_form.setAttribute("value", element_list_id)
     let delete_btn = document.getElementById("delete-btn")
+    
+    display_user_id.setAttribute("value", element_user_id)
+    display_list_id.setAttribute("value", element_list_id)
+    remove_user_user_id.setAttribute("value", user_id)
+    remove_list_user_id.setAttribute("value", element_user_id)
+    remove_list_id.setAttribute("value", element_list_id)
+
+    view_btn.setAttribute("class", "btn btn-success")
     delete_btn.setAttribute("class", "btn btn-danger")
 }
 

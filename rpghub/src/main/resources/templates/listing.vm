@@ -22,7 +22,8 @@
             <span id="hasJoined"></span>
             </h4>
             <div>
-                <h4>Session detail: user_id: <span id="user-id-span"></span> is_mod: <span id="is-mod-span"></span> error: <span id="error-span"></span></h4>
+                <h4>Session detail: user_id: <span id="user-id-span"> <p style="display:none">is_frozen: <span id="is-frozen-span"></p></span> is_mod: <span id="is-mod-span"></span></h4>
+                <h4 style="color:rgb(226, 131, 131)">error: <span id="error-span"></span></h4>
             </div>
             <!-- div for buttons -->
             <div id="buttons-div" class="row" style="display:flex; justify-content: space-around">

@@ -2,10 +2,15 @@
 function test_update_span(session){
     let user_id = document.getElementById("user-id-span")
     let is_mod = document.getElementById("is-mod-span")
-    let error = document.getElementById("error-span")
+    let is_frozen = document.getElementById("is-frozen-span")
     user_id.innerHTML = session.user_id
     is_mod.innerHTML = session.is_mod
-    error.innerHTML = session.error
+    is_frozen.innerHTML = session.is_frozen
+}
+
+function update_error_span(msg){
+    let error = document.getElementById("error-span")
+    error.innerHTML = msg     
 }
 
 function remove_entries(){
@@ -290,11 +295,12 @@ async function get_particular_listing(list_id){
         const response = await fetch(`/listing/manage/${list_id}`)
         const pReq = await response.json()
         if (response.status != 200){
-            const message = `Couldn't obtain entries! An error occured: ${res.status}`
+            const message = `Couldn't obtain listing! An error occured: ${res.status}`
             throw message
         }
         return pReq
     }catch(err){
+        update_error_span(err)
         console.log(err)
     }
 }
@@ -309,6 +315,7 @@ async function get_all_entries_of_listing(list_id){
         }
         return pReq
     }catch(err){
+        update_error_span(err)
         console.log(err)
     }
 }
@@ -318,12 +325,13 @@ async function get_session() {
         const response = await fetch('/session')
         const pReq = await response.json()
         if (response.status != 200){
-            const message = `Couldn't obtain requests! An error occured: ${res.status}`
+            const message = `Couldn't obtain session! An error occured: ${res.status}`
             throw message
         }
         test_update_span(pReq)
         return pReq
     }catch(err){
+        update_error_span(err)
         console.log(err)
     }
 }
@@ -349,6 +357,7 @@ async function create_entry(list_id){
     })
     
     if(!response.ok){
+        update_error_span("Could not create entry from javascript")
         console.log("Could not create entry from javascript")
     }
     
@@ -387,6 +396,7 @@ async function create_entry(list_id){
 
         if(!response.ok){
             console.log("Could not update entry from javascript")
+            update_error_span("Could not update entry from javascript")
         }        
     }
 
@@ -419,7 +429,8 @@ async function kick_entry(){
         })
 
         if(!response.ok){
-            console.log("Could not update entry from javascript")
+            console.log("Could not delete entry from javascript")
+            update_error_span("Could not delete entry from javascript")
         }        
     }
 

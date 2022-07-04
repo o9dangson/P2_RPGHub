@@ -99,14 +99,21 @@ public class ListingDemoSteps {
     public void user_will_be_added_to_the_list() {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
         updated_entries = driver.findElements(By.className("entry-row-div"));
-        System.out.println("updated entries");
-        updated_entry_amt = updated_entries.size();
-        System.out.println("...................updated elements:"+updated_entry_amt+"...........................");
-        Assert.assertTrue(updated_entry_amt>amt_of_entries);
-        Assert.assertEquals(driver.getTitle(), "Listing");
+        String hasApplied = driver.findElement(By.id("hasApplied")).getAttribute("innerHTML");
+        if(hasApplied.equals("false")){
+            System.out.println("updated entries");
+            updated_entry_amt = updated_entries.size();
+            System.out.println("...................updated elements:"+updated_entry_amt+"...........................");
+            Assert.assertTrue(updated_entry_amt>amt_of_entries);
+            Assert.assertEquals(driver.getTitle(), "Listing");
+        }
+        else{
+            Assert.assertEquals(hasApplied, "true");
+        }
+        
     }
 
-    
+
 
 
     @Then("user will be removed from listing")

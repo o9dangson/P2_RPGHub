@@ -1,8 +1,8 @@
 <suite name="RPGHUB Test Suite">
     <test name="Basic Test">
         <classes>
-            <!--<class name="com.revature.scramble.RepositoryTest"/>
-            <class name="com.revature.scramble.ServiceTest"/>-->
+            <class name="com.revature.scramble.RepositoryTest"/>
+            <class name="com.revature.scramble.ServiceTest"/>
         </classes>
     </test>
     <test name="Selenium Test">

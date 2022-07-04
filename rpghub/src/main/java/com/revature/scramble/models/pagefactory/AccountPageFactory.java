@@ -121,6 +121,7 @@ public class AccountPageFactory {
         int max_size = 8;
         int min_size = 2;
         int rand_max_size = rand.nextInt(max_size)+min_size;
+        max_size_field.clear();
         max_size_field.sendKeys(String.valueOf(rand_max_size));
     }
 

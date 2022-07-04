@@ -2,6 +2,7 @@ package com.revature.scramble.StepDefinitions;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,7 +35,7 @@ public class AccountDemoSteps {
     int amt_of_listings;
     int updated_list_size;
 
-    @BeforeClass
+    @Before
     public void setup(){
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
         driver = new ChromeDriver();
@@ -93,11 +94,12 @@ public class AccountDemoSteps {
     @When("user inputs max party size")
     public void user_inputs_max_party_size() {
         accountPageFactory.list_max_party_size();
+        sleep(3);
     }
     @When("user clicks Submit button")
     public void user_clicks_submit_button() {
         accountPageFactory.click_listing_submit_button();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+        sleep(3);
     }
 
     @When("user clicks Select Listing button")
@@ -127,8 +129,7 @@ public class AccountDemoSteps {
     }
     @Then("there should be a new listing")
     public void there_should_be_a_new_listing() {
-        
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+        sleep(10);
         updated_listings = driver.findElements(By.className("listing-row-div"));
         updated_list_size = updated_listings.size();
         Boolean list_updated = updated_list_size > amt_of_listings;
@@ -151,13 +152,22 @@ public class AccountDemoSteps {
         Assert.assertEquals(driver.getTitle(), "Account");
     }
 
-    // @AfterClass
-    // public void teardown(){
-    //     if(!driver.getTitle().equals("Homepage")){
-    //         WebElement logoutButton = driver.findElement(By.id("logout-btn"));
-    //         logoutButton.click();
-    //     }
-    //     this.driver.quit();
-    // }
+    @After
+    public void teardown(){
+        if(!driver.getTitle().equals("Homepage")){
+            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+            logoutButton.click();
+        }
+        this.driver.quit();
+    }
+    
+    public void sleep(long x){
+        try {
+            TimeUnit.SECONDS.sleep(x);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }
 

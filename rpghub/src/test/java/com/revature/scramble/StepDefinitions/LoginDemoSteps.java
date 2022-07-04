@@ -23,15 +23,15 @@ public class LoginDemoSteps {
     public WebDriver driver;
     public LoginPageFactory loginPageFactory;
     
-    @Before
-    public void setup(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        loginPageFactory = new LoginPageFactory(driver);
-        driver.get("http://localhost:9090/");
-    }
+    // @Before
+    // public void setup(){
+    //     System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+    //     driver = new ChromeDriver();
+    //     driver.manage().window().maximize();
+    //     driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+    //     loginPageFactory = new LoginPageFactory(driver);
+    //     driver.get("http://localhost:9090/");
+    // }
 
     @Given("a user is on the login page")
     public void a_user_is_on_the_login_page() {
@@ -110,12 +110,12 @@ public class LoginDemoSteps {
     //     //Assert.assertEquals(driver.getTitle(), location);
     // }
 
-    @After
-    public void teardown(){
-        if(!driver.getTitle().equals("Homepage")){
-            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
-            logoutButton.click();
-        }
-        this.driver.quit();
-    }
+    // @After
+    // public void teardown(){
+    //     if(!driver.getTitle().equals("Homepage")){
+    //         WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+    //         logoutButton.click();
+    //     }
+    //     this.driver.quit();
+    // }
 }

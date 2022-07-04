@@ -344,7 +344,7 @@ async function create_new_listing(){
     let max_size = document.getElementById("create-max-size")
     let user_id = document.getElementById("user-id-span")
     console.log(user_id)
-    if(max_size.value()>0 && max_size.value()<=10){
+    if(max_size.value >0 && max_size.value <=10){
         let formData = new FormData()
         formData.append('user_id', user_id.innerHTML)
         formData.append('list_name', list_name.value)

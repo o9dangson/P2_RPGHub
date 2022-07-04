@@ -3,6 +3,7 @@ package com.revature.scramble.StepDefinitions;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -43,18 +44,18 @@ public class ListingDemoSteps {
     int randIndex;
     
 
-    @BeforeClass
-    public void setup(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+    // @Before
+    // public void setup(){
+    //     System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+    //     driver = new ChromeDriver();
+    //     driver.manage().window().maximize();
+    //     driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-        driver.get("http://localhost:9090/");
-        loginPageFactory = new LoginPageFactory(driver);
-        accountPageFactory = new AccountPageFactory(driver);
-        listingPageFactory = new ListingPageFactory(driver);
-    }
+    //     driver.get("http://localhost:9090/");
+    //     loginPageFactory = new LoginPageFactory(driver);
+    //     accountPageFactory = new AccountPageFactory(driver);
+    //     listingPageFactory = new ListingPageFactory(driver);
+    // }
 
     @Given("User is logged in")
     public void user_is_logged_in() {
@@ -63,7 +64,7 @@ public class ListingDemoSteps {
     }
     @When("user clicks select listing button")
     public void user_clicks_select_listing_button() {
-        
+        sleep(1);
         accountPageFactory.click_select_listing_button();
         
     }
@@ -130,14 +131,23 @@ public class ListingDemoSteps {
             Assert.assertTrue(list_updated);
         }
         Assert.assertEquals(driver.getTitle(), "Listing");
-        }
+    }
 
-    @AfterClass
-    public void teardown(){
-        if(!driver.getTitle().equals("Homepage")){
-            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
-            logoutButton.click();
+    // @After
+    // public void teardown(){
+    //     if(!driver.getTitle().equals("Homepage")){
+    //         WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+    //         logoutButton.click();
+    //     }
+    //     this.driver.quit();
+    // }
+
+    public void sleep(long x){
+        try {
+            TimeUnit.SECONDS.sleep(x);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        this.driver.quit();
     }
 }

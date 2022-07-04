@@ -256,7 +256,7 @@ function check_valid_user(){
 //Async Functions
 async function reload_page(list_id){
     let listing_obj = await get_particular_listing(list_id)
-    await render_listing_info(listing_obj)
+    render_listing_info(listing_obj)
     remove_entries()
     reset_button_class()
     let list_of_entry = await get_all_entries_of_listing(list_id)
@@ -409,6 +409,9 @@ async function create_entry(list_id){
     let list_id = document.getElementById("listing-info-span").innerHTML
     //Check if user is listing leader or moderator
     if(check_valid_user()){
+        remove_entries()
+        let list_of_entry = await get_all_entries_of_listing(list_id)
+        await render_entry_info(list_of_entry)
         if (this.getAttribute("id") === "accept-button"){
             list_id_input = document.getElementById("accept-list_id-input").value
             entry_id_input = document.getElementById("accept-entry_id-input").value
@@ -436,11 +439,11 @@ async function create_entry(list_id){
         if(!response.ok){
             console.log("Could not update entry from javascript")
             update_error_span("Could not update entry from javascript")
-        }        
+        };        
     }
 
     
-    reload_page(list_id)
+    await reload_page(list_id_input);
 }
 
 async function kick_entry(){

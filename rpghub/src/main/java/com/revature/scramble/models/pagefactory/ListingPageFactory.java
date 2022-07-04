@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import org.openqa.selenium.WebElement;
 
 public class ListingPageFactory {
@@ -32,7 +33,7 @@ public class ListingPageFactory {
 
     @FindBy(id = "reject-button")
     public WebElement reject_btn;
-    
+
     @FindBy(id = "kick-button")
     public WebElement kick_btn;
 
@@ -57,6 +58,26 @@ public class ListingPageFactory {
     public void clickLogoutButton(){
         logoutButton.click();
     }
+
+    public WebElement select_entry(int random){
+        List<WebElement> entries = webdriver.findElements(By.className("entry-row-div"));
+        return entries.get(random);
+    }
+
+    public WebElement selected_entry_status(int random){
+        List<WebElement> entry_statuses = webdriver.findElements(By.className("entry-status"));
+        return entry_statuses.get(random);
+    }
+
+    public void click_update_selected_entry(){
+        update_selected_entry_btn.click();
+    }
+
+    public void click_accept_button(){
+        
+        accept_btn.click();
+    }
+
 
     public void clickAccountPageButton(){
         accountPageButton.click();

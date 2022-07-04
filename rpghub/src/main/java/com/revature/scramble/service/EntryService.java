@@ -31,8 +31,8 @@ public class EntryService {
         return json_string;
     }
 
-    public static void create_new_entry(Entry entry){
-        entryDao.insert_entry(entry);
+    public static int create_new_entry(Entry entry){
+        return entryDao.insert_entry(entry);
     }
 
     public static void update_entry(int entry_id, String status){

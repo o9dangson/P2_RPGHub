@@ -58,7 +58,3 @@
   - freezing/unfreezing accounts
 - `TC_18`: Happy paths Postman
 - `TC_19`: Alternate paths Postman
-
-## **Logging**
-
-- `TC_20`: logging activity

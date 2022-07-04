@@ -19,6 +19,9 @@ Scenario: A user logs in correctly but is banned
     And clicks on login button
     Then a user will be navigated to a page telling them they are banned
 
+Scenario: A user tries to routw directly to the account page without logging in
+    When a user enters a route without logging in
+    Then the user will be taken back to the login page
 ## TC_04 Tests direct html routing
 #Scenario Outline: A user tries to directly access routes
 #    When a user is logged in "<logged_in>"

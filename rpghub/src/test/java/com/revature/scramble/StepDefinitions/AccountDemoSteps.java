@@ -34,16 +34,16 @@ public class AccountDemoSteps {
     int amt_of_listings;
     int updated_list_size;
 
-    // @BeforeClass
-    // public void setup(){
-    //     System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-    //     driver = new ChromeDriver();
-    //     driver.manage().window().maximize();
-    //     driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-    //     driver.get("http://localhost:9090/");
-    //     loginPageFactory = new LoginPageFactory(driver);
-    //     accountPageFactory = new AccountPageFactory(driver);
-    // }
+    @BeforeClass
+    public void setup(){
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.get("http://localhost:9090/");
+        loginPageFactory = new LoginPageFactory(driver);
+        accountPageFactory = new AccountPageFactory(driver);
+    }
 
     @Given("a user is logged in and on the Account page")
     public void a_user_is_logged_in_and_on_the_account_page() {

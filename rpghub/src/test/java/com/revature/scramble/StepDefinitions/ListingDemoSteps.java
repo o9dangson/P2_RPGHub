@@ -2,6 +2,7 @@ package com.revature.scramble.StepDefinitions;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,8 +32,15 @@ public class ListingDemoSteps {
 
     List<WebElement> all_entries;
     List<WebElement> updated_entries;
+    List<WebElement> entry_statuses;
+    WebElement selected_entry;
+    WebElement selected_entry_status;
     int amt_of_entries;
     int updated_entry_amt;
+    String session_id;
+    String listing_leader;
+    Random rand;
+    int randIndex;
     
 
     @Before
@@ -63,12 +71,8 @@ public class ListingDemoSteps {
     public void user_clicks_view_selected_listing_button() {
         accountPageFactory.view_selected_listing();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(4000));
-        // String list_id = driver.findElement(By.id("listing-info-span")).getAttribute("innerHTML");
-        // String user_id = driver.findElement(By.id("user-id-span")).getAttribute("innerHTML");
-        // EntryService.create_new_entry(new Entry(-1,Integer.valueOf(list_id),Integer.valueOf(user_id),"Tank","Im a tank","Pending"));
         all_entries = driver.findElements(By.className("entry-row-div"));
         amt_of_entries = all_entries.size();
-        System.out.println("...................current elements:"+amt_of_entries+"...........................");
         
     }
     @When("user clicks join listing button")
@@ -92,7 +96,10 @@ public class ListingDemoSteps {
 
     @When("user clicks leave group button")
     public void user_clicks_leave_group_button() {
-        listingPageFactory.clickLeaveGroupButton();
+        String hasJoined = driver.findElement(By.id("hasJoined")).getAttribute("innerHTML");
+        if(hasJoined.equals("true")){
+            listingPageFactory.clickLeaveGroupButton();
+        }
     }
 
     @Then("user will be added to the list")
@@ -103,7 +110,6 @@ public class ListingDemoSteps {
         if(hasApplied.equals("false")){
             System.out.println("updated entries");
             updated_entry_amt = updated_entries.size();
-            System.out.println("...................updated elements:"+updated_entry_amt+"...........................");
             Assert.assertTrue(updated_entry_amt>amt_of_entries);
             Assert.assertEquals(driver.getTitle(), "Listing");
         }
@@ -112,19 +118,17 @@ public class ListingDemoSteps {
         }
         
     }
-
-
-
-
+    
     @Then("user will be removed from listing")
     public void user_will_be_removed_from_listing() {
-        updated_entries = driver.findElements(By.className("entry-row-div"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
-        updated_entry_amt = updated_entries.size();
-        Boolean list_updated = updated_entry_amt < amt_of_entries || updated_entry_amt == 0;
-        
-        System.out.println("...................updated elements:"+updated_entry_amt+"...........................");
-        Assert.assertTrue(list_updated);
+        String hasJoined = driver.findElement(By.id("hasJoined")).getAttribute("innerHTML");
+        if(hasJoined.equals("true")){
+            updated_entries = driver.findElements(By.className("entry-row-div"));
+            driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
+            updated_entry_amt = updated_entries.size();
+            Boolean list_updated = updated_entry_amt < amt_of_entries || updated_entry_amt == 0;
+            Assert.assertTrue(list_updated);
+        }
         Assert.assertEquals(driver.getTitle(), "Listing");
         }
 

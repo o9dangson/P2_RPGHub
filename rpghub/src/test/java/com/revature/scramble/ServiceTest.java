@@ -13,8 +13,10 @@ import org.testng.annotations.Test;
 import com.revature.scramble.repository.EntryDao;
 import com.revature.scramble.repository.ListingDao;
 import com.revature.scramble.repository.LoginInfoDao;
+import com.revature.scramble.repository.entities.Entry;
 import com.revature.scramble.repository.entities.Listing;
 import com.revature.scramble.repository.entities.LoginInfo;
+import com.revature.scramble.service.EntryService;
 import com.revature.scramble.service.ListingService;
 
 
@@ -84,7 +86,23 @@ public class ServiceTest {
 
     @Test
     public void entryService(){
-        
-    }
+        Listing listing = new Listing(-1, 1, "ex_listing", "ex_dungeon", 4, 1);
+        Entry entry = new Entry(-1,listing.getListingId(),listing.getUser_id(),"Tank","tank","Pending");
+        //Test get all listing
+        Assert.assertSame(EntryService.get_all_entries(listing.getListingId()), mockEntryDao.select_entry_by_list_id(listing.getListingId()));
+        //Test create listing
+        ListingService.create_listing(listing);
+        int new_entry_id = EntryService.create_new_entry(entry);
+        entry.setEntry_id(new_entry_id);
+        Assert.assertSame(new_entry_id,entry.getEntry_id());
 
+        //Test entry update and get entry by entry id
+        EntryService.update_entry(entry.getEntry_id(), "Rejected");
+        Assert.assertEquals(entry.getStatus(), EntryService.get_entry_by_entry_id(entry.getEntry_id()).getStatus());
+
+        List<Entry> all_entries = EntryService.get_all_entries(listing.getListingId());
+        EntryService.delete_entry(new_entry_id);
+        all_entries = EntryService.get_all_entries(listing.getListingId());
+        Assert.assertSame(all_entries, EntryService.get_all_entries(listing.getListingId()));
+    }
 }

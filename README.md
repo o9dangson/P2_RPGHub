@@ -15,9 +15,9 @@ The purpose of this service is to provide a location for anyone looking to join 
 3. once fully cloned, navigate to the cloned repo
 
 ## Prerequisites
-For the program to launch, JVM and JRE
-In order to access this program, Javalin must be running
-Have VSCode installed
+For the program to launch, JVM and JRE  
+In order to access this program, Javalin must be running  
+Have VSCode installed  
 
 ## Steps
 1. Type "code rpghub" to open vscode in the Java Project Folder

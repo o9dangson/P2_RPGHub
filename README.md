@@ -1,5 +1,7 @@
 # P2_RPGHub
-The purpose of this service is to provide a location for anyone looking to join a group in any game.
+`RPGHub` is an online web service that provides users with the ability to gather and search for like-minded individuals who wish to join and participate in group events such as dungeon raids.
+
+
 # Technologies
 * Maven - Project Managemetn
 * TestNG - Unit Testing
@@ -15,18 +17,26 @@ The purpose of this service is to provide a location for anyone looking to join 
 3. once fully cloned, navigate to the cloned repo
 
 ## Prerequisites
-For the program to launch, JVM and JRE  
-In order to access this program, Javalin must be running  
-Have VSCode installed  
+* For the program to launch, JVM and JRE is required
+* To access this program, Javalin must be running  
+* Have VSCode installed  
 
 ## Steps
-1. Type "code rpghub" to open vscode in the Java Project Folder
-3. Run App.java
-4. Once Javalin is running ctrl-click the local-ip where the site is hosted
+1. `code rpghub/.`
+    -  Opens vscode in the Java Project Folder
+2. `App.java`
+    - Runs the program
+3. Once Javalin is running ctrl-click the local-ip where the site is hosted
 
 
 ## Testing
 Testing was performed with Selenium to automate happy/alternate paths
+1.  `App.java`
+    - Run the program in one terminal
+2.  `mvn verify`
+    - Runs and builds all the unit tests and the selenium tests as specified in the `test_suite.xml`
+    - `jacoco` report is in `target/site/jacoco/index.html` upon test build
+    
 # Link to Test Documents
 
 [Test Report](https://docs.google.com/spreadsheets/d/1vrbJxwkwGh9Mivx3jvNStIw6cBCDLl5n84kohAFXwAg/)
@@ -34,5 +44,7 @@ Testing was performed with Selenium to automate happy/alternate paths
 [Requirement Traceability Matrix](https://docs.google.com/spreadsheets/d/165YTA7sOHqGW7WqFuZkqycsUHZZUzTAaR4-t2JEHZBU/)
 
 [User Stories](https://trello.com/b/fjMshtac)
+
+[Presentation Slides](https://docs.google.com/presentation/d/11kVvdvnZV9q5z-cfoiwA9d-AvuurWYiLvRk74mEw7Cw)
 
 [All Other Test Documentation](/documentation)

@@ -179,12 +179,16 @@ public class ModDemoSteps {
         sleep((long).5);
         int list_id = list_id_temp = accountPageFactory.get_new_listing(updated_listings, map);
         //Remove Listing
-        System.out.println("----------------Removing Listing------------------\nlist_id: " + list_id);
         listings.clear();
         listings = driver.findElements(By.className("listing-row-div"));
+        sleep((long).5);
+        int size = updated_listings.size();
         updated_listings.clear();
         accountPageFactory.remove_listing_using_element(list_id);
         updated_listings = driver.findElements(By.className("listing-row-div"));
+        sleep(1);
+        boolean hasChanged = updated_listings.size() < size;
+        Assert.assertTrue(hasChanged);
     }
 
     @When("mod selects entry")

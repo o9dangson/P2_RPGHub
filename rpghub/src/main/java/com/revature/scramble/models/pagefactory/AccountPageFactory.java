@@ -2,6 +2,7 @@ package com.revature.scramble.models.pagefactory;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -14,9 +15,6 @@ import org.openqa.selenium.support.ui.Select;
 public class AccountPageFactory {
 
     public WebDriver webdriver;
-
-    @FindBy(id = "view-btn")
-    public WebElement view_selected_listing_button;
 
     //Moderator
     @FindBy(id= "mod-collapse-btn")
@@ -60,8 +58,10 @@ public class AccountPageFactory {
     @FindBy(id = "listing-submit")
     public WebElement listing_submit_button;
 
-
     //Other Buttons
+
+    @FindBy(id = "view-btn")
+    public WebElement view_selected_listing_button;
 
     @FindBy(id = "delete-btn")
     public WebElement delete_button;
@@ -143,5 +143,77 @@ public class AccountPageFactory {
     }
     public void click_remove_listing_button() {
         delete_button.click();
+    }
+
+    public void input_and_create_listing(){
+        list_name_field.sendKeys("New Listing");
+        dungeon_name_field.sendKeys("New Dungeon");
+        max_size_field.clear();
+        max_size_field.sendKeys("5");
+        listing_submit_button.click();
+    }
+
+    public WebElement get_listing_row_button(int listing_id){
+        String button_id = String.format("select-listing-%s", listing_id);
+        WebElement button = webdriver.findElement(By.id(button_id));
+        System.out.println("\tbutton_id: " + button.getAttribute("id"));
+        return button;
+    }
+    
+    public int get_new_listing(List<WebElement> updated_listings, Map<String, Integer> map){
+        int new_list_id = -1;
+        for(WebElement ele: updated_listings){
+            if(!map.containsKey(get_listing_row_id(ele))){
+                new_list_id = Integer.parseInt(get_listing_row_id(ele));
+                break;
+            }
+        }
+        return new_list_id;
+    }
+
+    public void initiate_map(List<WebElement> list, Map<String, Integer> map){
+        map.clear();
+        for(WebElement ele: list){
+            String innerHTML = get_listing_row_id(ele);
+            map.put(innerHTML, Integer.parseInt(innerHTML));
+        }
+    }
+
+    public boolean are_elements_in_map(List<WebElement> list, Map<String, Integer> map){
+        boolean exist = true;
+        for(WebElement ele: list){
+            if(!map.containsKey(get_listing_row_id(ele))){
+                exist = false;
+                break;
+            }
+        }
+        return exist;
+    }
+
+    public String get_listing_row_id(WebElement ele){
+        String innerHTML = ele.findElement(By.xpath(".//div/p")).getAttribute("innerHTML");
+        System.out.println("\tele: " + innerHTML);
+        return innerHTML;
+    }
+
+    public void remove_listing_using_element(int list_id){
+        WebElement button = get_listing_row_button(list_id);
+        button.click();
+        webdriver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        while(!listing_selected()){
+            break;
+        }
+        delete_button.click();
+    }
+
+    public void view_listing_using_element(int list_id){
+        WebElement button = get_listing_row_button(list_id);
+        button.click();
+        System.out.println("VIEW BUTTON ACTIVATED");
+        webdriver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        while(!listing_selected()){
+            break;
+        }
+        view_selected_listing_button.click();
     }
 }

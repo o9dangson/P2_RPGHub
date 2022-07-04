@@ -13,7 +13,7 @@ import io.cucumber.testng.TestNGCucumberRunner;
 
 @CucumberOptions(
     plugin = {"pretty", "html:target/cucumber.html"},
-    features = "src/test/resources/features/ListingDemo.feature",
+    features = "src/test/resources/features/ModDemo.feature",
     glue = {"com/revature/scramble/StepDefinitions"}
 )
 public class SeleniumTestRunner extends AbstractTestNGCucumberTests{

@@ -1,6 +1,8 @@
 package com.revature.scramble.models.pagefactory;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -83,5 +85,103 @@ public class ListingPageFactory {
 
     public void clickSubmitButton(){
         submitButton.click();
+    }
+
+    public void initiate_map(List<WebElement> list, Map<String, Integer> map){
+        map.clear();
+        for(WebElement ele: list){
+            String innerHTML = get_entry_row_id(ele);
+            map.put(innerHTML, Integer.parseInt(innerHTML));
+        }
+    }
+
+    public String get_entry_row_id(WebElement ele){
+        String innerHTML = ele.findElement(By.xpath(".//div[7]/p")).getAttribute("innerHTML");
+        System.out.println("\tentry: " + innerHTML);
+        return innerHTML;
+    }
+
+    public void input_and_create_entry(){
+        webdriver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        Select dropdown = new Select(roleCategoryDropdown);
+        dropdown.selectByIndex(1);
+        noteCategory.sendKeys("I am the best");
+        submitButton.click();
+    }
+
+    public WebElement get_new_entry_button(List<WebElement> updated_entries, Map<String, Integer> map){
+        //int new_entry_id = -1;
+        WebElement btn = update_selected_entry_btn;
+        for(WebElement ele: updated_entries){
+            String innerHTML = ele.findElement(By.xpath(".//div[6]/input")).getAttribute("innerHTML");
+            if(!map.containsKey(get_entry_row_id(ele))){
+                //new_entry_id = Integer.parseInt(get_entry_row_id(ele));
+                btn = ele.findElement(By.xpath("..//div[6]/input"));
+                break;
+            }
+        }
+        //System.out.println("new_entry_id: " + new_entry_id);
+        return btn;
+    }
+
+    public int get_new_entry(List<WebElement> updated_entries, Map<String, Integer> map){
+        int new_entry_id = -1;
+        for(WebElement ele: updated_entries){
+            if(!map.containsKey(get_entry_row_id(ele))){
+                new_entry_id = Integer.parseInt(get_entry_row_id(ele));
+                break;
+            }
+        }
+        System.out.println("new_entry_id: " + new_entry_id);
+        return new_entry_id;
+    }
+
+    public void click_select_element(int entry_id){
+        WebElement button = get_entry_row_button(entry_id);
+        button.click();
+        System.out.println("VIEW BUTTON ACTIVATED");
+        webdriver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        while(!entry_selected()){
+            break;
+        }
+    }
+
+    public WebElement get_entry_row_button(int entry_id){
+        String button_id = String.format("select-entry-%s", entry_id);
+        WebElement button = webdriver.findElement(By.id(button_id));
+        System.out.println("\tbutton_id: " + button.getAttribute("id"));
+        return button;
+    }
+
+    public WebElement get_entry_status(int entry_id){
+        String entry_status_id = String.format("entry-status-%s", entry_id);
+        WebElement status = webdriver.findElement(By.id(entry_status_id));
+        System.out.println("\tstatus: " + status.getAttribute("id"));
+        return status;
+    }
+
+    public Boolean entry_selected(){
+        String accept_btn_class = accept_btn.getAttribute("class");
+        if(accept_btn_class.equals("btn btn-success")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void wait_selected_to_load(){
+        update_selected_entry_btn.click();
+        while(!entry_selected()){
+            break;
+        }
+    }
+
+    public boolean check_entry_status(int entry_id, String status){
+        boolean match = false;
+        WebElement status_element = get_entry_status(entry_id);
+        if(status_element.getAttribute("innerHTML").equals(status))
+            match = true;
+        return match;
     }
 } 

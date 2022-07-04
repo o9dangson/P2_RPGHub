@@ -24,13 +24,19 @@ Scenario: Mod tries to unfreeze account
 #    When a user logs out and mod logs in
 #    When mod removes listing
 #    Then mod sees listing is gone
-#
-#Scenario: Mod tries to manipulate entry that isn't theirs
-#    When mod logs out and user logs in
-#    When a user creates a listing
-#    When a user creates an entry
-#    When a user logs out and mod logs in
-#    When mod navigates to listing
-#    When mod selects entry
-#    When mod kicks entry
-#    Then mod sees entry is gone
+
+Scenario: Mod tries to manipulate listing and entry that isn't theirs
+    When mod logs out and user logs in
+    When a user creates a listing
+    When they navigate to listing
+    When a user creates an entry
+    When a user logs out and mod logs in
+    When they navigate to listing
+    When mod selects entry
+    When mod opens update menu
+    When mod accepts entry
+    When mod selects entry
+    When mod rejects entry
+    When mod selects entry
+    When mod kicks entry
+    Then mod sees entry is gone

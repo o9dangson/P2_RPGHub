@@ -35,7 +35,7 @@ public class ListingDemoSteps {
     int updated_entry_amt;
     
 
-    @Before
+    @BeforeClass
     public void setup(){
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
         driver = new ChromeDriver();
@@ -128,7 +128,7 @@ public class ListingDemoSteps {
         Assert.assertEquals(driver.getTitle(), "Listing");
         }
 
-    @After
+    @AfterClass
     public void teardown(){
         if(!driver.getTitle().equals("Homepage")){
             WebElement logoutButton = driver.findElement(By.id("logout-btn"));

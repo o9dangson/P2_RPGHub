@@ -12,37 +12,54 @@ import org.openqa.selenium.WebElement;
 public class ListingPageFactory {
     WebDriver webdriver;
 
-    @FindBy(id = "logout-btn")
-    WebElement logoutButton;
+    @FindBy(id = "account-btn")
+    public WebElement accountPageButton;
 
     @FindBy(id = "leave-btn")
-    WebElement leaveGroupButton;
+    public WebElement leaveGroupButton;
+    
+    @FindBy(id = "logout-btn")
+    public WebElement logoutButton;
 
-    @FindBy(id = "account-btn")
-    WebElement accountPageButton;
+    //Update Selected Collapse
+    @FindBy(id = "accept-reject-collapse-btn")
+    public WebElement update_selected_entry_btn;
 
-    @FindBy(className = "create-btn")
-    WebElement joinListingButton;
+    @FindBy(id = "accept-button")
+    public WebElement accept_btn;
+
+    @FindBy(id = "reject-button")
+    public WebElement reject_btn;
+    
+    @FindBy(id = "kick-button")
+    public WebElement kick_btn;
+
+    //Join Listing Collapse
+    @FindBy(id = "create-collapse-btn")
+    public WebElement joinListingButton;
 
     @FindBy(id = "entry-role")
-    WebElement roleCategoryDropdown;
+    public WebElement roleCategoryDropdown;
 
     @FindBy(id = "desc-input")
-    WebElement noteCategory;
+    public WebElement noteCategory;
 
     @FindBy(id = "create-button")
-    WebElement submitButton;
+    public WebElement submitButton;
 
     public ListingPageFactory(WebDriver webDriver){
         this.webdriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
-        public void clickLogoutButton(){
-            logoutButton.click();
-        }
-        public void clickAccountPageButton(){
-            accountPageButton.click();
-        }
+    
+    public void clickLogoutButton(){
+        logoutButton.click();
+    }
+
+    public void clickAccountPageButton(){
+        accountPageButton.click();
+    }
+
     public void select_role(){
         Select user_role_select = new Select(roleCategoryDropdown);
         List<WebElement> categories = user_role_select.getOptions();
@@ -62,5 +79,9 @@ public class ListingPageFactory {
 
     public void clickJoinListingButton(){
         joinListingButton.click();
+    }
+
+    public void clickSubmitButton(){
+        submitButton.click();
     }
 } 

@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -46,7 +48,6 @@ public class ListingDemoSteps {
         listingPageFactory = new ListingPageFactory(driver);
     }
 
-
     @Given("User is logged in")
     public void user_is_logged_in() {
         loginPageFactory.login("user1","pass");
@@ -54,26 +55,26 @@ public class ListingDemoSteps {
     }
     @When("user clicks select listing button")
     public void user_clicks_select_listing_button() {
+        
         accountPageFactory.click_select_listing_button();
         
     }
     @When("user clicks view selected listing button")
     public void user_clicks_view_selected_listing_button() {
         accountPageFactory.view_selected_listing();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        String list_id = driver.findElement(By.id("listing-info-span")).getAttribute("innerHTML");
-        String user_id = driver.findElement(By.id("user-id-span")).getAttribute("innerHTML");
-        EntryService.create_new_entry(new Entry(-1,Integer.valueOf(list_id),Integer.valueOf(user_id),"Tank","Im a tank","Pending"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(4000));
+        // String list_id = driver.findElement(By.id("listing-info-span")).getAttribute("innerHTML");
+        // String user_id = driver.findElement(By.id("user-id-span")).getAttribute("innerHTML");
+        // EntryService.create_new_entry(new Entry(-1,Integer.valueOf(list_id),Integer.valueOf(user_id),"Tank","Im a tank","Pending"));
         all_entries = driver.findElements(By.className("entry-row-div"));
         amt_of_entries = all_entries.size();
         System.out.println("...................current elements:"+amt_of_entries+"...........................");
         
     }
-
     @When("user clicks join listing button")
     public void user_clicks_join_listing_button() {
-        new WebDriverWait(driver, Duration.ofSeconds(1));
         listingPageFactory.clickJoinListingButton();
+        
     }
     @When("user clicks a role")
         public void select_role(){
@@ -85,33 +86,37 @@ public class ListingDemoSteps {
     public void input_user_note(){
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         listingPageFactory.input_user_note("test");
-        
+        listingPageFactory.clickSubmitButton();
+        new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @When("user clicks leave group button")
     public void user_clicks_leave_group_button() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        listingPageFactory.clickLeaveGroupButton();  
+        listingPageFactory.clickLeaveGroupButton();
     }
 
     @Then("user will be added to the list")
     public void user_will_be_added_to_the_list() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        updated_entries = driver.findElements(By.className("entry-info-div"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
+        updated_entries = driver.findElements(By.className("entry-row-div"));
+        System.out.println("updated entries");
         updated_entry_amt = updated_entries.size();
         System.out.println("...................updated elements:"+updated_entry_amt+"...........................");
         Assert.assertTrue(updated_entry_amt>amt_of_entries);
         Assert.assertEquals(driver.getTitle(), "Listing");
-    
     }
+
+    
+
 
     @Then("user will be removed from listing")
     public void user_will_be_removed_from_listing() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
-        updated_entries = driver.findElements(By.className("entry-info-div"));
+        updated_entries = driver.findElements(By.className("entry-row-div"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
         updated_entry_amt = updated_entries.size();
-        Boolean list_updated = updated_entry_amt < amt_of_entries;
-        System.out.println("...................updateed elements:"+updated_entry_amt+"...........................");
+        Boolean list_updated = updated_entry_amt < amt_of_entries || updated_entry_amt == 0;
+        
+        System.out.println("...................updated elements:"+updated_entry_amt+"...........................");
         Assert.assertTrue(list_updated);
         Assert.assertEquals(driver.getTitle(), "Listing");
         }

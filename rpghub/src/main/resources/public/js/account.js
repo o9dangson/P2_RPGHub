@@ -385,7 +385,7 @@ async function filter_listing() {
     const filtered_html = [];
     for(listing of filtered_elements){
         if(listing.innerText === specific_filter_val){
-            console.log("listing matches filter:\n" + listing);
+            //console.log("listing matches filter:\n" + listing);
             let cat_element = listing.parentElement
             let listing_row_html = cat_element.parentElement
             filtered_html.push(listing_row_html)

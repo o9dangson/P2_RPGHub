@@ -3,18 +3,34 @@ Feature: Test Mod Functionality
 Background: 
     Given a mod is logged in
 
-# TC_03 Routing upon success/failure
-Scenario Outline: Mod tries to manipulate accounts
+#TC_13
+Scenario: Mod tries to freeze account
     When a mod clicks on mod menu
-    When a mod selects a user "<user_id>"
-    And clicks to "<freeze_unfreeze>"
-    When mod logs out and "<user_id>" logs in
-    Then user is on "<landing_page>"
+    When a mod selects a user
+    And clicks to ban
+    When mod logs out and user logs in
+    Then banned user is on the ban page
 
-    Examples:
-        | user_id   |   freeze_unfreeze |   landing_page    |
-        | 1         |   true            |   Banned!         |
-        | 1         |   false           |   Account         |
-        | 3         |   true            |   Banned!         |
-        | 3         |   false           |   Account         |
-        | 1         |   false           |   Account         |
+Scenario: Mod tries to unfreeze account
+    When a mod clicks on mod menu
+    When a mod selects a user
+    And clicks to unban
+    When mod logs out and user logs in
+    Then unbanned user is on the account page
+
+#Scenario: Mod tries to manipulate listing that isn't theirs
+#    When mod logs out and user logs in
+#    When a user creates a listing
+#    When a user logs out and mod logs in
+#    When mod removes listing
+#    Then mod sees listing is gone
+#
+#Scenario: Mod tries to manipulate entry that isn't theirs
+#    When mod logs out and user logs in
+#    When a user creates a listing
+#    When a user creates an entry
+#    When a user logs out and mod logs in
+#    When mod navigates to listing
+#    When mod selects entry
+#    When mod kicks entry
+#    Then mod sees entry is gone

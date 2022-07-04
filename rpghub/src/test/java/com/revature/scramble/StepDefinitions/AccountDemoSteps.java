@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import com.revature.scramble.models.pagefactory.AccountPageFactory;
 import com.revature.scramble.models.pagefactory.LoginPageFactory;
@@ -32,16 +34,16 @@ public class AccountDemoSteps {
     int amt_of_listings;
     int updated_list_size;
 
-    @Before
-    public void setup(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        driver.get("http://localhost:9090/");
-        loginPageFactory = new LoginPageFactory(driver);
-        accountPageFactory = new AccountPageFactory(driver);
-    }
+    // @BeforeClass
+    // public void setup(){
+    //     System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+    //     driver = new ChromeDriver();
+    //     driver.manage().window().maximize();
+    //     driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+    //     driver.get("http://localhost:9090/");
+    //     loginPageFactory = new LoginPageFactory(driver);
+    //     accountPageFactory = new AccountPageFactory(driver);
+    // }
 
     @Given("a user is logged in and on the Account page")
     public void a_user_is_logged_in_and_on_the_account_page() {
@@ -63,7 +65,7 @@ public class AccountDemoSteps {
     @When("user chooses a category to filter by")
     public void user_chooses_a_category_to_filter_by() {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        accountPageFactory.select_category();
+        accountPageFactory.select_category(accountPageFactory.filter_category_dropdown);
     }
     @When("user inputs a specific filter")
     public void user_inputs_a_specific_filter() {
@@ -141,7 +143,7 @@ public class AccountDemoSteps {
 
     @Then("the selected listing should be removed")
     public void the_selected_listing_should_be_removed() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
         updated_listings = driver.findElements(By.className("listing-row-div"));
         updated_list_size = updated_listings.size();
         Boolean list_updated = updated_list_size < amt_of_listings;
@@ -149,13 +151,13 @@ public class AccountDemoSteps {
         Assert.assertEquals(driver.getTitle(), "Account");
     }
 
-    @After
-    public void teardown(){
-        if(!driver.getTitle().equals("Homepage")){
-            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
-            logoutButton.click();
-        }
-        this.driver.quit();
-    }
+    // @AfterClass
+    // public void teardown(){
+    //     if(!driver.getTitle().equals("Homepage")){
+    //         WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+    //         logoutButton.click();
+    //     }
+    //     this.driver.quit();
+    // }
 }
 

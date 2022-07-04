@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class AccountPageFactory {
 
-    WebDriver webdriver;
+    public WebDriver webdriver;
 
     @FindBy(id = "view-btn")
     public WebElement view_selected_listing_button;
@@ -33,41 +33,41 @@ public class AccountPageFactory {
 
     //Filter Listings
     @FindBy(id = "filter-collapse-btn")
-    WebElement filter_button;
+    public WebElement filter_button;
 
     @FindBy(id = "filter-category")
-    WebElement filter_category_dropdown;
+    public WebElement filter_category_dropdown;
 
     @FindBy(id = "specific-filter-input")
-    WebElement specific_filter_input;
+    public WebElement specific_filter_input;
 
     @FindBy(id = "filter-submit")
-    WebElement filter_listing_submit_button;
+    public WebElement filter_listing_submit_button;
 
     //Create Listings
     @FindBy(id = "create-collapse-btn")
-    WebElement create_listing_button;
+    public WebElement create_listing_button;
 
     @FindBy(id = "create-list-name")
-    WebElement list_name_field;
+    public WebElement list_name_field;
 
     @FindBy(id = "create-dungeon-name")
-    WebElement dungeon_name_field;
+    public WebElement dungeon_name_field;
 
     @FindBy(id = "create-max-size")
-    WebElement max_size_field;
+    public WebElement max_size_field;
 
     @FindBy(id = "listing-submit")
-    WebElement listing_submit_button;
+    public WebElement listing_submit_button;
 
 
     //Other Buttons
 
     @FindBy(id = "delete-btn")
-    WebElement delete_button;
+    public WebElement delete_button;
 
     @FindBy(id = "logout-btn")
-    WebElement logout_button;
+    public WebElement logout_button;
 
     
     List<WebElement> list_of_listings;
@@ -88,8 +88,8 @@ public class AccountPageFactory {
     }
 
 
-    public void select_category(){
-        Select category_dropdown = new Select(filter_category_dropdown);
+    public void select_category(WebElement dropdownMenu){
+        Select category_dropdown = new Select(dropdownMenu);
         List<WebElement> categories = category_dropdown.getOptions();
         
         int random_category = (int)Math.random()*categories.size();

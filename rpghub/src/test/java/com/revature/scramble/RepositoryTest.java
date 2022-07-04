@@ -109,7 +109,7 @@ public class RepositoryTest {
         Assert.assertEquals(login_obj.getUsername(), "failed");
     }
 
-    // TC_01
+    // TC_01, 12
     @Test
     public void testUserInfoDao(){
         //select_user_by_info_id

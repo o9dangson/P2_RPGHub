@@ -20,6 +20,7 @@
             <h4 style="display:none">
             <span id="listing-info-span">$list_id</span>
             <span id="hasJoined"></span>
+            <span id="hasApplied"></span>
             </h4>
             <div>
                 <h4>Session detail: user_id: <span id="user-id-span"> <p style="display:none">is_frozen: <span id="is-frozen-span"></p></span> is_mod: <span id="is-mod-span"></span></h4>

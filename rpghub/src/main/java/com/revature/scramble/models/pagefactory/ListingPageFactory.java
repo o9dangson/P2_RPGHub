@@ -10,8 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import io.cucumber.messages.types.Duration;
-
 import org.openqa.selenium.WebElement;
 
 public class ListingPageFactory {

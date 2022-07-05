@@ -20,9 +20,6 @@ import com.revature.scramble.models.pagefactory.AccountPageFactory;
 import com.revature.scramble.models.pagefactory.LoginPageFactory;
 import com.revature.scramble.models.pagefactory.BannedPageFactory;
 import com.revature.scramble.models.pagefactory.ListingPageFactory;
-import com.revature.scramble.repository.entities.Entry;
-import com.revature.scramble.service.EntryService;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;

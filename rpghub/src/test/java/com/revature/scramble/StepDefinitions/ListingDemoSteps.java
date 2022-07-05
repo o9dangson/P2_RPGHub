@@ -22,8 +22,6 @@ import io.cucumber.java.en.When;
 import com.revature.scramble.models.pagefactory.AccountPageFactory;
 import com.revature.scramble.models.pagefactory.ListingPageFactory;
 import com.revature.scramble.models.pagefactory.LoginPageFactory;
-import com.revature.scramble.repository.entities.Entry;
-import com.revature.scramble.service.EntryService;
 public class ListingDemoSteps {
     
     public WebDriver driver;

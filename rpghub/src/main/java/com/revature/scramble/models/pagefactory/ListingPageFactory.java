@@ -134,7 +134,7 @@ public class ListingPageFactory {
         //int new_entry_id = -1;
         WebElement btn = update_selected_entry_btn;
         for(WebElement ele: updated_entries){
-            String innerHTML = ele.findElement(By.xpath(".//div[6]/input")).getAttribute("innerHTML");
+            //String innerHTML = ele.findElement(By.xpath(".//div[6]/input")).getAttribute("innerHTML");
             if(!map.containsKey(get_entry_row_id(ele))){
                 //new_entry_id = Integer.parseInt(get_entry_row_id(ele));
                 btn = ele.findElement(By.xpath("..//div[6]/input"));

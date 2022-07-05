@@ -5,7 +5,6 @@ import java.util.List;
 import com.revature.scramble.service.EntryService;
 import com.revature.scramble.service.ListingService;
 import com.revature.scramble.models.Session;
-import com.revature.scramble.repository.ListingDao;
 import com.revature.scramble.repository.entities.Entry;
 import com.revature.scramble.repository.entities.Listing;
 

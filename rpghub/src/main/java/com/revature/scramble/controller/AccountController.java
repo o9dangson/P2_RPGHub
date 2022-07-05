@@ -6,7 +6,6 @@ import com.revature.scramble.models.Session;
 import com.revature.scramble.repository.entities.LoginInfo;
 import com.revature.scramble.repository.entities.UserInfo;
 import com.revature.scramble.service.AccountService;
-import com.revature.scramble.service.ListingService;
 
 import io.javalin.http.Handler;
 

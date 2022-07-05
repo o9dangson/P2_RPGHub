@@ -1,5 +1,6 @@
 # P2_RPGHub
-`RPGHub` is an online web service that provides users with the ability to gather and search for like-minded individuals who wish to join and participate in group events such as dungeon raids.
+Avid rpg gamers everywhere struggle with many difficulties when trying to complete raids/events. `RPGHub` is a web service that allows gamers anywhere to login into their accounts and streamline the process of setting up raid requests and managing players who wish to participate in various raid requests.
+
 
 
 # Technologies

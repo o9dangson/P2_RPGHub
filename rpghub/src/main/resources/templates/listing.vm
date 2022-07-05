@@ -22,7 +22,7 @@
             <span id="hasJoined"></span>
             <span id="hasApplied"></span>
             </h4>
-            <div>
+            <div style="display:none">>
                 <h4>Session detail: user_id: <span id="user-id-span"> <p style="display:none">is_frozen: <span id="is-frozen-span"></p></span> is_mod: <span id="is-mod-span"></span></h4>
                 <h4 style="color:rgb(226, 131, 131)">error: <span id="error-span"></span></h4>
             </div>

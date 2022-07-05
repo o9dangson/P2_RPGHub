@@ -14,7 +14,7 @@
         <h1 style="color:green">Welcome to your account page</h1>
         <div class="container">
             <!-- account page details -->
-            <div>
+            <div style="display:none">>
                 <h4>Session detail: user_id: <span id="user-id-span"></span> is_mod: <span id="is-mod-span"></span> is_frozen: <span id="is-frozen-span"></span></h4>
                 <h4 style="color:rgb(226, 131, 131)">error: <span id="error-span"></span></h4>
             </div>

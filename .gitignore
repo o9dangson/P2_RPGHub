@@ -1,9 +1,6 @@
 rpghub/target/*
 !rpghub/target/cucumber.html
-<<<<<<< HEAD
-=======
 !rpghub/target/surefire-reports/junitreports/*
->>>>>>> listingpage_backup
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup

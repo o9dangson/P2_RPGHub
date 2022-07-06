@@ -56,19 +56,6 @@ public class Entry{
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + entry_id;
-        result = prime * result + list_id;
-        result = prime * result + ((status == null) ? 0 : status.hashCode());
-        result = prime * result + user_id;
-        result = prime * result + ((user_note == null) ? 0 : user_note.hashCode());
-        result = prime * result + ((user_role == null) ? 0 : user_role.hashCode());
-        return result;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;

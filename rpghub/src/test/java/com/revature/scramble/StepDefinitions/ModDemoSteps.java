@@ -45,22 +45,22 @@ public class ModDemoSteps {
     int amt_of_listings;
     int updated_list_size;
 
-    // @Before
-    // public void setup(){
-    //     System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-    //     driver = new ChromeDriver();
-    //     driver.manage().window().maximize();
-    //     driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-    //     driver.get("http://localhost:9090/");
-    //     if(!driver.getTitle().equals("Homepage")){
-    //         WebElement logoutButton = driver.findElement(By.id("logout-btn"));
-    //         logoutButton.click();
-    //     }
-    //     loginPageFactory = new LoginPageFactory(driver);
-    //     accountPageFactory = new AccountPageFactory(driver);
-    //     listingPageFactory = new ListingPageFactory(driver);
-    //     bannedPageFactory = new BannedPageFactory(driver);
-    // }
+    @Before
+    public void setup(){
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.get("http://localhost:9090/");
+        if(!driver.getTitle().equals("Homepage")){
+            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+            logoutButton.click();
+        }
+        loginPageFactory = new LoginPageFactory(driver);
+        accountPageFactory = new AccountPageFactory(driver);
+        listingPageFactory = new ListingPageFactory(driver);
+        bannedPageFactory = new BannedPageFactory(driver);
+    }
 
     //Given
     @Given("a mod is logged in")
@@ -317,14 +317,14 @@ public class ModDemoSteps {
         Assert.assertTrue(hasChanged);
     }
 
-    // @After
-    // public void teardown(){
-    //     if(!driver.getTitle().equals("Homepage")){
-    //         WebElement logoutButton = driver.findElement(By.id("logout-btn"));
-    //         logoutButton.click();
-    //     }
-    //     this.driver.quit();
-    // }
+    @After
+    public void teardown(){
+        if(!driver.getTitle().equals("Homepage")){
+            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+            logoutButton.click();
+        }
+        this.driver.quit();
+    }
 
     public void sleep(long x){
         try {

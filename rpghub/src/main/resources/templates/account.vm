@@ -11,7 +11,7 @@
 </head>
     <body class="text-center">
         
-        <h1 style="color:green">Welcome to your account page</h1>
+        <h1 style="color:#171a21">Welcome to your account page</h1>
         <div class="container">
             <!-- account page details -->
             <div style="display:none">>
@@ -127,7 +127,7 @@
             </div>
             <!-- div for listings -->
             <div id="listing-container">
-                <div id="listing-header-div" class="row table-header mt-2">
+                <div id="listing-header-div" class="row table-header mt-2 mb-2">
                     <div id="user-id-header" class="col-1 themed-grid-col mt-4">
                         <p class="username-title" id="user-id-col">username</p>
                     </div>

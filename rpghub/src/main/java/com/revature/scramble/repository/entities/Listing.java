@@ -67,19 +67,6 @@ public class Listing{
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + cur_size;
-        result = prime * result + ((dungeonName == null) ? 0 : dungeonName.hashCode());
-        result = prime * result + list_id;
-        result = prime * result + ((list_name == null) ? 0 : list_name.hashCode());
-        result = prime * result + max_size;
-        result = prime * result + user_id;
-        return result;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;

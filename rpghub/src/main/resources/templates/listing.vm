@@ -11,7 +11,7 @@
 </head>
     <body class="text-center">
         <div class="container">
-            <h1 style="color:green">Listing Information</h1>
+            <h1 style="color:#171a21">Listing Information</h1>
             <h3 id = "listing-desc">
                 <p>List Name: <span id="list_name-span"></span></p>
                 <p>Leader: <span id="user_id-span"></span> - Size: <span id="cur_size-span"></span>/<span id="max_size-span"></span></p>

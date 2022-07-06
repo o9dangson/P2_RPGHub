@@ -1,4 +1,4 @@
-body {background-color: rgb(228, 217, 194);}
+body {background-color: #c6d4df;}
 
 .b-example-divider {
     height: 3rem;
@@ -38,17 +38,18 @@ body {background-color: rgb(228, 217, 194);}
 }
 
 .listing-row-div {
-    border-radius: 25px;
+    border-radius: 8px;
 }
 
 .table-header{
-    background-color: rgb(105, 132, 133);
-    border-radius: 25px;
+    color: #66C0F4;
+    background-color: #1B2838;
+    border-radius: 8px;
 }
 
 .table-color {
     background-color: rgb(139, 139, 139);
-    border-radius: 25px;
+    border-radius: 8px;
 }
 #entry-info-div{
     justify-content: center;

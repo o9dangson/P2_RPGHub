@@ -66,20 +66,6 @@ public class UserInfo {
         this.is_frozen = is_frozen;
     }
 
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((char_name == null) ? 0 : char_name.hashCode());
-        result = prime * result + info_id;
-        result = prime * result + ((is_frozen == null) ? 0 : is_frozen.hashCode());
-        result = prime * result + ((is_mod == null) ? 0 : is_mod.hashCode());
-        result = prime * result + userId;
-        return result;
-    }
-
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

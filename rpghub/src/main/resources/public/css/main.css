@@ -1,4 +1,4 @@
-body {background-color: rgb(228, 217, 194);}
+body {background-color: #c6d4df;}
 
 .bd-placeholder-img {
     font-size: 1.125rem;
@@ -56,12 +56,16 @@ body {background-color: rgb(228, 217, 194);}
   }
 
   .table-header{
-    background-color: rgb(105, 132, 133);
+    color: #66C0F4;
+    background-color: #1B2838;
+    border-radius: 8px;
+    border-width: 100px;
+    margin-top: 5px;
   }
 
   .table-color {
     background-color: rgb(139, 139, 139);
-    border-radius: 25px;
+    border-radius: 8px;
   }
 
   .logout-button, .view-btn {
@@ -70,7 +74,7 @@ body {background-color: rgb(228, 217, 194);}
   }
 
   #listing-display-div, #listing-header-div {
-    border-radius: 25px;
+    /*border-radius: 25px;*/
   }
 
   .view-listing-btn:hover,.view-listing-btn:focus {

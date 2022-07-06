@@ -42,18 +42,18 @@ public class ListingDemoSteps {
     int randIndex;
     
 
-    // @Before
-    // public void setup(){
-    //     System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-    //     driver = new ChromeDriver();
-    //     driver.manage().window().maximize();
-    //     driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+    @Before
+    public void setup(){
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-    //     driver.get("http://localhost:9090/");
-    //     loginPageFactory = new LoginPageFactory(driver);
-    //     accountPageFactory = new AccountPageFactory(driver);
-    //     listingPageFactory = new ListingPageFactory(driver);
-    // }
+        driver.get("http://localhost:9090/");
+        loginPageFactory = new LoginPageFactory(driver);
+        accountPageFactory = new AccountPageFactory(driver);
+        listingPageFactory = new ListingPageFactory(driver);
+    }
 
     @Given("User is logged in")
     public void user_is_logged_in() {
@@ -131,14 +131,14 @@ public class ListingDemoSteps {
         Assert.assertEquals(driver.getTitle(), "Listing");
     }
 
-    // @After
-    // public void teardown(){
-    //     if(!driver.getTitle().equals("Homepage")){
-    //         WebElement logoutButton = driver.findElement(By.id("logout-btn"));
-    //         logoutButton.click();
-    //     }
-    //     this.driver.quit();
-    // }
+    @After
+    public void teardown(){
+        if(!driver.getTitle().equals("Homepage")){
+            WebElement logoutButton = driver.findElement(By.id("logout-btn"));
+            logoutButton.click();
+        }
+        this.driver.quit();
+    }
 
     public void sleep(long x){
         try {
